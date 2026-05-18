@@ -67,6 +67,42 @@
       border-left-color: var(--violet);
     }
     .piece .when strong { color: var(--text); }
+
+    .category-band {
+      margin: 32px 0 4px;
+      padding: 18px 0 14px;
+      border-top: 1px solid var(--border-soft);
+    }
+    .category-band:first-of-type {
+      border-top: none;
+      margin-top: 8px;
+    }
+    .category-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: 0 0 8px;
+    }
+    .variant-section.agent .category-eyebrow { color: var(--violet); }
+    .category-title {
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 6px;
+      color: var(--text);
+    }
+    .category-intro {
+      font-size: 15.5px;
+      color: var(--text-dim);
+      margin: 0;
+    }
+    .category-band + .piece {
+      border-top: none;
+      padding-top: 16px;
+    }
   </style>
 </head>
 <body>
@@ -167,10 +203,16 @@
       <p class="meta">scaffolder flag: <code>--type ui-app</code> · for websites, dashboards, marketing pages</p>
 
       <p>
-        Layered on top of the shared foundation are five extras focused on
-        building good user interfaces. Four are skills Claude reaches for; one
-        is a file that lives in your project.
+        Layered on top of the shared foundation are three groups of extras
+        focused on building good user interfaces.
       </p>
+
+      <!-- ----- Category 1: Visual design rulebook ----- -->
+      <div class="category-band">
+        <p class="category-eyebrow">Group 1 of 3</p>
+        <h3 class="category-title">A visual design rulebook</h3>
+        <p class="category-intro">Specific rules for layout, color, animation, and accessibility — plus a contract file your project's PRs cite. Three pieces work together.</p>
+      </div>
 
       <div class="piece">
         <h3>A 99-rule design checklist</h3>
@@ -214,44 +256,6 @@
       </div>
 
       <div class="piece">
-        <h3>Onboarding playbook</h3>
-        <p class="tech-name">skill · <code>onboarding-psychologist</code></p>
-        <p>
-          A framework for designing first-time-user experiences based on
-          behavioral research. It uses the <strong>IDENTITY-TO-HABIT</strong>
-          arc: define the first win → remove unnecessary setup → create
-          ownership through a small meaningful action → attach a stable cue
-          (link to existing routine) → reinforce identity (reflect the user as
-          someone who succeeds at this).
-        </p>
-        <p>
-          It explicitly rules out feature tours, "12 things to know" walls, and
-          empty-state pages that show CRUD forms instead of value.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> when you're designing the very
-          first thing a new user sees and does. Especially valuable for
-          products where adoption is a real concern.
-        </p>
-      </div>
-
-      <div class="piece">
-        <h3>Frontend design helper</h3>
-        <p class="tech-name">plugin · <code>frontend-design</code> (Anthropic official)</p>
-        <p>
-          Anthropic's officially maintained frontend design plugin. General-purpose
-          companion for component design and visual decisions — less opinionated
-          than <code>ui-ux-pro-max</code>, more focused on Anthropic's idea of
-          frontend best practices.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> alongside the other UI skills, for
-          general-purpose frontend work. The two skills complement each other
-          rather than overlap.
-        </p>
-      </div>
-
-      <div class="piece">
         <h3>Your project's UI rulebook</h3>
         <p class="tech-name">file · <code>docs/UX_CONTRACT.md</code></p>
         <p>
@@ -279,6 +283,58 @@
           <code>CLAUDE.md</code> so it's part of every session's context.
         </p>
       </div>
+
+      <!-- ----- Category 2: Onboarding ----- -->
+      <div class="category-band">
+        <p class="category-eyebrow">Group 2 of 3</p>
+        <h3 class="category-title">First-use onboarding patterns</h3>
+        <p class="category-intro">A behavioral-research framework for taking new users from curious to committed. One piece.</p>
+      </div>
+
+      <div class="piece">
+        <h3>Onboarding playbook</h3>
+        <p class="tech-name">skill · <code>onboarding-psychologist</code></p>
+        <p>
+          A framework for designing first-time-user experiences based on
+          behavioral research. It uses the <strong>IDENTITY-TO-HABIT</strong>
+          arc: define the first win → remove unnecessary setup → create
+          ownership through a small meaningful action → attach a stable cue
+          (link to existing routine) → reinforce identity (reflect the user as
+          someone who succeeds at this).
+        </p>
+        <p>
+          It explicitly rules out feature tours, "12 things to know" walls, and
+          empty-state pages that show CRUD forms instead of value.
+        </p>
+        <p class="when">
+          <strong>When it kicks in:</strong> when you're designing the very
+          first thing a new user sees and does. Especially valuable for
+          products where adoption is a real concern.
+        </p>
+      </div>
+
+      <!-- ----- Category 3: Frontend plugin ----- -->
+      <div class="category-band">
+        <p class="category-eyebrow">Group 3 of 3</p>
+        <h3 class="category-title">Anthropic's frontend plugin</h3>
+        <p class="category-intro">General-purpose assistance for component design and visual decisions. One piece.</p>
+      </div>
+
+      <div class="piece">
+        <h3>Frontend design helper</h3>
+        <p class="tech-name">plugin · <code>frontend-design</code> (Anthropic official)</p>
+        <p>
+          Anthropic's officially maintained frontend design plugin. General-purpose
+          companion for component design and visual decisions — less opinionated
+          than <code>ui-ux-pro-max</code>, more focused on Anthropic's idea of
+          frontend best practices.
+        </p>
+        <p class="when">
+          <strong>When it kicks in:</strong> alongside the other UI skills, for
+          general-purpose frontend work. The two skills complement each other
+          rather than overlap.
+        </p>
+      </div>
     </section>
 
     <!-- ============= AGENT APP ============= -->
@@ -287,10 +343,16 @@
       <p class="meta">scaffolder flag: <code>--type agent-app</code> · for LLM apps and AI agents</p>
 
       <p>
-        Layered on top of the shared foundation are four skills and one design
-        principle, focused on building applications that <em>themselves</em> call
-        LLMs.
+        Layered on top of the shared foundation are three groups of extras
+        focused on building applications that <em>themselves</em> call LLMs.
       </p>
+
+      <!-- ----- Category 1: Architecture & orchestration ----- -->
+      <div class="category-band">
+        <p class="category-eyebrow">Group 1 of 3</p>
+        <h3 class="category-title">Agent architecture &amp; orchestration</h3>
+        <p class="category-intro">How to structure single-agent or multi-agent systems — handoffs, supervision, parallel work. Two pieces.</p>
+      </div>
 
       <div class="piece">
         <h3>Agent architecture guide</h3>
@@ -308,6 +370,32 @@
           again any time you're tempted to "just add another agent." Used
           early, it prevents the most common agent-app architectural mistakes.
         </p>
+      </div>
+
+      <div class="piece">
+        <h3>Multi-agent coordination patterns</h3>
+        <p class="tech-name">skill · <code>agent-orchestrator</code></p>
+        <p>
+          If your app uses more than one agent, this covers how to get them to
+          cooperate without stepping on each other. Patterns include:
+        </p>
+        <ul>
+          <li><strong>Sequential handoffs</strong> — agent A finishes, hands the conversation to agent B.</li>
+          <li><strong>Supervisor / worker</strong> — one agent delegates tasks to specialists.</li>
+          <li><strong>Parallel work</strong> — multiple agents tackle independent parts of a problem at the same time.</li>
+          <li><strong>Conflict resolution</strong> — what happens when two agents disagree about state.</li>
+        </ul>
+        <p class="when">
+          <strong>When it kicks in:</strong> only relevant if your app has
+          multiple agents. Single-agent apps can ignore this entirely.
+        </p>
+      </div>
+
+      <!-- ----- Category 2: Memory ----- -->
+      <div class="category-band">
+        <p class="category-eyebrow">Group 2 of 3</p>
+        <h3 class="category-title">Memory between sessions</h3>
+        <p class="category-intro">Patterns for what your agent remembers and how — vector recall, structured facts, or both. One piece.</p>
       </div>
 
       <div class="piece">
@@ -331,23 +419,11 @@
         </p>
       </div>
 
-      <div class="piece">
-        <h3>Multi-agent coordination patterns</h3>
-        <p class="tech-name">skill · <code>agent-orchestrator</code></p>
-        <p>
-          If your app uses more than one agent, this covers how to get them to
-          cooperate without stepping on each other. Patterns include:
-        </p>
-        <ul>
-          <li><strong>Sequential handoffs</strong> — agent A finishes, hands the conversation to agent B.</li>
-          <li><strong>Supervisor / worker</strong> — one agent delegates tasks to specialists.</li>
-          <li><strong>Parallel work</strong> — multiple agents tackle independent parts of a problem at the same time.</li>
-          <li><strong>Conflict resolution</strong> — what happens when two agents disagree about state.</li>
-        </ul>
-        <p class="when">
-          <strong>When it kicks in:</strong> only relevant if your app has
-          multiple agents. Single-agent apps can ignore this entirely.
-        </p>
+      <!-- ----- Category 3: Building on the Claude API ----- -->
+      <div class="category-band">
+        <p class="category-eyebrow">Group 3 of 3</p>
+        <h3 class="category-title">Building on the Claude API</h3>
+        <p class="category-intro">Anthropic's official SDK skill plus a portable-identity rule so user data survives if you swap LLMs later. Two pieces.</p>
       </div>
 
       <div class="piece">

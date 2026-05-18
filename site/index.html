@@ -429,9 +429,9 @@
   <div class="brand">project-starter</div>
   <nav>
     <a href="docs/">docs</a>
-    <a href="#scaffold">scaffold</a>
     <a href="#variants">variants</a>
-    <a href="#stack">stack</a>
+    <a href="#stack">foundation</a>
+    <a href="#scaffold">scaffold</a>
     <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
   </nav>
 </div>
@@ -595,13 +595,114 @@
 
 <main>
 
-  <!-- ---------- SCAFFOLD ---------- -->
+  <!-- ---------- VARIANTS (first) ---------- -->
+  <section class="section" id="variants">
+    <p class="eyebrow">Two variants</p>
+    <h2>Pick the shape that fits.</h2>
+    <p class="section-lede">
+      Both variants share the same foundation, described in the next section.
+      They differ in which extras they layer on top — grouped here by purpose,
+      with full breakdowns on the variants docs page.
+    </p>
+
+    <div class="variants">
+      <article class="variant-card ui">
+        <h3>UI App</h3>
+        <p class="codename">scaffolder flag: <code>--type ui-app</code></p>
+        <p class="sub">For websites, dashboards, marketing pages — anything with a screen.</p>
+        <ul>
+          <li>
+            <span class="label">A visual design rulebook</span>
+            Specific rules for layout, color, animation, and accessibility — plus a contract file your project's PRs cite.
+          </li>
+          <li>
+            <span class="label">First-use onboarding patterns</span>
+            A behavioral-research framework for taking new users from curious to committed.
+          </li>
+          <li>
+            <span class="label">Anthropic's frontend plugin</span>
+            General-purpose assistance for component design and visual decisions.
+          </li>
+        </ul>
+        <p class="learn-more"><a href="docs/variants.html#ui-app">See exactly what each includes →</a></p>
+      </article>
+
+      <article class="variant-card agent">
+        <h3>Agent App</h3>
+        <p class="codename">scaffolder flag: <code>--type agent-app</code></p>
+        <p class="sub">For LLM apps, AI agents, anything that calls Claude or another model.</p>
+        <ul>
+          <li>
+            <span class="label">Agent architecture &amp; orchestration</span>
+            How to structure single-agent or multi-agent systems — handoffs, supervision, parallel work.
+          </li>
+          <li>
+            <span class="label">Memory between sessions</span>
+            Patterns for what your agent remembers and how — vector recall, structured facts, or both.
+          </li>
+          <li>
+            <span class="label">Building on the Claude API</span>
+            Anthropic's official SDK skill plus a portable-identity rule so user data survives LLM swaps.
+          </li>
+        </ul>
+        <p class="learn-more"><a href="docs/variants.html#agent-app">See exactly what each includes →</a></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ---------- STACK (second) ---------- -->
+  <section class="section" id="stack">
+    <p class="eyebrow">The shared foundation</p>
+    <h2>Both shapes are built on this.</h2>
+    <p class="section-lede">
+      Whichever shape you picked above, every scaffolded project starts with the
+      same foundation — Claude Code's <strong>built-in capabilities</strong>,
+      plus <strong>skills</strong> that fit the task, <strong>MCP servers</strong>
+      that travel with the project, and <strong>auto-memory</strong> that persists
+      across sessions. The variant extras layer on top.
+    </p>
+
+    <div class="stack">
+      <div class="stack-layer">
+        <div>
+          <div class="name">Built-in capabilities</div>
+          <div class="desc">Tools every Claude Code session ships with — no install needed. Plan mode lets Claude draft an approach before touching code; todo tracking keeps multi-step work visible; the Explore agent searches your codebase without filling up your conversation; web fetch handles one-off lookups.</div>
+        </div>
+        <div class="badge">built-in</div>
+      </div>
+      <div class="stack-layer">
+        <div>
+          <div class="name">Skills</div>
+          <div class="desc">Specialized playbooks Claude pulls in when a task fits — a checklist for code review, an outline-maker for planning, a UI-design rulebook for visual work, an SDK helper for building on Claude's API. Installed once per computer; your project's <code>CLAUDE.md</code> lists which ones to lean on.</div>
+        </div>
+        <div class="badge">user-installed</div>
+      </div>
+      <div class="stack-layer cyan">
+        <div>
+          <div class="name">MCP servers</div>
+          <div class="desc">Extra tools wired to Claude per project. project-starter pins three: <strong>Serena</strong> (finds code symbols and references without re-reading whole files), <strong>Context7</strong> (looks up live library docs — beats outdated training data), and <strong>GitHub</strong> (reads issues and PRs without leaving the conversation).</div>
+        </div>
+        <div class="badge">.mcp.json</div>
+      </div>
+      <div class="stack-layer violet">
+        <div>
+          <div class="name">Auto-memory</div>
+          <div class="desc">Persistent notes Claude writes about you and your work, loaded automatically every future session. Saves who you are, feedback you've given, what's happening in this project, and pointers to external systems. Lives on your computer at <code>~/.claude</code>.</div>
+        </div>
+        <div class="badge">~/.claude</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- SCAFFOLD (last) ---------- -->
   <section class="section" id="scaffold">
-    <p class="eyebrow">Three ways · same output</p>
-    <h2>Scaffold a new project</h2>
+    <p class="eyebrow">Now do it · three ways · same output</p>
+    <h2>Scaffold a new project.</h2>
     <p class="section-lede">
       Pick whichever shell you have. All three copy the templates, fill placeholders,
-      <code>git init</code>, and make the first commit.
+      <code>git init</code>, and make the first commit. Replace <code>my-site</code>
+      with your project name and <code>ui-app</code> with <code>agent-app</code> if
+      that's the variant you picked above.
     </p>
 
     <div class="scaffold-grid">
@@ -647,129 +748,6 @@ docker run --rm \
   <span class="flag">--name</span> my-site \
   <span class="flag">--target</span> /out</code></pre>
       </article>
-    </div>
-  </section>
-
-  <!-- ---------- VARIANTS ---------- -->
-  <section class="section" id="variants">
-    <p class="eyebrow">Two variants</p>
-    <h2>Pick the shape that fits.</h2>
-    <p class="section-lede">
-      Both share the same foundation — memory hierarchy, code-search tools, voice
-      rules. Each variant adds the extras that match its project shape. Every
-      "extra" below is something Claude can reach for during your project, with
-      a one-line explanation of what it actually does.
-    </p>
-
-    <div class="variants">
-      <article class="variant-card ui">
-        <h3>UI App</h3>
-        <p class="codename">scaffolder flag: <code>--type ui-app</code></p>
-        <p class="sub">For websites, dashboards, marketing pages — anything with a screen.</p>
-        <ul>
-          <li>
-            <span class="label">A 99-rule design checklist</span>
-            Claude consults it when designing or reviewing visuals — covers color contrast, button sizes, animation timing, and anti-patterns to refuse.
-            <span class="tech">skill · ui-ux-pro-max</span>
-          </li>
-          <li>
-            <span class="label">Design-system structure</span>
-            A way to organize colors, spacing, and sizes in three layers so they stay consistent across every page.
-            <span class="tech">skill · design-system</span>
-          </li>
-          <li>
-            <span class="label">Onboarding playbook</span>
-            A behavioral-research-backed framework for first-time-user flows — how to take someone from curious to committed.
-            <span class="tech">skill · onboarding-psychologist</span>
-          </li>
-          <li>
-            <span class="label">Frontend design helper</span>
-            Anthropic's official frontend plugin — general assistance for component design and visual decisions.
-            <span class="tech">plugin · frontend-design</span>
-          </li>
-          <li>
-            <span class="label">Your project's UI rulebook</span>
-            A file that lists the visual rules every PR must pass. Claude checks against it before suggesting any UI change.
-            <span class="tech">file · docs/UX_CONTRACT.md</span>
-          </li>
-        </ul>
-        <p class="learn-more"><a href="docs/variants.html#ui-app">What each of these actually does →</a></p>
-      </article>
-
-      <article class="variant-card agent">
-        <h3>Agent App</h3>
-        <p class="codename">scaffolder flag: <code>--type agent-app</code></p>
-        <p class="sub">For LLM apps, AI agents, anything that calls Claude or another model.</p>
-        <ul>
-          <li>
-            <span class="label">Agent architecture guide</span>
-            Helps decide if your app needs one agent, several agents talking to each other, or an orchestrator coordinating them.
-            <span class="tech">skill · ai-agents-architect</span>
-          </li>
-          <li>
-            <span class="label">Memory system design</span>
-            Patterns for how your agent remembers things between sessions — vector databases for fuzzy recall, structured DBs for facts.
-            <span class="tech">skill · agent-memory-systems</span>
-          </li>
-          <li>
-            <span class="label">Multi-agent coordination patterns</span>
-            How to get multiple AI agents to cooperate — handoffs, supervision, parallel work without stepping on each other.
-            <span class="tech">skill · agent-orchestrator</span>
-          </li>
-          <li>
-            <span class="label">Anthropic SDK helper</span>
-            Anthropic's official skill for apps that call Claude — covers caching, tool use, streaming, batching. Auto-loads when you import the SDK.
-            <span class="tech">skill · claude-api</span>
-          </li>
-          <li>
-            <span class="label">Portable-identity design rule</span>
-            A built-in principle: your user's memory, skills, and integrations stay intact if you switch LLMs later. Avoids vendor lock-in.
-            <span class="tech">discipline · documented in CLAUDE.md</span>
-          </li>
-        </ul>
-        <p class="learn-more"><a href="docs/variants.html#agent-app">What each of these actually does →</a></p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ---------- STACK ---------- -->
-  <section class="section" id="stack">
-    <p class="eyebrow">Four-layer agent stack</p>
-    <h2>What every scaffolded project gets.</h2>
-    <p class="section-lede">
-      Listed bottom-up. The bottom two layers are what makes this repo distinct —
-      pinned MCP servers and the persistent-memory discipline travel with every project.
-    </p>
-
-    <div class="stack">
-      <div class="stack-layer">
-        <div>
-          <div class="name">Built-in capabilities</div>
-          <div class="desc">plan mode · todos · Explore agent · web fetch — always available, no install.</div>
-        </div>
-        <div class="badge">built-in</div>
-      </div>
-      <div class="stack-layer">
-        <div>
-          <div class="name">Skills</div>
-          <div class="desc">concise-planning · code-reviewer · ui-ux-pro-max · claude-api — referenced in <code>CLAUDE.md</code>.</div>
-        </div>
-        <div class="badge">user-installed</div>
-      </div>
-      <div class="stack-layer cyan">
-        <div>
-          <div class="name">MCP servers</div>
-          <div class="desc">Serena (semantic code retrieval) · Context7 (live library docs) · GitHub.</div>
-        </div>
-        <div class="badge">.mcp.json</div>
-      </div>
-      <div class="stack-layer violet">
-        <div>
-          <div class="name">Auto-memory</div>
-          <div class="desc">user · feedback · project · reference — persistent context across every session.</div>
-        </div>
-        <div class="badge">~/.claude</div>
-      </div>
     </div>
   </section>
 
