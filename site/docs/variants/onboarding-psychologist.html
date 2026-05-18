@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>onboarding-psychologist — UI App pieces — project-starter docs</title>
+  <meta name="description" content="Behavioral-research framework for first-time-user flows — IDENTITY-TO-HABIT arc grounded in BJ Fogg and James Clear."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>onboarding-psychologist
+    </nav>
+
+    <h1>Onboarding playbook</h1>
+    <p class="lede">
+      A framework for designing first-time-user experiences based on
+      behavioral research. Structured around the IDENTITY-TO-HABIT arc — how
+      a user gets from outsider to participant.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Skill (SKILL.md, location varies)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill unverified">unverified</span> No public source found under this exact name</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>First-time-user flow design, signup, empty states</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>Likely private/local — see "Verification status" below</dd>
+      </div>
+    </dl>
+
+    <div class="callout stuck">
+      <div class="icon">?</div>
+      <div>
+        <p>
+          <strong>Verification status:</strong> No public repo, marketplace
+          listing, or <code>SKILL.md</code> surfaces under the exact name
+          <code>onboarding-psychologist</code>. The behavioral framework it
+          references (IDENTITY-TO-HABIT) maps directly to published research
+          by <strong>BJ Fogg</strong> (Tiny Habits / Hook Model) and
+          <strong>James Clear</strong> (Atomic Habits, identity-based habits).
+          The skill is likely private or locally-defined; the framework below
+          stands on its own regardless of which specific skill implementation
+          you use.
+        </p>
+      </div>
+    </div>
+
+    <h2>The IDENTITY-TO-HABIT arc</h2>
+    <p>
+      The arc has five steps. Run through them when designing any first-use
+      experience.
+    </p>
+
+    <h3>1. Define the first win</h3>
+    <p>
+      The smallest meaningful success that proves the product's value. A
+      Headspace user's first win is finishing one breathing exercise.
+      Notion's is creating their first page. Duolingo's is answering one
+      question correctly.
+    </p>
+    <p>
+      <strong>Test:</strong> can a new user reach the first win in under 2
+      minutes, without any friction? If not, the first win is too far away or
+      the path is too tangled.
+    </p>
+
+    <h3>2. Remove unnecessary setup</h3>
+    <p>
+      Every decision a user makes before the first win is a chance to lose
+      them. Defer everything that can be deferred — account creation,
+      preferences, integrations, customization. Strip the path to the first
+      win to its minimum.
+    </p>
+    <p>
+      Common cuts: email verification (let them verify later), profile
+      pictures (use initials), team-vs-personal choice (default to personal),
+      tutorial selection (have one default flow).
+    </p>
+
+    <h3>3. Create ownership through action</h3>
+    <p>
+      A small, meaningful task that creates investment. The user does
+      <em>something</em> that's theirs — names a document, picks a goal, adds
+      a contact. This is psychologically distinct from passive consumption.
+      Investment creates attachment.
+    </p>
+    <p>
+      The IKEA effect in software: users overvalue what they helped build.
+      One small input by minute three pays dividends in retention.
+    </p>
+
+    <h3>4. Attach a stable cue</h3>
+    <p>
+      A habit needs a trigger that fires reliably. Pair the product with an
+      existing routine the user already does. Examples:
+    </p>
+    <ul>
+      <li>Meditation apps → "before bed" or "with morning coffee"</li>
+      <li>Language apps → "during commute" or "lunch break"</li>
+      <li>Productivity tools → "first thing after standup"</li>
+    </ul>
+    <p>
+      BJ Fogg calls this "anchor → behavior → celebration." The anchor is the
+      existing routine. Without it, habits don't form.
+    </p>
+
+    <h3>5. Reinforce identity</h3>
+    <p>
+      Reflect the user as someone who succeeds with this product. Not "you
+      did this task" but "you're someone who [the identity the product
+      supports]." Examples:
+    </p>
+    <ul>
+      <li>"You're a daily reader" (vs. "you read for 5 minutes today")</li>
+      <li>"You're building a writing practice" (vs. "you wrote 200 words")</li>
+      <li>"You're learning Spanish" (vs. "you completed lesson 3")</li>
+    </ul>
+    <p>
+      Identity is sticky. Tasks are forgotten. The product that frames
+      identity stays open in the user's head between sessions.
+    </p>
+
+    <h2>Anti-patterns the framework rules out</h2>
+    <ul>
+      <li><strong>Feature tours</strong> — narrating the UI before the user has wanted any of it.</li>
+      <li><strong>"12 things to know" walls</strong> — anything that asks the user to memorize before they've succeeded.</li>
+      <li><strong>Empty-state pages that show CRUD forms</strong> — empty states should show <em>value</em>, not data-entry chores.</li>
+      <li><strong>Forced selection of plan, team type, or use case before first win</strong> — irreversible-seeming choices block exploration.</li>
+      <li><strong>Email verification gating the first win</strong> — let the user succeed first; verify later.</li>
+    </ul>
+
+    <h2>When to use the framework</h2>
+    <p>
+      Whenever you're designing or reviewing:
+    </p>
+    <ul>
+      <li>A signup or first-time-user flow</li>
+      <li>An empty state on a primary feature</li>
+      <li>A "welcome back" experience for returning users</li>
+      <li>A reactivation flow for lapsed users</li>
+    </ul>
+    <p>
+      It's <em>most</em> valuable when retention is a real concern. For
+      internal tools where users are required to use the product (employee
+      apps, b2b admin panels), the arc still works but feels less load-bearing.
+    </p>
+
+    <h2>Publicly-available alternatives</h2>
+    <p>
+      If you want a published skill rather than the private one referenced in
+      the template, these are close substitutes:
+    </p>
+    <ul>
+      <li>
+        <strong><code>app-onboarding-questionnaire</code></strong> by adamlyttleapps —
+        <a href="https://github.com/adamlyttleapps/claude-skill-app-onboarding-questionnaire">github.com/adamlyttleapps/claude-skill-app-onboarding-questionnaire</a>.
+        Focused on high-converting questionnaire onboarding modeled on Headspace, Noom, and similar.
+      </li>
+      <li>
+        <strong><code>Onboard</code></strong> on MCP Market — UX-expert skill for first-mile journey, aha-moments, progressive disclosure.
+      </li>
+    </ul>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://www.bjfogg.com/">BJ Fogg's Tiny Habits</a> — anchor → behavior → celebration; the underlying behavioral model</li>
+        <li><a href="https://jamesclear.com/identity-based-habits">James Clear on identity-based habits</a> — the identity → process → outcomes framing</li>
+        <li><a href="https://www.nirandfar.com/hooked/">Nir Eyal's Hook Model</a> — trigger → action → reward → investment (closely related)</li>
+        <li><a href="https://github.com/adamlyttleapps/claude-skill-app-onboarding-questionnaire">adamlyttleapps onboarding-questionnaire skill</a> — closest public Claude skill</li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="ux-contract.html">
+        <span class="dir">← Previous</span>
+        <span class="title">UX_CONTRACT.md</span>
+      </a>
+      <a class="next" href="frontend-design.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Frontend design helper</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

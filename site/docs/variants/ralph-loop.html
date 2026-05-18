@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ralph-loop — Agent App pieces — project-starter docs</title>
+  <meta name="description" content="Anthropic's iterative-agent-loop plugin. A Stop hook re-feeds the prompt across iterations until Claude emits a completion promise."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>ralph-loop
+    </nav>
+
+    <h1>Iterative agent loops</h1>
+    <p class="lede">
+      Anthropic's official plugin for the "Ralph Wiggum" iterative-loop
+      technique. A Stop hook intercepts session-exit attempts and re-feeds the
+      original prompt while preserving all file modifications and git history
+      across iterations. Each iteration sees prior work. Continues until
+      Claude emits a user-defined completion-promise tag.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Plugin (includes a Stop hook, slash commands, scripts)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill official">Anthropic official</span> "Anthropic Verified" plugin</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Manual — invoked with <code>/ralph-loop</code></dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd><code>/plugin marketplace add anthropics/claude-plugins-official</code> then <code>/plugin install ralph-loop</code></dd>
+      </div>
+    </dl>
+
+    <h2>What it actually does</h2>
+    <p>
+      Ralph (named after Ralph Wiggum from <em>The Simpsons</em>, because the
+      loop is determined to keep trying) turns a one-shot prompt into a
+      multi-iteration agentic run.
+    </p>
+    <p>
+      The mechanism is simple:
+    </p>
+    <ol>
+      <li>You run <code>/ralph-loop "&lt;prompt&gt;"</code> with a max iteration count and a completion-promise string.</li>
+      <li>Claude runs the prompt normally. When it tries to end the session, the Stop hook fires.</li>
+      <li>The hook checks: did Claude emit the completion promise? If yes, the loop ends. If no, the hook re-feeds the original prompt and lets Claude continue.</li>
+      <li>File modifications and git state persist across iterations — Claude's next pass sees what the previous pass did.</li>
+      <li>Loops until completion or until the max iteration count is hit.</li>
+    </ol>
+    <p>
+      A system message tells Claude not to lie about completion just to escape
+      the loop. The honesty constraint matters because the loop can run a long
+      time and the agent could otherwise game its way out.
+    </p>
+
+    <h2>How to invoke it</h2>
+<pre><code>/ralph-loop "Implement the user authentication flow with tests"
+            --max-iterations 10
+            --completion-promise "&lt;promise&gt;COMPLETE&lt;/promise&gt;"</code></pre>
+    <p>
+      Cancel an in-progress loop:
+    </p>
+<pre><code>/cancel-ralph</code></pre>
+
+    <h2>When it's the right tool</h2>
+    <p><strong>Use ralph-loop for:</strong></p>
+    <ul>
+      <li><strong>Greenfield TDD.</strong> You have a spec, you want Claude to write the test, then code, then make the test pass, then move on. Each iteration completes a unit.</li>
+      <li><strong>Tasks with automated verification.</strong> The loop knows when to stop because tests pass.</li>
+      <li><strong>Clear success criteria.</strong> You can articulate what "done" looks like in a promise string.</li>
+      <li><strong>Phased work with checkpoints.</strong> Each iteration completes one phase.</li>
+    </ul>
+
+    <h2>When it's the wrong tool</h2>
+    <p><strong>Don't use ralph-loop for:</strong></p>
+    <ul>
+      <li><strong>Vague success criteria.</strong> "Improve the codebase" has no completion signal. The loop runs until the iteration cap, possibly churning.</li>
+      <li><strong>Complex tasks without phasing.</strong> If "done" requires understanding what's in iteration 7 from what happened in iteration 2, the loop's stateless re-feed will lose threads.</li>
+      <li><strong>No iteration limit.</strong> Always set <code>--max-iterations</code>. The cost otherwise is unbounded.</li>
+      <li><strong>Tasks where you want to review each step.</strong> The loop runs without checking in. Use plan-mode + manual review for those.</li>
+    </ul>
+
+    <h2>The Stop-hook mechanism</h2>
+    <p>
+      Stop hooks fire when Claude attempts to end a session. They can either
+      <strong>allow</strong> the stop (normal session ends) or <strong>block</strong>
+      it (Claude continues). Ralph's hook:
+    </p>
+    <ol>
+      <li>Reads the transcript looking for the completion promise.</li>
+      <li>If found → allows the stop. Loop ends.</li>
+      <li>If not found → checks iteration count. If under cap, blocks the stop and re-injects the original prompt. Claude continues.</li>
+      <li>If iteration cap is hit → allows the stop with a warning. Loop ends incomplete.</li>
+    </ol>
+
+    <h2>Plugin structure (for the curious)</h2>
+    <pre><code>ralph-loop/
+├── .claude-plugin/      <span class="cmt"># plugin manifest</span>
+├── commands/             <span class="cmt"># /ralph-loop and /cancel-ralph</span>
+├── hooks/                <span class="cmt"># the Stop hook</span>
+│   └── hooks.json
+├── scripts/              <span class="cmt"># helper shell scripts</span>
+├── README.md
+└── LICENSE</code></pre>
+
+    <div class="callout warn">
+      <div class="icon">!</div>
+      <div>
+        <p>
+          <strong>Windows note:</strong> if hooks fail with "bash not found,"
+          set the Git Bash path explicitly in <code>hooks/hooks.json</code>.
+          Default WSL resolution can resolve to the wrong shell on some
+          Windows setups.
+        </p>
+      </div>
+    </div>
+
+    <h2>How it relates to the other Agent App pieces</h2>
+    <ul>
+      <li>
+        <strong><code>ai-agents-architect</code></strong> decides <em>whether</em> your app needs an iterative loop at all (vs. one-shot or supervisor/worker).
+      </li>
+      <li>
+        <strong><code>agent-orchestrator</code></strong> is for coordinating multiple agents. Ralph is for getting <em>one</em> agent (or session) to iterate.
+      </li>
+      <li>
+        Ralph pairs naturally with the built-in <code>/loop</code> harness skill for self-paced multi-turn execution.
+      </li>
+    </ul>
+
+    <h2>Install</h2>
+<pre><code>/plugin marketplace add anthropics/claude-plugins-official
+/plugin install ralph-loop</code></pre>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://claude.com/plugins/ralph-loop">claude.com/plugins/ralph-loop</a> — official plugin page</li>
+        <li><a href="https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-loop">github.com/anthropics/claude-plugins-official/.../ralph-loop</a> — source</li>
+        <li><a href="https://deepwiki.com/anthropics/claude-plugins-official/6.2-ralph-loop-(iterative-development)">DeepWiki: Ralph Loop (Iterative Development)</a></li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="agent-orchestrator.html">
+        <span class="dir">← Previous</span>
+        <span class="title">Multi-agent coordination</span>
+      </a>
+      <a class="next" href="agent-memory-systems.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Memory system design</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

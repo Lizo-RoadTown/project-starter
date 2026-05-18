@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>agent-memory-systems — Agent App pieces — project-starter docs</title>
+  <meta name="description" content="Memory architecture skill for agent apps. CoALA framework (semantic, episodic, procedural); vector store selection; chunking; consolidation; decay."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>agent-memory-systems
+    </nav>
+
+    <h1>Memory system design</h1>
+    <p class="lede">
+      Patterns for how your agent <em>remembers things between conversations</em>.
+      Covers three memory types from the CoALA framework (semantic, episodic,
+      procedural), plus vector-store selection, chunking strategies, background
+      consolidation, and memory decay.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Skill (SKILL.md with reference patterns)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill community">community</span> Originates from vibeship-spawner-skills (Apache 2.0)</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Memory, persistence, vector stores, RAG, LangMem, MemGPT mentions</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>Via antigravity-awesome-skills installer or manual copy to <code>.claude/skills/</code></dd>
+      </div>
+    </dl>
+
+    <h2>The CoALA framework — three memory types</h2>
+    <p>
+      Most agent apps need some persistence — what the user said before, what
+      they prefer, what the agent has learned. The
+      <strong>CoALA</strong> (Cognitive Architectures for Language Agents)
+      framework breaks this into three distinct types, each with different
+      storage requirements.
+    </p>
+
+    <h3>Semantic memory — facts about the world</h3>
+    <p>
+      Stable, structured knowledge. "The user's preferred language is
+      Spanish." "Account ID 12345 is owned by Jane Doe." "This project uses
+      Postgres on Render."
+    </p>
+    <p>
+      <strong>Store as:</strong> structured records in a SQL database or
+      typed key-value store. Cheap to update, exact-match retrieval.
+    </p>
+
+    <h3>Episodic memory — experiences</h3>
+    <p>
+      Discrete events that happened during interactions. "On 2026-05-14, the
+      user asked about pricing and the agent failed to find the
+      enterprise tier." "Last Tuesday, the agent corrected a calculation
+      mistake."
+    </p>
+    <p>
+      <strong>Store as:</strong> vector embeddings of episode summaries in a
+      vector database. Retrieval by semantic similarity — "what did we talk
+      about that was like X?"
+    </p>
+
+    <h3>Procedural memory — how to do things</h3>
+    <p>
+      Skills, routines, learned behaviors. "When the user says 'summarize my
+      day,' query the calendar API, then the journal, then format as a
+      bulleted list." Procedural memory is what makes an agent <em>get
+      better</em> at recurring tasks.
+    </p>
+    <p>
+      <strong>Store as:</strong> structured task templates, often as JSON or
+      markdown skill files. Distinct from semantic memory because it
+      describes <em>processes</em>, not facts.
+    </p>
+
+    <h2>Short-term vs. long-term</h2>
+    <p>
+      The CoALA types above are all long-term. Most apps also need
+      <strong>short-term memory</strong> — the running context of the current
+      conversation. This usually lives in the LLM's context window, padded
+      with relevant retrievals from long-term memory.
+    </p>
+    <p>
+      The split matters because context window is expensive and bounded.
+      Short-term holds the active thread; long-term holds everything else;
+      retrieval pulls the relevant slice of long-term into short-term when
+      needed.
+    </p>
+
+    <h2>Vector store selection</h2>
+    <p>The skill compares the practical options:</p>
+    <ul>
+      <li><strong>Pinecone</strong> — managed, fast, expensive at scale. Good default for production apps that need someone else to operate it.</li>
+      <li><strong>Qdrant</strong> — open-source, self-hostable, supports advanced filters. Good for teams that want control.</li>
+      <li><strong>Weaviate</strong> — open-source, modular, supports hybrid search (vector + keyword).</li>
+      <li><strong>ChromaDB</strong> — embedded, simplest dev experience. Good for prototypes; less clear at scale.</li>
+      <li><strong>pgvector</strong> — Postgres extension. Right call if you already have Postgres and don't want to operate a second datastore.</li>
+      <li><strong>LanceDB</strong> — open-source, embedded, optimized for AI workloads. Often a good fit for self-hosted Claude apps.</li>
+    </ul>
+    <p>
+      <strong>The decision:</strong> almost always either pgvector (you already
+      have Postgres) or one of LanceDB/Chroma (no extra ops). Start with one
+      of those; consider migrating to managed only when scale demands.
+    </p>
+
+    <h2>Chunking strategies</h2>
+    <p>
+      Long documents have to be broken into chunks before they can be
+      embedded and stored. Strategy matters more than people expect.
+    </p>
+    <ul>
+      <li><strong>Fixed-size chunking</strong> — e.g. every 500 tokens. Simple, terrible at preserving meaning across chunk boundaries.</li>
+      <li><strong>Semantic chunking</strong> — break at sentence or paragraph boundaries, then group semantically related sentences. Preserves meaning; computationally heavier.</li>
+      <li><strong>Structure-aware chunking</strong> — respect document structure (headings, sections, tables). Best for technical documents.</li>
+      <li><strong>Contextual chunking</strong> — prepend each chunk with a brief summary of the document it came from. Improves retrieval relevance at the cost of more tokens.</li>
+    </ul>
+
+    <h2>Background memory formation</h2>
+    <p>
+      Don't try to store memories in the user's request path — that adds
+      latency the user feels. Instead:
+    </p>
+    <ol>
+      <li>During the conversation, log raw events to a queue.</li>
+      <li>Asynchronously, a worker reads the queue, summarizes events into episodes, embeds them, stores in the vector store.</li>
+      <li>The user's next request retrieves from already-consolidated memory.</li>
+    </ol>
+    <p>
+      This is called <strong>background consolidation</strong> — modeled on
+      how human sleep consolidates short-term experiences into long-term
+      memory.
+    </p>
+
+    <h2>Memory decay</h2>
+    <p>
+      Old memories that no longer matter should fade. Two approaches:
+    </p>
+    <ul>
+      <li><strong>Time-based decay</strong> — older memories get lower retrieval scores. Eventually drop below a threshold and get pruned.</li>
+      <li><strong>Utility-based decay</strong> — track which memories actually get retrieved and used. Memories that are never used drop out.</li>
+    </ul>
+    <p>
+      Without some form of decay, the vector store grows unboundedly and
+      retrieval quality degrades (every query returns stale, irrelevant
+      hits).
+    </p>
+
+    <h2>When it kicks in</h2>
+    <p>
+      Activates on mentions of agent memory, long-term memory, persistent
+      memory, vector stores, RAG pipelines, LangMem, MemGPT, or specific
+      vector-DB names.
+    </p>
+
+    <h2>Install</h2>
+    <p>
+      The skill is part of the <code>antigravity-awesome-skills</code> pack.
+      Manual install:
+    </p>
+<pre><code>cd ~/.claude/skills
+git clone https://github.com/sickn33/antigravity-awesome-skills
+# Then symlink or copy the agent-memory-systems skill</code></pre>
+    <p>
+      Or use the pack's installer CLI if available in your version.
+    </p>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://github.com/sickn33/antigravity-awesome-skills/blob/main/plugins/antigravity-awesome-skills-claude/skills/agent-memory-systems/SKILL.md">SKILL.md source (sickn33/antigravity-awesome-skills)</a></li>
+        <li><a href="https://arxiv.org/abs/2309.02427">CoALA: Cognitive Architectures for Language Agents (Sumers et al., 2023)</a></li>
+        <li><a href="https://arxiv.org/abs/2310.08560">MemGPT: Towards LLMs as Operating Systems (Packer et al., 2023)</a></li>
+        <li><a href="https://github.com/langchain-ai/langmem">LangMem</a> — LangChain's memory library</li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="ralph-loop.html">
+        <span class="dir">← Previous</span>
+        <span class="title">Iterative agent loops</span>
+      </a>
+      <a class="next" href="claude-api.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Anthropic SDK helper</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

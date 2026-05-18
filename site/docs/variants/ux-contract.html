@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>UX_CONTRACT.md — UI App pieces — project-starter docs</title>
+  <meta name="description" content="The 12-point UI review contract every visual PR cites. Color semantics, animation budget, accessibility minimums, anti-patterns."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>UX_CONTRACT.md
+    </nav>
+
+    <h1>Your project's UI rulebook</h1>
+    <p class="lede">
+      Unlike the other UI App entries, this one is a <strong>file inside your
+      project</strong>, not a global skill. It's a 12-point checklist your
+      visual PRs cite. The scaffolded version sets sensible defaults; you edit
+      it to match your project's specific rules.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>File — <code>docs/UX_CONTRACT.md</code></dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill local">local</span> Your project — edit freely</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Referenced from <code>CLAUDE.md</code> — loaded every session</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>Ships with <code>ui-app</code> scaffolds automatically</dd>
+      </div>
+    </dl>
+
+    <h2>What's in the scaffolded version</h2>
+    <p>
+      The template ships a contract that's been refined across real projects.
+      You can keep it, extend it, or rewrite it — but starting from this base
+      is faster than from scratch.
+    </p>
+
+    <h3>Rule zero — the master interaction contract</h3>
+    <p>
+      <strong>Attention → Question → Commitment → Feedback → Reveal.</strong>
+      The user must commit to a decision before the system reveals structure.
+      No auto-advance. No answer-before-input. No forward navigation during
+      reasoning. Every other rule serves this one.
+    </p>
+
+    <h3>Onboarding arc — IDENTITY-TO-HABIT</h3>
+    <p>How a user gets from outsider to participant. Five steps:</p>
+    <ol>
+      <li><strong>Define the first win</strong> — the smallest meaningful success.</li>
+      <li><strong>Remove unnecessary setup</strong> — minimize early decisions.</li>
+      <li><strong>Create ownership through action</strong> — small task that creates investment.</li>
+      <li><strong>Attach a stable cue</strong> — link return-visits to existing routines.</li>
+      <li><strong>Reinforce identity</strong> — reflect the user as someone who succeeds.</li>
+    </ol>
+
+    <h3>Two-language coherence</h3>
+    <p>
+      When the user commits to something in one representation, the paired
+      representation updates at the same time. If a paired representation
+      doesn't exist, say so explicitly — silence reads as broken.
+    </p>
+
+    <h3>Empty vs filled — <code>?</code> slots and <code>fill-pop</code> cards</h3>
+    <p>
+      Empty values render as dashed-border <code>?</code> placeholders. Filled
+      values render as solid cards with a <code>fill-pop</code> entry
+      animation. The contrast is intentional and load-bearing — users can tell
+      at a glance whether they're making progress.
+    </p>
+
+    <h3>Hand-crafted, attempt-aware feedback</h3>
+    <ul>
+      <li><strong>Attempt 1:</strong> Minimal — "not quite, try another."</li>
+      <li><strong>Attempt 2:</strong> Same minimal nudge with slight rewording.</li>
+      <li><strong>Attempt 3:</strong> Actual hint — concrete pointer.</li>
+      <li><strong>Attempt 4+:</strong> "Show reasoning" — explains the rule but requires the user to still apply it.</li>
+    </ul>
+    <p>Never auto-generated from a model at runtime <em>without</em> the per-attempt structure.</p>
+
+    <h3>Wrong-but-valid ≠ wrong-and-invalid</h3>
+    <ul>
+      <li><strong>Suboptimal but valid</strong>: amber tint, two buttons — "Use this anyway" and "Choose again". Log the suboptimal pick; debrief later.</li>
+      <li><strong>Wrong and invalid</strong>: red flash, block. Forces retry.</li>
+    </ul>
+    <p>Mixing them confuses users about what's permitted.</p>
+
+    <h3>Color semantics — six tokens, one meaning each</h3>
+    <p>The contract defines a small fixed set of color tokens. Don't introduce new colors for new states.</p>
+    <ul>
+      <li><strong>Attention target</strong> — neutral border with subtle pulse</li>
+      <li><strong>Candidate (selected, unjudged)</strong> — amber tint, amber border</li>
+      <li><strong>Correct / live</strong> — emerald tint, emerald border</li>
+      <li><strong>Active / pivot</strong> — blue tint, blue border</li>
+      <li><strong>Invalid</strong> — red flash, red border</li>
+      <li><strong>Skipped / dimmed</strong> — reduced opacity</li>
+    </ul>
+
+    <h3>Animation budget</h3>
+    <ul>
+      <li><strong>Duration</strong>: 150–300ms for state changes.</li>
+      <li><strong>Spatial continuity</strong>: animate the path between two places.</li>
+      <li><strong>Respect <code>prefers-reduced-motion</code>.</strong></li>
+      <li><strong>Never animate width/height</strong> — animate <code>transform</code> and <code>opacity</code> only (GPU-accelerated).</li>
+    </ul>
+
+    <h3>Navigation rules</h3>
+    <ul>
+      <li>One nav item per concern. If two pages answer the same question, they belong on one page.</li>
+      <li>The sidebar is not a TODO list. Stub status items are forbidden — either build the surface or remove the link.</li>
+      <li>Every page should feel like the same product.</li>
+    </ul>
+
+    <h3>Voice and tone</h3>
+    <ul>
+      <li>Describe what <em>is</em>, not what it <em>isn't</em>.</li>
+      <li>No marketing language ("the unlock," "delightful," "transformative").</li>
+      <li>No self-congratulation.</li>
+      <li>No defensive contrasts ("real X not Y").</li>
+      <li>No conversation-language in product surfaces.</li>
+    </ul>
+
+    <h3>Accessibility — non-negotiable</h3>
+    <ul>
+      <li>Color contrast ≥ 4.5:1 normal text, ≥ 3:1 large.</li>
+      <li>Focus rings visible (2–4px) on every interactive element.</li>
+      <li>Aria labels on icon-only buttons.</li>
+      <li>Keyboard navigation matches visual order.</li>
+      <li><code>prefers-reduced-motion</code> respected.</li>
+    </ul>
+
+    <h3>Touch &amp; interaction — non-negotiable</h3>
+    <ul>
+      <li>Minimum 44×44px touch targets, 8px+ spacing between.</li>
+      <li>Loading feedback within 100ms of every action.</li>
+      <li>No hover-only affordances.</li>
+      <li>No 0ms state changes — at minimum 150ms easing.</li>
+    </ul>
+
+    <h2>The 12-point review checklist</h2>
+    <p>Every UI PR must pass this checklist or explicitly call out the trade-off:</p>
+    <ol>
+      <li>Master contract — does the user commit before the system reveals?</li>
+      <li>Forward navigation locked during reasoning?</li>
+      <li>Paired representation present, or its absence explicitly named?</li>
+      <li>Empty vs filled visually distinct?</li>
+      <li>Hints attempt-aware, or scripted placeholder explicitly labeled?</li>
+      <li>Wrong choices distinguished invalid (red, block) vs suboptimal (amber, dual-button)?</li>
+      <li>Color semantics consistent with the table above?</li>
+      <li>Animations purposeful, within budget, respect reduced-motion?</li>
+      <li>Accessibility — contrast, focus rings, aria labels, keyboard?</li>
+      <li>Touch targets 44px+, spacing 8px+, loading feedback within 100ms?</li>
+      <li>Voice clean — no marketing language?</li>
+      <li>Sidebar does not gain a stub?</li>
+    </ol>
+
+    <h2>How to use it in practice</h2>
+    <p>Cite it in PR descriptions:</p>
+<pre><code><span class="cmt">## Test plan</span>
+- [x] UX_CONTRACT items 7-10 pass
+- [x] Focus rings visible on all new buttons
+- [ ] Touch target audit not done (mobile out of scope)</code></pre>
+    <p>
+      Claude reads <code>UX_CONTRACT.md</code> as part of every session because
+      it's linked from <code>CLAUDE.md</code>. When you ask for a visual change,
+      Claude checks against the contract before suggesting code.
+    </p>
+
+    <h2>Customizing it</h2>
+    <p>
+      <strong>You should edit it.</strong> The scaffolded version is a sensible
+      default; your project will have its own constraints. Examples of edits
+      that make sense:
+    </p>
+    <ul>
+      <li>Replace the color semantics table with your brand palette.</li>
+      <li>Add platform-specific rules (a desktop app might have different touch-target rules than a mobile site).</li>
+      <li>Add rules for specific domains — accessibility for healthcare, regulatory copy for finance.</li>
+      <li>Remove the onboarding arc if your product isn't user-facing.</li>
+    </ul>
+    <p>
+      The point isn't this specific contract — it's having <em>some</em>
+      contract in writing so visual discipline doesn't drift.
+    </p>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://github.com/Lizo-RoadTown/project-starter/blob/main/templates/ui-app/docs/UX_CONTRACT.md">Scaffolded UX_CONTRACT.md source</a></li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="design-system.html">
+        <span class="dir">← Previous</span>
+        <span class="title">Design-system structure</span>
+      </a>
+      <a class="next" href="onboarding-psychologist.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Onboarding playbook</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

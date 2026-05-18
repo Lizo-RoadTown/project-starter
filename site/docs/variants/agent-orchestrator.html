@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>agent-orchestrator — Agent App pieces — project-starter docs</title>
+  <meta name="description" content="Multi-agent coordination patterns — Handoff, Assign, send_message; supervisor/worker, peer-to-peer, orchestrator-led shapes."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>agent-orchestrator
+    </nav>
+
+    <h1>Multi-agent coordination patterns</h1>
+    <p class="lede">
+      For agent apps that need more than one agent. Documents three
+      coordination primitives (Handoff, Assign, send_message) and three
+      orchestration shapes (supervisor/worker, peer-to-peer, orchestrator-led).
+      The patterns are independent of any specific library; the same shapes
+      appear in AWS's CLI Agent Orchestrator and most multi-agent frameworks.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Skill (coordination patterns)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill community">community</span> Closest matches: <code>multi-agent-patterns</code>, AWS CAO</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Multi-agent design, coordination, handoffs</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>See "Public implementations" below</dd>
+      </div>
+    </dl>
+
+    <h2>The three coordination primitives</h2>
+
+    <h3>Handoff — synchronous task transfer</h3>
+    <p>
+      Agent A passes the active task to Agent B and <em>waits</em> for B to
+      finish before continuing. Used when there's a clean baton-pass: one
+      agent's output is the next agent's input.
+    </p>
+    <p>
+      <strong>Example:</strong> a research agent gathers source material,
+      hands the conversation to a writing agent that drafts the article. The
+      research agent doesn't see the article; the writing agent doesn't redo
+      the research.
+    </p>
+
+    <h3>Assign — asynchronous spawn</h3>
+    <p>
+      Agent A spawns Agent B (or several Bs) and continues its own work in
+      parallel. Used when sub-tasks are independent and can run concurrently.
+    </p>
+    <p>
+      <strong>Example:</strong> an orchestrator dispatches three research
+      agents to investigate three sources at once. While they work, the
+      orchestrator can summarize what it knows so far.
+    </p>
+
+    <h3>send_message — point-to-point communication</h3>
+    <p>
+      Agents already in flight exchange messages without blocking. Used for
+      sharing intermediate results, coordinating constraints, or raising
+      conditions that affect another agent's work.
+    </p>
+    <p>
+      <strong>Example:</strong> while writing, the writing agent realizes it
+      needs one more source. It sends a message to the research agent rather
+      than restarting the whole pipeline.
+    </p>
+
+    <h2>The three orchestration shapes</h2>
+
+    <h3>Shape 1: Supervisor / Worker (hierarchical)</h3>
+    <p>
+      One supervisor agent owns the goal. Workers are specialists the
+      supervisor calls on. Workers don't talk to each other directly.
+    </p>
+    <pre><code>            ┌──────────────┐
+            │  Supervisor  │
+            └──┬────┬───┬──┘
+               │    │   │
+       ┌───────▼─┐ ▼ ┌──▼─────┐
+       │ Worker  │ │ │ Worker │
+       │ (research) │ │ (write) │
+       └───────────┘ │ └────────┘
+                     ▼
+                  Worker
+                 (review)</code></pre>
+    <p>
+      <strong>Good for:</strong> centralized control, auditability, policy
+      enforcement. Easy to reason about.
+    </p>
+    <p>
+      <strong>Watch out for:</strong> the supervisor becomes a bottleneck.
+      All decisions flow through it.
+    </p>
+
+    <h3>Shape 2: Peer-to-Peer (network)</h3>
+    <p>
+      Agents talk to each other directly without a central coordinator. Each
+      agent decides who to ask based on its goal.
+    </p>
+    <p>
+      <strong>Good for:</strong> emergent collaboration, no single point of
+      failure, can scale to large agent counts.
+    </p>
+    <p>
+      <strong>Watch out for:</strong> hard to debug ("why did agent C ignore
+      agent B?"), hard to enforce global constraints, race conditions on
+      shared state.
+    </p>
+
+    <h3>Shape 3: Orchestrator-Led (pipeline)</h3>
+    <p>
+      A lightweight orchestrator routes work through a fixed sequence of
+      specialists. The orchestrator doesn't decide <em>what</em> to do — it
+      just knows the order.
+    </p>
+    <p>
+      <strong>Good for:</strong> well-known workflows where the shape is
+      stable (CI pipelines, content publishing, data ETL).
+    </p>
+    <p>
+      <strong>Watch out for:</strong> not really agent behavior — it's a
+      workflow engine that happens to use LLMs. That's fine, but call it what
+      it is.
+    </p>
+
+    <h2>Conflict resolution</h2>
+    <p>
+      When two agents disagree about state, you need a policy. Three options:
+    </p>
+    <ul>
+      <li><strong>Last writer wins</strong> — simple, often wrong for important state.</li>
+      <li><strong>Supervisor arbitration</strong> — escalate to a higher-level agent. Works in hierarchical shapes.</li>
+      <li><strong>Explicit lock or claim</strong> — agents claim ownership of state before modifying. Avoids conflicts but adds latency.</li>
+    </ul>
+
+    <h2>When you DON'T need multi-agent coordination</h2>
+    <p>
+      Most apps don't. Multi-agent shapes pay for themselves only when the
+      split has a real reason — different personas, parallel work, or
+      context-isolation requirements. Single-agent apps can skip this
+      entirely.
+    </p>
+    <p>
+      Decision check: can you describe what the agent does in one paragraph?
+      Then you probably need one agent, not several.
+    </p>
+
+    <h2>Public implementations</h2>
+
+    <h3>AWS CLI Agent Orchestrator (CAO)</h3>
+    <p>
+      AWS Labs' reference implementation. Documents all three primitives and
+      shapes; provides a Python library.
+    </p>
+<pre><code>pip install cli-agent-orchestrator</code></pre>
+    <p>
+      Source: <a href="https://github.com/awslabs/cli-agent-orchestrator">github.com/awslabs/cli-agent-orchestrator</a>.
+      Announcement post: <a href="https://aws.amazon.com/blogs/opensource/introducing-cli-agent-orchestrator-transforming-developer-cli-tools-into-a-multi-agent-powerhouse/">AWS Open Source Blog</a>.
+    </p>
+
+    <h3>muratcankoylan's <code>multi-agent-patterns</code> skill</h3>
+    <p>
+      Part of the <em>Agent Skills for Context Engineering</em> pack.
+    </p>
+<pre><code>/plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering
+/plugin install multi-agent-patterns@context-engineering</code></pre>
+
+    <h2>How it relates to <code>ai-agents-architect</code></h2>
+    <p>
+      <strong>ai-agents-architect</strong> helps you decide <em>whether</em>
+      you need multiple agents. <strong>agent-orchestrator</strong> helps you
+      coordinate them once you've decided you do. They're sequential, not
+      alternatives.
+    </p>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://github.com/awslabs/cli-agent-orchestrator">github.com/awslabs/cli-agent-orchestrator</a> — AWS reference impl</li>
+        <li><a href="https://aws.amazon.com/blogs/opensource/introducing-cli-agent-orchestrator-transforming-developer-cli-tools-into-a-multi-agent-powerhouse/">AWS CAO announcement post</a></li>
+        <li><a href="https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering">Context Engineering skill pack</a> (contains <code>multi-agent-patterns</code>)</li>
+        <li><a href="https://www.anthropic.com/research/building-effective-agents">Anthropic — Building Effective Agents</a> (multi-agent section)</li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="ai-agents-architect.html">
+        <span class="dir">← Previous</span>
+        <span class="title">Agent architecture guide</span>
+      </a>
+      <a class="next" href="ralph-loop.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Iterative agent loops</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

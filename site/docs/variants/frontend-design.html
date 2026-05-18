@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>frontend-design — UI App pieces — project-starter docs</title>
+  <meta name="description" content="Anthropic's official frontend plugin — generates production-grade HTML/CSS/JS with distinctive typography and animations."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>frontend-design
+    </nav>
+
+    <h1>Frontend design helper</h1>
+    <p class="lede">
+      Anthropic's official frontend plugin. Generates production-grade HTML,
+      CSS, JavaScript, or React components with distinctive typography,
+      creative layouts, and thoughtful animations. Explicitly designed to
+      avoid "generic AI slop" aesthetics.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Plugin (contains a skill named <code>frontend-design</code>)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill official">Anthropic official</span> Authors: Prithvi Rajasekaran &amp; Alexander Bricken</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Automatic on frontend-creation prompts</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>Bundled with Claude Code; also via the official plugin marketplace</dd>
+      </div>
+    </dl>
+
+    <h2>What it actually does</h2>
+    <p>
+      The plugin ships a skill that, when activated, injects design principles
+      and aesthetic directives into Claude's context. The goal is concrete:
+      generate frontend code that looks <em>intentional</em> instead of
+      defaulting to the generic patterns most LLMs gravitate toward (Inter
+      font, gray cards on white, blue primary button, no animation).
+    </p>
+    <p>
+      Concretely, the skill encodes:
+    </p>
+    <ul>
+      <li><strong>Distinctive typography defaults</strong> — pair a refined body font with a distinctive display font; avoid Arial, system defaults, and Inter as the default.</li>
+      <li><strong>Layout creativity heuristics</strong> — generous whitespace, asymmetric grids when appropriate, deliberate visual hierarchy.</li>
+      <li><strong>Animation as part of the design</strong> — micro-interactions and transitions that earn their place, not just exist.</li>
+      <li><strong>"Implementation complexity matches aesthetic vision"</strong> — maximalist designs get elaborate animations and effects; minimalist designs use restraint, precision, and careful spacing. Don't mix.</li>
+    </ul>
+
+    <h2>When it kicks in</h2>
+    <p>Automatic on prompts that ask for frontend creation. Examples:</p>
+    <ul>
+      <li>"Create a dashboard for a music streaming app" → triggers</li>
+      <li>"Build a landing page for an indie game studio" → triggers</li>
+      <li>"Design a settings panel for the admin console" → triggers</li>
+      <li>"Fix the spacing on this button" → less likely to trigger (too tactical)</li>
+      <li>"Refactor this React component for performance" → does NOT trigger</li>
+    </ul>
+
+    <h2>Anti-patterns it actively warns against</h2>
+    <ul>
+      <li>
+        <strong>Generic body fonts.</strong> Arial, Inter, Roboto, and system
+        defaults are flagged as default choices. The skill nudges toward
+        distinctive pairings — a refined body font (e.g. Söhne, GT Walsheim,
+        Sentinel) plus a distinctive display font (Editorial New, GT Super,
+        Tiempos Headline).
+      </li>
+      <li>
+        <strong>"AI slop" aesthetics.</strong> Purple/pink gradients on
+        everything, glass cards over abstract blobs, vague hero copy. These
+        are flagged as visual clichés.
+      </li>
+      <li>
+        <strong>Animation budget overrun.</strong> Every animation should
+        have a reason. Decorative animations on a serious product feel
+        amateur.
+      </li>
+      <li>
+        <strong>Maximalist effects on minimalist designs (and vice versa).</strong>
+        A clean editorial layout shouldn't have parallax and 3D card flips.
+        A maximalist brutalist site shouldn't have subtle hover states.
+      </li>
+    </ul>
+
+    <h2>How it relates to <code>ui-ux-pro-max</code></h2>
+    <p>
+      They complement rather than overlap:
+    </p>
+    <ul>
+      <li><strong><code>ui-ux-pro-max</code></strong> — opinionated. Picks a style and palette from a curated set, then enforces design-system rules across the output. Best when you want "make it good, don't make me choose."</li>
+      <li><strong><code>frontend-design</code></strong> — aesthetic-forward. Pushes for distinctive choices over safe defaults. Best when you want the output to feel <em>specific</em> to your project, not generic.</li>
+    </ul>
+    <p>
+      Both can be active at once. <code>ui-ux-pro-max</code> handles structural
+      decisions (which UI pattern, which palette, which font pairing);
+      <code>frontend-design</code> handles aesthetic ambition (don't take the
+      easy choice).
+    </p>
+
+    <h2>How to invoke it</h2>
+    <p>Usually automatic. Describe what you want:</p>
+<pre><code>Build a landing page for an indie game studio called Driftbound.
+The game is a slow-paced exploration sim set on alien moons.
+Tone: contemplative, mysterious, not action-y.</code></pre>
+    <p>The skill will activate and you'll get back code with:</p>
+    <ul>
+      <li>A distinctive font pairing (probably an editorial display + a clean body)</li>
+      <li>A color palette evocative of the brief (muted, maybe with a single saturated accent)</li>
+      <li>Considered animations (a slow drift on a hero element, perhaps)</li>
+      <li>Layout that breaks the standard "centered hero + 3 cards + CTA" mold if appropriate</li>
+    </ul>
+
+    <h2>Install</h2>
+    <p>
+      <strong>If you have Claude Code:</strong> the plugin is bundled — no
+      separate install. Confirm it's available:
+    </p>
+<pre><code>/plugin list</code></pre>
+    <p>
+      <strong>From the official marketplace:</strong>
+    </p>
+<pre><code>/plugin marketplace add anthropics/claude-plugins-official
+/plugin install frontend-design</code></pre>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://claude.com/plugins/frontend-design">claude.com/plugins/frontend-design</a> — official plugin landing page</li>
+        <li><a href="https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design">github.com/anthropics/claude-code/.../frontend-design</a> — source code</li>
+        <li><a href="https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md">SKILL.md</a> — the skill definition itself</li>
+        <li><a href="https://claude.com/blog/improving-frontend-design-through-skills">Anthropic blog: Improving Frontend Design Through Skills</a></li>
+        <li><a href="https://github.com/anthropics/claude-cookbooks/blob/main/coding/prompting_for_frontend_aesthetics.ipynb">Cookbook: Prompting for Frontend Aesthetics</a></li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="onboarding-psychologist.html">
+        <span class="dir">← Previous</span>
+        <span class="title">Onboarding playbook</span>
+      </a>
+      <a class="next" href="ai-agents-architect.html">
+        <span class="dir">Next variant →</span>
+        <span class="title">Agent App: Architecture guide</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

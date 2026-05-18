@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ui-ux-pro-max — UI App pieces — project-starter docs</title>
+  <meta name="description" content="The 99-rule UI/UX design intelligence skill — 67 UI styles, 161 color palettes, anti-patterns, parallel-domain analysis."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>ui-ux-pro-max
+    </nav>
+
+    <h1>A 99-rule design checklist</h1>
+    <p class="lede">
+      The <code>ui-ux-pro-max</code> skill is a design-intelligence engine that
+      bundles 67 UI styles, 161 color palettes, 57 font pairings, 99 UX
+      guidelines, 25 chart types, and 161 reasoning rules. When you ask Claude
+      to design or review a UI, it analyzes the request across five domains in
+      parallel and returns a full design system — pattern, style, colors,
+      typography, effects, anti-patterns to refuse, plus accessibility checks.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Skill (SKILL.md + supporting CSV reasoning rules)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill community">community</span> <code>nextlevelbuilder</code></dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Automatic on UI/UX prompts</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd><code>npm install -g uipro-cli</code> then <code>uipro init --ai claude</code></dd>
+      </div>
+    </dl>
+
+    <h2>What it actually does</h2>
+    <p>
+      When invoked, the skill runs five analyses in parallel — looking at the
+      request through five lenses:
+    </p>
+    <ul>
+      <li><strong>Product context</strong> — what the user is building (finance dashboard? consumer landing? brutalist portfolio?).</li>
+      <li><strong>Style direction</strong> — which of the 67 UI styles fits (glassmorphism, claymorphism, neumorphism, bento grid, brutalism, AI-native, dark mode, etc.).</li>
+      <li><strong>Color palette</strong> — chosen from 161 curated palettes, filtered for industry-appropriateness.</li>
+      <li><strong>Landing/layout</strong> — section ordering and visual hierarchy.</li>
+      <li><strong>Typography</strong> — chosen from 57 font pairings, with a refined body font + distinctive display font.</li>
+    </ul>
+    <p>
+      Reasoning happens via CSV-driven rules — the skill ships ~161 rules that
+      gate which combinations make sense for which use cases. Output is a full
+      design proposal: pattern recommendation, applied style, color tokens,
+      typography choices, effects (animations, shadows), and accessibility
+      pre-flight (contrast ratios, focus states, ARIA labels, touch targets).
+    </p>
+
+    <h2>When it kicks in</h2>
+    <p>
+      Activates automatically when the prompt touches UI work. Examples:
+    </p>
+    <ul>
+      <li>"Design a dashboard for a healthcare app" → triggers</li>
+      <li>"Make this card more readable" → triggers</li>
+      <li>"What font should I pair with Inter?" → triggers</li>
+      <li>"Rename this function" → does NOT trigger</li>
+      <li>"Fix this SQL query" → does NOT trigger</li>
+    </ul>
+    <p>
+      It works in Claude Code as well as Cursor, Windsurf, Antigravity, Codex
+      CLI, Gemini CLI, OpenCode, and Warp.
+    </p>
+
+    <h2>Anti-patterns it actively refuses</h2>
+    <p>The skill ships a list of patterns it will <em>not</em> produce:</p>
+    <ul>
+      <li><strong>AI purple/pink gradients on finance/banking products.</strong> Wrong industry signal — users associate them with consumer AI tools, not regulated finance.</li>
+      <li><strong>Bright neon for healthcare or banking.</strong> Trust signals demand restraint.</li>
+      <li><strong>Missing focus or hover states.</strong> Keyboard navigation must be visible.</li>
+      <li><strong>Emojis as icons.</strong> Use SVG; emojis render inconsistently across platforms and don't respect color tokens.</li>
+      <li><strong>Generic body fonts (Arial, system defaults) on marketing sites.</strong> Pair a refined body font with a distinctive display font.</li>
+      <li><strong>Harsh, jarring animations.</strong> Respect <code>prefers-reduced-motion</code>; keep durations within 150–300ms.</li>
+    </ul>
+
+    <h2>Pre-delivery checklist it runs</h2>
+    <p>Before returning a design, the skill self-audits against:</p>
+    <ul>
+      <li>Contrast ratios (≥4.5:1 normal text, ≥3:1 large)</li>
+      <li>Responsive breakpoints (mobile, tablet, desktop)</li>
+      <li>Keyboard navigation paths</li>
+      <li>Focus-state visibility on every interactive element</li>
+      <li>Touch-target minimums (44×44px)</li>
+      <li>ARIA labels on icon-only buttons</li>
+    </ul>
+
+    <h2>How to invoke it</h2>
+    <p>You don't have to. Just describe what you want:</p>
+<pre><code>Design a settings panel for a music streaming app. Dark mode default,
+should feel premium but not corporate.</code></pre>
+    <p>
+      The skill will activate automatically and return a structured design
+      proposal. To force it explicitly, mention it by name:
+    </p>
+<pre><code>Use ui-ux-pro-max to redesign this card.</code></pre>
+
+    <h2>Install</h2>
+    <p>
+      Two steps. First install the CLI globally:
+    </p>
+<pre><code>npm install -g uipro-cli</code></pre>
+    <p>
+      Then initialize it for Claude Code in your project (or globally):
+    </p>
+<pre><code>uipro init --ai claude</code></pre>
+    <p>
+      The skill files are written to your Claude Code skills directory. Confirm
+      Claude can see it by asking <em>"is ui-ux-pro-max available?"</em> in a
+      new session.
+    </p>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://github.com/nextlevelbuilder/ui-ux-pro-max-skill">github.com/nextlevelbuilder/ui-ux-pro-max-skill</a> — source</li>
+        <li><a href="https://ui-ux-pro-max-skill.nextlevelbuilder.io/">ui-ux-pro-max-skill.nextlevelbuilder.io</a> — landing page with style examples</li>
+        <li><a href="https://claudemarketplaces.com/plugins/nextlevelbuilder-ui-ux-pro-max-skill">claudemarketplaces.com listing</a> — marketplace entry</li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="../variants.html">
+        <span class="dir">← Back</span>
+        <span class="title">All variants</span>
+      </a>
+      <a class="next" href="design-system.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Design-system structure</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

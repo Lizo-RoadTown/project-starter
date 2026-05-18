@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>design-system — UI App pieces — project-starter docs</title>
+  <meta name="description" content="The three-tier design-token architecture skill — primitive → semantic → component."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>design-system
+    </nav>
+
+    <h1>Design-system structure</h1>
+    <p class="lede">
+      A pattern (and an associated skill) for organizing visual values —
+      colors, spacing, font sizes — in three layers so they stay consistent
+      across every page and theme. Changing one primitive value ripples through
+      the entire UI without touching component code.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Skill (multiple community implementations)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill community">community</span> multiple — name is generic</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Theming, token setup, multi-brand, design-system architecture</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>Varies by implementation — see References below</dd>
+      </div>
+    </dl>
+
+    <div class="callout warn">
+      <div class="icon">!</div>
+      <div>
+        <p><strong>Heads-up:</strong> <code>design-system</code> is a generic name with multiple community skills under it. The pattern itself is universal; what differs between implementations is exactly which token names ship and which framework adapters are included. For project-starter, the pattern matters more than which specific package you install.</p>
+      </div>
+    </div>
+
+    <h2>The three-tier token architecture</h2>
+    <p>
+      Design tokens are named values — <code>color-blue-500</code>,
+      <code>spacing-md</code>, <code>radius-lg</code>. The three-tier pattern
+      separates them by purpose, which is what makes the system maintainable.
+    </p>
+
+    <h3>Tier 1 — Primitive tokens</h3>
+    <p>Raw values, no context. The visual vocabulary.</p>
+<pre><code>--color-blue-500: #1A73E8;
+--color-blue-600: #1557B0;
+--spacing-1: 4px;
+--spacing-2: 8px;
+--spacing-3: 12px;
+--font-size-base: 16px;
+--radius-sm: 4px;
+--radius-md: 8px;</code></pre>
+    <p>Primitives are content-free. They name nothing about <em>where</em> they're used.</p>
+
+    <h3>Tier 2 — Semantic tokens</h3>
+    <p>Reference primitives by <em>purpose</em>, not by value.</p>
+<pre><code>--color-action-primary: var(--color-blue-500);
+--color-action-primary-hover: var(--color-blue-600);
+--color-text-primary: var(--color-zinc-900);
+--color-text-muted: var(--color-zinc-500);
+--spacing-component-padding: var(--spacing-3);
+--radius-card: var(--radius-md);</code></pre>
+    <p>
+      Semantic tokens encode <em>intent</em>. This is the layer that matters
+      most for AI agents: when Claude has to pick a color for a "primary action
+      button," it can read <code>color-action-primary</code> and know it's the
+      right answer. Without semantic naming, Claude has to guess from raw values
+      — which leads to inconsistent picks across files.
+    </p>
+
+    <h3>Tier 3 — Component tokens</h3>
+    <p>Specialize per component, when needed.</p>
+<pre><code>--button-primary-bg: var(--color-action-primary);
+--button-primary-bg-hover: var(--color-action-primary-hover);
+--button-primary-padding: var(--spacing-component-padding);
+--card-background: var(--color-surface-1);
+--card-padding: var(--spacing-4);
+--card-radius: var(--radius-card);</code></pre>
+    <p>
+      Component tokens are optional. Use them when a component has unique
+      requirements (a button's padding might differ from a card's padding even
+      though both are "component padding" in the abstract). Skip them when
+      semantic tokens are enough.
+    </p>
+
+    <h2>Why three tiers (not one, not two)</h2>
+    <p>
+      The flexibility lives in the indirection:
+    </p>
+    <ul>
+      <li><strong>Change a brand color</strong> → edit one primitive (<code>--color-blue-500</code>). Every semantic and component token derived from it updates automatically.</li>
+      <li><strong>Switch to dark mode</strong> → swap a different semantic-token sheet that points the same names at darker primitives. Component code never changes.</li>
+      <li><strong>Add a new brand or white-label</strong> → swap primitive + semantic sheets together. Components are unaware.</li>
+    </ul>
+
+    <h2>Why semantic naming matters for AI agents</h2>
+    <p>
+      An LLM writing new components has to pick token values. If your codebase
+      uses primitives directly (<code>color: var(--color-zinc-900)</code>
+      everywhere), the model has to <em>infer</em> which zinc shade is the
+      "primary text color" by reading examples. It will guess wrong sometimes.
+    </p>
+    <p>
+      If your codebase uses semantic names (<code>color: var(--color-text-primary)</code>),
+      the model just reads the name and picks correctly. Semantic naming is
+      machine-readable design intent.
+    </p>
+
+    <h2>When it kicks in</h2>
+    <p>
+      Activates on prompts about:
+    </p>
+    <ul>
+      <li>Setting up the project's design tokens for the first time</li>
+      <li>Adding a new theme (dark mode, brand variant, white-label)</li>
+      <li>Refactoring an existing codebase to use the three-tier pattern</li>
+      <li>Choosing where to add a new visual concept (which tier does it belong on?)</li>
+    </ul>
+
+    <h2>Public implementations to consider</h2>
+    <p>Two community skills publish under or near this name:</p>
+    <ul>
+      <li>
+        <strong>Triptease's <code>claude-skill-design-system</code></strong> —
+        <a href="https://github.com/triptease/claude-skill-design-system">github.com/triptease/claude-skill-design-system</a>.
+        Clone into <code>.claude/skills/</code>. Encodes the three-tier hierarchy plus
+        component-architecture patterns (polymorphic, compound) and theme switching.
+      </li>
+      <li>
+        <strong><code>design-system-patterns</code></strong> on the MCP Market.
+        Similar scope, slightly different opinions on naming conventions.
+      </li>
+    </ul>
+    <p>
+      No single canonical Anthropic version exists under the exact name
+      <code>design-system</code>. The template references the pattern; pick
+      whichever implementation fits your project's framework.
+    </p>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://github.com/triptease/claude-skill-design-system">github.com/triptease/claude-skill-design-system</a> — closest public implementation</li>
+        <li><a href="https://spectrum.adobe.com/page/design-tokens/">Adobe Spectrum design tokens</a> — canonical example of the three-tier pattern</li>
+        <li><a href="https://m3.material.io/foundations/design-tokens/overview">Material 3 design tokens</a> — Google's documentation of the same pattern</li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="ui-ux-pro-max.html">
+        <span class="dir">← Previous</span>
+        <span class="title">99-rule design checklist</span>
+      </a>
+      <a class="next" href="ux-contract.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Your project's UI rulebook</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

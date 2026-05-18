@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>claude-api — Agent App pieces — project-starter docs</title>
+  <meta name="description" content="Anthropic's official skill for building apps with the Claude API. Covers Messages API, Managed Agents, caching, tool use, streaming, batching, model migration."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>claude-api
+    </nav>
+
+    <h1>Anthropic SDK helper</h1>
+    <p class="lede">
+      Anthropic's official skill for building apps that call the Claude API.
+      Provides Claude with up-to-date reference for the Messages API and
+      Managed Agents (beta), across 8 languages. Covers prompt caching, tool
+      use, streaming, batching, and model migration. Auto-loads when your
+      code imports the SDK.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Skill (skill suite with subcommands)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill official">Anthropic official</span> Lives in <code>anthropics/skills</code> repo</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Imports of <code>anthropic</code> or <code>@anthropic-ai/sdk</code>; Claude API questions</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>Bundled with Claude Code; standalone via <code>/plugin install claude-api@anthropic-agent-skills</code></dd>
+      </div>
+    </dl>
+
+    <h2>What it covers</h2>
+    <p>
+      The skill provides Claude with current, authoritative reference material
+      for the entire Anthropic SDK surface. It's not a tutorial — it's a fast
+      lookup for whatever's relevant to the code you're writing.
+    </p>
+
+    <h3>Messages API (8 languages)</h3>
+    <p>
+      Quick-start, request/response shape, message roles, system prompts. Covers:
+    </p>
+    <ul>
+      <li>Python (<code>anthropic</code>)</li>
+      <li>TypeScript / JavaScript (<code>@anthropic-ai/sdk</code>)</li>
+      <li>Java</li>
+      <li>Go</li>
+      <li>Ruby</li>
+      <li>C# / .NET</li>
+      <li>PHP</li>
+      <li>cURL (for any other language)</li>
+    </ul>
+
+    <h3>Managed Agents (beta, 7 languages)</h3>
+    <p>
+      Anthropic's hosted-agent runtime. Same languages as Messages API minus
+      C#. Includes:
+    </p>
+    <ul>
+      <li>The Agent-once / Session-every-run pattern.</li>
+      <li>Required beta header: <code>managed-agents-2026-04-01</code>.</li>
+      <li>Session management and persistence.</li>
+    </ul>
+
+    <h3>Tool use</h3>
+    <p>
+      Letting Claude call your functions. Covers tool schemas, response
+      handling, the new beta tool runner. Documents the iteration pattern
+      where Claude calls a tool → your code executes it → result goes back to
+      Claude → next turn.
+    </p>
+
+    <h3>Streaming</h3>
+    <p>
+      Show output as Claude generates it instead of waiting for the full
+      response. Covers SSE event handling, partial-message accumulation,
+      cancellation.
+    </p>
+
+    <h3>Batching</h3>
+    <p>
+      Submit many requests at once for 50% cost reduction. Async processing
+      with a results-fetch step. Covers batch size limits, latency
+      expectations, and when batching is worth it.
+    </p>
+
+    <h3>Prompt caching</h3>
+    <p>
+      Critical for cost efficiency. The skill covers:
+    </p>
+    <ul>
+      <li><strong>Prefix stability</strong> — cache hits require byte-identical prefixes. The skill teaches what counts as a prefix change.</li>
+      <li><strong>Breakpoint placement</strong> — where to put cache breakpoints to maximize hit rate.</li>
+      <li><strong>Silent-invalidator audit</strong> — common things that quietly invalidate the cache (timestamps, request IDs, tool ordering).</li>
+    </ul>
+
+    <h3>Model migration</h3>
+    <p>
+      When Anthropic releases a new model, the skill helps you migrate.
+      Specifically:
+    </p>
+    <ul>
+      <li>Replaces deprecated model constants (e.g. <code>Model.CLAUDE_OPUS_4_6</code> → <code>Model.CLAUDE_OPUS_4_7</code>).</li>
+      <li>Removes parameters no longer accepted (<code>temperature</code>, <code>top_p</code>, <code>top_k</code> for Opus 4.7).</li>
+      <li>Converts <code>thinking: {budget_tokens}</code> → <code>thinking: {type: "adaptive"}</code>.</li>
+      <li>Strips beta headers that have gone GA (e.g. <code>effort-2025-11-24</code>, <code>interleaved-thinking-2025-05-14</code>).</li>
+    </ul>
+    <p>
+      Run it explicitly with <code>/claude-api migrate</code>.
+    </p>
+
+    <h3>Structured outputs</h3>
+    <p>
+      Modern alternative to prefilling. The skill teaches when to use structured
+      output schemas vs. JSON-mode prefill.
+    </p>
+
+    <h3>Effort calibration</h3>
+    <p>
+      For models that support effort levels (like Opus 4.7), the skill
+      recommends <code>xhigh</code> for coding and agentic tasks. Lower effort
+      for simpler tasks to save tokens.
+    </p>
+
+    <h2>When it kicks in</h2>
+    <p><strong>Automatic activation:</strong></p>
+    <ul>
+      <li>Your code imports <code>anthropic</code> (Python) or <code>@anthropic-ai/sdk</code> (TS/JS).</li>
+      <li>You ask to build, debug, or tune a Claude API feature.</li>
+      <li>You mention model migration, caching, tool use, streaming, or batching.</li>
+    </ul>
+    <p><strong>Does NOT activate for:</strong></p>
+    <ul>
+      <li>OpenAI SDK code (<code>openai</code> import).</li>
+      <li>Other LLM provider SDKs.</li>
+      <li>Provider-neutral wrapper code.</li>
+      <li>General programming or ML questions.</li>
+    </ul>
+    <p><strong>Manual invocation:</strong></p>
+<pre><code>/claude-api                            <span class="cmt"># general help</span>
+/claude-api migrate                    <span class="cmt"># model migration</span>
+/claude-api managed-agents-onboard     <span class="cmt"># start a Managed Agents project</span></code></pre>
+
+    <h2>Install</h2>
+    <p>
+      <strong>If you have Claude Code:</strong> bundled — no install. Confirm:
+    </p>
+<pre><code>/plugin list | grep claude-api</code></pre>
+    <p>
+      <strong>Standalone install:</strong>
+    </p>
+<pre><code><span class="cmt"># Via skills CLI:</span>
+npx skills add https://github.com/anthropics/skills --skill claude-api
+
+<span class="cmt"># Or via the plugin marketplace:</span>
+/plugin marketplace add anthropics/skills
+/plugin install claude-api@anthropic-agent-skills</code></pre>
+
+    <h2>Why it's pinned in the Agent App variant</h2>
+    <p>
+      Agent apps almost universally call an LLM API. If you're building on
+      Claude, having Claude write that code is much smoother when Claude itself
+      knows the current API surface. The auto-load means you usually don't
+      have to ask for it — it activates the moment your code touches the SDK.
+    </p>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill">Official skill docs — platform.claude.com</a></li>
+        <li><a href="https://github.com/anthropics/skills/tree/main/skills/claude-api">Source — github.com/anthropics/skills/.../claude-api</a></li>
+        <li><a href="https://docs.anthropic.com">docs.anthropic.com</a> — full API reference</li>
+        <li><a href="https://docs.claude.com/en/docs/claude-code/overview">Claude Code docs</a></li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="agent-memory-systems.html">
+        <span class="dir">← Previous</span>
+        <span class="title">Memory system design</span>
+      </a>
+      <a class="next" href="portable-identity.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Portable-identity rule</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

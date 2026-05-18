@@ -4,14 +4,14 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>What's in each variant? — project-starter docs</title>
-  <meta name="description" content="A plain-language breakdown of every skill, file, and design rule that ships with the UI App and Agent App variants of project-starter."/>
+  <meta name="description" content="A directory of every skill, plugin, file, and design rule that ships with the UI App and Agent App variants. Each piece links to its own dedicated documentation page."/>
   <link rel="icon" href="../assets/favicon.svg"/>
   <link rel="stylesheet" href="docs.css"/>
   <style>
     .variant-section {
       border: 1.5px solid var(--border);
       border-radius: 14px;
-      padding: 28px 28px 8px;
+      padding: 28px 28px 28px;
       margin: 36px 0;
       background: var(--surface);
     }
@@ -31,46 +31,9 @@
       color: var(--text-faint);
       margin: -4px 0 18px;
     }
-    .piece {
-      border-top: 1px solid var(--border-soft);
-      padding: 22px 0;
-    }
-    .piece:last-of-type { padding-bottom: 8px; }
-    .piece h3 {
-      font-family: var(--sans);
-      font-size: 19px;
-      margin: 0 0 4px;
-      color: var(--text);
-    }
-    .piece .tech-name {
-      font-family: var(--mono);
-      font-size: 12.5px;
-      color: var(--text-faint);
-      letter-spacing: 0.02em;
-      margin: 0 0 12px;
-    }
-    .piece p {
-      font-size: 16px;
-      color: var(--text-muted);
-      margin: 8px 0;
-    }
-    .piece .when {
-      margin: 12px 0 0;
-      padding: 10px 14px;
-      background: rgba(125, 211, 252, 0.05);
-      border-left: 3px solid var(--cyan);
-      border-radius: 4px;
-      font-size: 14.5px;
-    }
-    .variant-section.agent .piece .when {
-      background: rgba(167, 139, 250, 0.05);
-      border-left-color: var(--violet);
-    }
-    .piece .when strong { color: var(--text); }
-
     .category-band {
-      margin: 32px 0 4px;
-      padding: 18px 0 14px;
+      margin: 28px 0 4px;
+      padding: 18px 0 8px;
       border-top: 1px solid var(--border-soft);
     }
     .category-band:first-of-type {
@@ -98,10 +61,6 @@
       font-size: 15.5px;
       color: var(--text-dim);
       margin: 0;
-    }
-    .category-band + .piece {
-      border-top: none;
-      padding-top: 16px;
     }
   </style>
 </head>
@@ -154,24 +113,25 @@
     <h1>What's actually in each variant?</h1>
     <p class="lede">
       When you scaffold a project you pick <strong>UI App</strong> or
-      <strong>Agent App</strong>. Both variants share the same foundation —
-      they differ in which extras they layer on top. This page explains every
-      extra in plain language, what it does, and when it kicks in.
+      <strong>Agent App</strong>. Both share the same foundation; each adds
+      extras grouped here by purpose. Every piece below links to a dedicated
+      documentation page with full details, source, and install instructions.
     </p>
 
     <h2 id="what-is-a-skill">First — what's a "skill"?</h2>
     <p>
-      Most of the extras below are called "skills." A skill is a markdown file
-      stored at <code>~/.claude/skills/</code> on your computer. It tells Claude
-      how to handle a specific kind of task — writing UI, planning, reviewing,
-      etc. Skills are installed once per machine, then any project can use
-      them.
+      Most of the extras are <strong>skills</strong>. A skill is a markdown file
+      (a <code>SKILL.md</code>) plus optional supporting files, stored at
+      <code>~/.claude/skills/</code> on your computer or shipped inside a plugin.
+      Each skill tells Claude how to handle a specific kind of task — writing UI,
+      planning, reviewing, calling an API — and which patterns to apply.
+      Installed once per machine, then any project can reach for them.
     </p>
     <p>
-      <strong>The scaffolded project doesn't install the skills</strong> — it just
+      <strong>The scaffolded project doesn't install the skills</strong> — it
       references them in <code>CLAUDE.md</code> so Claude knows to reach for
-      them when relevant. If a skill isn't installed when Claude tries to use
-      it, you'll be told, and you can install it with a single command.
+      them when relevant. If a skill isn't installed when Claude tries to use it,
+      you'll be told and given the install command.
     </p>
     <div class="callout info">
       <div class="icon">i</div>
@@ -179,22 +139,25 @@
         <p>
           A few extras aren't skills — they're files in your project (like
           <code>UX_CONTRACT.md</code>) or design principles baked into the
-          <code>CLAUDE.md</code> template. Each entry below says which kind it is.
+          <code>CLAUDE.md</code> template. Each piece page makes the distinction
+          explicit.
         </p>
       </div>
     </div>
 
     <h2 id="shared-foundation">The shared foundation</h2>
     <p>
-      Both variants ship with this set — they don't appear in the variant
-      breakdowns because they're always there. Listed here for completeness.
+      Both variants ship with this set — it's not listed under either variant
+      because it's always there. The main page's <a href="../#stack">foundation
+      section</a> covers it in summary; for the full breakdown see
+      <a href="../../docs/AGENTS.md">docs/AGENTS.md</a>.
     </p>
     <ul>
-      <li><strong>Memory hierarchy</strong> — files for proposals (architectural decisions), plans (in-flight work), test runs (real journey logs), and auto-memory (persistent across sessions). Documented in <a href="../../docs/AGENTS.md">docs/AGENTS.md</a>.</li>
-      <li><strong>Three MCP servers pinned</strong> — Serena (semantic code search), Context7 (live library docs), GitHub (issue/PR access).</li>
-      <li><strong>Token discipline rules</strong> — guidance baked into <code>CLAUDE.md</code> telling Claude to use semantic search instead of reading whole files, never re-read what's loaded, etc.</li>
-      <li><strong>Voice rules</strong> — describe what is, not what it isn't; no marketing language; no self-congratulation.</li>
-      <li><strong>Commit + PR discipline</strong> — small PRs, cite proposals, never <code>--no-verify</code>.</li>
+      <li><strong>Memory hierarchy</strong> — proposals, plans, test-runs, auto-memory.</li>
+      <li><strong>Three MCP servers pinned</strong> — Serena, Context7, GitHub.</li>
+      <li><strong>Token discipline rules</strong> — semantic search over whole-file reads.</li>
+      <li><strong>Voice rules</strong> — describe what is; no marketing language.</li>
+      <li><strong>Commit + PR discipline</strong> — small PRs, cite proposals.</li>
     </ul>
 
     <!-- ============= UI APP ============= -->
@@ -202,138 +165,61 @@
       <h2 id="ui-app">UI App</h2>
       <p class="meta">scaffolder flag: <code>--type ui-app</code> · for websites, dashboards, marketing pages</p>
 
-      <p>
-        Layered on top of the shared foundation are three groups of extras
-        focused on building good user interfaces.
-      </p>
-
-      <!-- ----- Category 1: Visual design rulebook ----- -->
+      <!-- Group 1: Visual design rulebook -->
       <div class="category-band">
         <p class="category-eyebrow">Group 1 of 3</p>
         <h3 class="category-title">A visual design rulebook</h3>
-        <p class="category-intro">Specific rules for layout, color, animation, and accessibility — plus a contract file your project's PRs cite. Three pieces work together.</p>
+        <p class="category-intro">Specific rules for layout, color, animation, and accessibility — plus a contract file your project's PRs cite. Three pieces.</p>
+      </div>
+      <div class="piece-cards">
+        <a class="piece-card" href="variants/ui-ux-pro-max.html">
+          <h4>A 99-rule design checklist</h4>
+          <p class="pc-tech">skill · ui-ux-pro-max · community (nextlevelbuilder)</p>
+          <p class="pc-summary">67 UI styles, 99 UX guidelines, 161 color palettes, 57 font pairings — applied automatically when the prompt touches UI work.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
+        <a class="piece-card" href="variants/design-system.html">
+          <h4>Design-system structure</h4>
+          <p class="pc-tech">skill · design-system · community</p>
+          <p class="pc-summary">The three-tier token architecture — primitive → semantic → component — and why semantic naming matters for AI agents.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
+        <a class="piece-card" href="variants/ux-contract.html">
+          <h4>Your project's UI rulebook</h4>
+          <p class="pc-tech">file · docs/UX_CONTRACT.md · local to your project</p>
+          <p class="pc-summary">A 12-point review contract every UI PR must pass — color semantics, animation budget, accessibility minimums, anti-patterns.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
       </div>
 
-      <div class="piece">
-        <h3>A 99-rule design checklist</h3>
-        <p class="tech-name">skill · <code>ui-ux-pro-max</code></p>
-        <p>
-          A curated checklist of 99 specific UI/UX rules synthesized from
-          industry best practices — color contrast minimums, button-size
-          guidelines, animation timing windows, anti-patterns that the skill
-          will actively refuse to produce. It also ships ~160 color palette
-          recommendations.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> any time you ask Claude to build,
-          review, or critique a visual interface. Saying "make this card more
-          readable" triggers it; saying "rename this function" doesn't.
-        </p>
-      </div>
-
-      <div class="piece">
-        <h3>Design-system structure</h3>
-        <p class="tech-name">skill · <code>design-system</code></p>
-        <p>
-          A pattern for organizing visual values (colors, spacing, font sizes)
-          in three layers:
-        </p>
-        <ul>
-          <li><strong>Primitive</strong> — raw values like <code>#7dd3fc</code> or <code>16px</code>.</li>
-          <li><strong>Semantic</strong> — what they mean: "primary action color," "card padding."</li>
-          <li><strong>Component</strong> — what uses them: "button border," "modal background."</li>
-        </ul>
-        <p>
-          This way, changing one primitive (the cyan accent, say) ripples through
-          everywhere it's used without touching component code.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> when you set up the project's
-          styling or add a new visual concept. Useful even for small projects —
-          it's the difference between "edit 40 files to change the accent color"
-          and "edit one variable."
-        </p>
-      </div>
-
-      <div class="piece">
-        <h3>Your project's UI rulebook</h3>
-        <p class="tech-name">file · <code>docs/UX_CONTRACT.md</code></p>
-        <p>
-          Unlike the other entries, this one is a <strong>file inside your
-          project</strong>, not a global skill. It's a 12-point checklist your
-          PRs reference and cite. The scaffolded version covers:
-        </p>
-        <ul>
-          <li>The master interaction contract (attention → question → commitment → feedback → reveal).</li>
-          <li>Color semantics (six tokens, one meaning each).</li>
-          <li>Animation budget (150–300ms, animate <code>transform</code>/<code>opacity</code> only, respect <code>prefers-reduced-motion</code>).</li>
-          <li>Navigation rules (one concern per nav item, no stub status items).</li>
-          <li>Accessibility minimums (4.5:1 contrast, focus rings, aria labels, keyboard nav).</li>
-          <li>Touch targets (≥44×44px, ≥8px spacing).</li>
-          <li>A 12-item review checklist every UI PR must pass.</li>
-        </ul>
-        <p>
-          You can edit, extend, or replace it — it's your project's rules, not a
-          mandate. The point is having <em>some</em> contract in writing so visual
-          discipline doesn't drift.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> at PR-review time, and when Claude
-          is about to make a visual change. The file is referenced from
-          <code>CLAUDE.md</code> so it's part of every session's context.
-        </p>
-      </div>
-
-      <!-- ----- Category 2: Onboarding ----- -->
+      <!-- Group 2: Onboarding -->
       <div class="category-band">
         <p class="category-eyebrow">Group 2 of 3</p>
         <h3 class="category-title">First-use onboarding patterns</h3>
-        <p class="category-intro">A behavioral-research framework for taking new users from curious to committed. One piece.</p>
+        <p class="category-intro">A behavioral-research framework for first-time-user flows. One piece.</p>
+      </div>
+      <div class="piece-cards">
+        <a class="piece-card" href="variants/onboarding-psychologist.html">
+          <h4>Onboarding playbook</h4>
+          <p class="pc-tech">skill · onboarding-psychologist · unverified publicly</p>
+          <p class="pc-summary">The IDENTITY-TO-HABIT arc — define the first win, remove unnecessary setup, attach a cue, reinforce identity. Grounded in BJ Fogg + James Clear.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
       </div>
 
-      <div class="piece">
-        <h3>Onboarding playbook</h3>
-        <p class="tech-name">skill · <code>onboarding-psychologist</code></p>
-        <p>
-          A framework for designing first-time-user experiences based on
-          behavioral research. It uses the <strong>IDENTITY-TO-HABIT</strong>
-          arc: define the first win → remove unnecessary setup → create
-          ownership through a small meaningful action → attach a stable cue
-          (link to existing routine) → reinforce identity (reflect the user as
-          someone who succeeds at this).
-        </p>
-        <p>
-          It explicitly rules out feature tours, "12 things to know" walls, and
-          empty-state pages that show CRUD forms instead of value.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> when you're designing the very
-          first thing a new user sees and does. Especially valuable for
-          products where adoption is a real concern.
-        </p>
-      </div>
-
-      <!-- ----- Category 3: Frontend plugin ----- -->
+      <!-- Group 3: Frontend plugin -->
       <div class="category-band">
         <p class="category-eyebrow">Group 3 of 3</p>
         <h3 class="category-title">Anthropic's frontend plugin</h3>
         <p class="category-intro">General-purpose assistance for component design and visual decisions. One piece.</p>
       </div>
-
-      <div class="piece">
-        <h3>Frontend design helper</h3>
-        <p class="tech-name">plugin · <code>frontend-design</code> (Anthropic official)</p>
-        <p>
-          Anthropic's officially maintained frontend design plugin. General-purpose
-          companion for component design and visual decisions — less opinionated
-          than <code>ui-ux-pro-max</code>, more focused on Anthropic's idea of
-          frontend best practices.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> alongside the other UI skills, for
-          general-purpose frontend work. The two skills complement each other
-          rather than overlap.
-        </p>
+      <div class="piece-cards">
+        <a class="piece-card" href="variants/frontend-design.html">
+          <h4>Frontend design helper</h4>
+          <p class="pc-tech">plugin · frontend-design · Anthropic official</p>
+          <p class="pc-summary">Anthropic's official frontend plugin. Generates production-grade HTML/CSS/JS with thoughtful typography and animation — explicitly designed to avoid "generic AI slop."</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
       </div>
     </section>
 
@@ -342,169 +228,85 @@
       <h2 id="agent-app">Agent App</h2>
       <p class="meta">scaffolder flag: <code>--type agent-app</code> · for LLM apps and AI agents</p>
 
-      <p>
-        Layered on top of the shared foundation are three groups of extras
-        focused on building applications that <em>themselves</em> call LLMs.
-      </p>
-
-      <!-- ----- Category 1: Architecture & orchestration ----- -->
+      <!-- Group 1: Architecture & orchestration -->
       <div class="category-band">
         <p class="category-eyebrow">Group 1 of 3</p>
         <h3 class="category-title">Agent architecture &amp; orchestration</h3>
-        <p class="category-intro">How to structure single-agent or multi-agent systems — handoffs, supervision, parallel work. Two pieces.</p>
+        <p class="category-intro">How to structure single-agent or multi-agent systems — handoffs, supervision, parallel work, iterative loops. Three pieces.</p>
+      </div>
+      <div class="piece-cards">
+        <a class="piece-card" href="variants/ai-agents-architect.html">
+          <h4>Agent architecture guide</h4>
+          <p class="pc-tech">skill · ai-agents-architect · community</p>
+          <p class="pc-summary">Decision framework for agent architecture — single agent vs. multi-agent, ReAct vs. Plan-and-Execute, when to introduce an orchestrator.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
+        <a class="piece-card" href="variants/agent-orchestrator.html">
+          <h4>Multi-agent coordination patterns</h4>
+          <p class="pc-tech">skill · agent-orchestrator · community</p>
+          <p class="pc-summary">Coordination primitives (Handoff, Assign, send_message) and the three orchestration shapes — supervisor/worker, peer-to-peer, orchestrator-led.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
+        <a class="piece-card" href="variants/ralph-loop.html">
+          <h4>Iterative agent loops</h4>
+          <p class="pc-tech">plugin · ralph-loop · Anthropic verified</p>
+          <p class="pc-summary">The "Ralph Wiggum" technique — a Stop hook that re-feeds the prompt across iterations until Claude emits a completion promise. For tasks with clear success criteria.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
       </div>
 
-      <div class="piece">
-        <h3>Agent architecture guide</h3>
-        <p class="tech-name">skill · <code>ai-agents-architect</code></p>
-        <p>
-          Helps you think through how your app should be structured. Key
-          questions: do you need a <strong>single agent</strong> (one personality,
-          one set of tools)? <strong>Multiple agents</strong> (specialized roles
-          talking to each other)? An <strong>orchestrator</strong> (a top-level
-          agent that delegates to sub-agents)? It walks you through the
-          tradeoffs based on what your app actually has to do.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> at the start of the project, and
-          again any time you're tempted to "just add another agent." Used
-          early, it prevents the most common agent-app architectural mistakes.
-        </p>
-      </div>
-
-      <div class="piece">
-        <h3>Multi-agent coordination patterns</h3>
-        <p class="tech-name">skill · <code>agent-orchestrator</code></p>
-        <p>
-          If your app uses more than one agent, this covers how to get them to
-          cooperate without stepping on each other. Patterns include:
-        </p>
-        <ul>
-          <li><strong>Sequential handoffs</strong> — agent A finishes, hands the conversation to agent B.</li>
-          <li><strong>Supervisor / worker</strong> — one agent delegates tasks to specialists.</li>
-          <li><strong>Parallel work</strong> — multiple agents tackle independent parts of a problem at the same time.</li>
-          <li><strong>Conflict resolution</strong> — what happens when two agents disagree about state.</li>
-        </ul>
-        <p class="when">
-          <strong>When it kicks in:</strong> only relevant if your app has
-          multiple agents. Single-agent apps can ignore this entirely.
-        </p>
-      </div>
-
-      <!-- ----- Category 2: Memory ----- -->
+      <!-- Group 2: Memory -->
       <div class="category-band">
         <p class="category-eyebrow">Group 2 of 3</p>
         <h3 class="category-title">Memory between sessions</h3>
         <p class="category-intro">Patterns for what your agent remembers and how — vector recall, structured facts, or both. One piece.</p>
       </div>
-
-      <div class="piece">
-        <h3>Memory system design</h3>
-        <p class="tech-name">skill · <code>agent-memory-systems</code></p>
-        <p>
-          Patterns for how your agent <em>remembers things between
-          conversations</em>. Most agent apps need some persistence — what the
-          user has said before, what they prefer, what the agent has learned.
-          This skill covers the practical options:
-        </p>
-        <ul>
-          <li><strong>Vector databases</strong> (Pinecone, LanceDB, pgvector) for fuzzy semantic recall — "what did we talk about regarding logistics?"</li>
-          <li><strong>Structured databases</strong> (Postgres, SQLite) for facts and structured state — "user prefers metric units."</li>
-          <li><strong>When to use which</strong>, and how to mix them.</li>
-        </ul>
-        <p class="when">
-          <strong>When it kicks in:</strong> when you're designing the persistence
-          layer — usually right after the architecture is decided. Get this
-          wrong and you'll be re-architecting later.
-        </p>
+      <div class="piece-cards">
+        <a class="piece-card" href="variants/agent-memory-systems.html">
+          <h4>Memory system design</h4>
+          <p class="pc-tech">skill · agent-memory-systems · community</p>
+          <p class="pc-summary">The CoALA framework (semantic, episodic, procedural memory) plus vector store selection, chunking strategies, async consolidation, and memory decay.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
       </div>
 
-      <!-- ----- Category 3: Building on the Claude API ----- -->
+      <!-- Group 3: Building on the Claude API -->
       <div class="category-band">
         <p class="category-eyebrow">Group 3 of 3</p>
         <h3 class="category-title">Building on the Claude API</h3>
-        <p class="category-intro">Anthropic's official SDK skill plus a portable-identity rule so user data survives if you swap LLMs later. Two pieces.</p>
+        <p class="category-intro">Anthropic's official SDK skill plus a portable-identity rule so user data survives if you swap LLMs. Two pieces.</p>
       </div>
-
-      <div class="piece">
-        <h3>Anthropic SDK helper</h3>
-        <p class="tech-name">skill · <code>claude-api</code> (Anthropic official)</p>
-        <p>
-          Anthropic's official skill for building apps that call Claude. It
-          covers the API itself, plus advanced features:
-        </p>
-        <ul>
-          <li><strong>Prompt caching</strong> — make repeat calls much cheaper.</li>
-          <li><strong>Tool use</strong> — let Claude call your functions.</li>
-          <li><strong>Streaming</strong> — show output as Claude generates it.</li>
-          <li><strong>Batching</strong> — process many requests at once at lower cost.</li>
-          <li><strong>Model migration</strong> — when Anthropic releases a new model, this skill helps you switch cleanly.</li>
-        </ul>
-        <p>
-          It auto-loads any time your code imports <code>anthropic</code> or
-          <code>@anthropic-ai/sdk</code>.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> any time you're writing code that
-          calls Claude's API. The auto-load means you usually don't have to
-          ask for it explicitly.
-        </p>
-      </div>
-
-      <div class="piece">
-        <h3>Portable-identity design rule</h3>
-        <p class="tech-name">discipline · documented in <code>CLAUDE.md</code></p>
-        <p>
-          Not a skill — a design principle baked into the variant's
-          <code>CLAUDE.md</code>. It says: your app's <strong>user data</strong>
-          (memory, skills, preferences, integrations) should be decoupled from
-          the underlying LLM so you can swap models without losing what the app
-          knows about its users.
-        </p>
-        <p>
-          Concretely:
-        </p>
-        <ul>
-          <li>The LLM choice lives in config (e.g. <code>MODEL=claude-opus-4-7</code>), not in your domain code.</li>
-          <li>User memory persists in your own DB, not in the model's context window.</li>
-          <li>Skills and tools are defined in your project, not in model-specific format.</li>
-          <li>Export/import are first-class — you can pull a user's identity bundle out.</li>
-        </ul>
-        <p>
-          Even if you don't plan to swap LLMs, designing as if you might forces
-          cleaner separation that pays off everywhere.
-        </p>
-        <p class="when">
-          <strong>When it kicks in:</strong> at schema-design time. Schema
-          decisions answer "is this portable?" before "is this convenient?"
-        </p>
+      <div class="piece-cards">
+        <a class="piece-card" href="variants/claude-api.html">
+          <h4>Anthropic SDK helper</h4>
+          <p class="pc-tech">skill · claude-api · Anthropic official</p>
+          <p class="pc-summary">Up-to-date reference for the Messages API and Managed Agents. Covers caching, tool use, streaming, batching, model migration. Auto-loads when you import the SDK.</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
+        <a class="piece-card" href="variants/portable-identity.html">
+          <h4>Portable-identity design rule</h4>
+          <p class="pc-tech">discipline · documented in CLAUDE.md · local</p>
+          <p class="pc-summary">A design principle: keep user data (memory, skills, integrations) decoupled from the LLM. Schema decisions answer "is this portable?" before "is this convenient?"</p>
+          <p class="pc-more">Read full documentation →</p>
+        </a>
       </div>
     </section>
 
     <h2>How to add or remove pieces</h2>
-    <p>
-      Variants aren't sacred. After scaffolding, every piece is just a file you
-      can edit:
-    </p>
+    <p>Variants aren't sacred. After scaffolding, every piece is just a file you can edit:</p>
     <ul>
       <li><strong>Add a skill to a variant</strong> for all future projects → edit <code>templates/&lt;variant&gt;/CLAUDE.md.extension</code> in this repo.</li>
       <li><strong>Add a skill to your specific project</strong> → edit your project's <code>CLAUDE.md</code> directly.</li>
-      <li><strong>Remove the UX contract</strong> → delete <code>docs/UX_CONTRACT.md</code> in your project (or just stop citing it).</li>
-      <li><strong>Add a new variant entirely</strong> → see <a href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> in the main repo for the recipe.</li>
+      <li><strong>Remove the UX contract</strong> → delete <code>docs/UX_CONTRACT.md</code> (or just stop citing it).</li>
+      <li><strong>Add a new variant entirely</strong> → see <a href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> for the recipe.</li>
     </ul>
 
     <h2>How Claude reaches for skills</h2>
     <p>
       You don't have to memorize skill names. Claude has the list (from
-      <code>CLAUDE.md</code>) and reaches for them when the task fits. You can
-      always ask explicitly — "use <code>concise-planning</code> for this" — but
-      usually you just describe what you want and Claude picks the right tool.
-    </p>
-    <p>
-      If a skill isn't installed yet, Claude will tell you and give you the
-      install command. Skills install at the user level (one-time per
-      machine), so once you've installed one for a project it's available
-      everywhere.
+      <code>CLAUDE.md</code>) and reaches for them when the task fits. Skills
+      install at the user level (one-time per machine); once installed for one
+      project they're available everywhere.
     </p>
 
     <div class="pager">

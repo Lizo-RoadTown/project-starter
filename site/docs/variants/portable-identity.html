@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Portable identity — Agent App pieces — project-starter docs</title>
+  <meta name="description" content="Design rule baked into the Agent App CLAUDE.md — keep user data decoupled from the LLM so the app survives model swaps."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>portable-identity
+    </nav>
+
+    <h1>Portable-identity design rule</h1>
+    <p class="lede">
+      Not a skill — a design principle baked into the Agent App variant's
+      <code>CLAUDE.md</code>. Your app's user data — memory, skills,
+      preferences, integrations — should be decoupled from the underlying LLM
+      so you can swap models without losing what the app knows about its
+      users.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Discipline (documented in <code>CLAUDE.md</code>)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill local">local</span> Your project's discipline — edit freely</dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Schema-design decisions, LLM choice, data storage</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>Ships with <code>agent-app</code> scaffolds automatically</dd>
+      </div>
+    </dl>
+
+    <h2>The principle</h2>
+    <p>
+      Treat the LLM as a <em>replaceable component</em>. The app's value lives
+      in the user data, the skills, the integrations, and the workflows — not
+      in the choice of model. When a better, cheaper, or faster model appears
+      (and they appear quickly), switching shouldn't lose what your users
+      have built up.
+    </p>
+    <p>
+      Even if you have no intention of switching LLMs, designing as if you
+      might forces a cleaner architecture that pays off everywhere — easier
+      testing, easier multi-tenancy, easier compliance.
+    </p>
+
+    <h2>What the rule says, concretely</h2>
+
+    <h3>1. LLM choice lives in config, not in your domain code</h3>
+    <p>
+      Wrong:
+    </p>
+<pre><code><span class="cmt"># domain logic with the model baked in</span>
+def summarize_user_journal(journal_text):
+    response = anthropic.messages.create(
+        model="claude-opus-4-7",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": journal_text}]
+    )
+    return response.content[0].text</code></pre>
+    <p>
+      Right:
+    </p>
+<pre><code><span class="cmt"># domain logic that asks "the LLM" — config decides which</span>
+def summarize_user_journal(journal_text):
+    return llm.summarize(journal_text, max_tokens=1024)
+
+<span class="cmt"># config.py</span>
+MODEL = os.environ.get("MODEL", "claude-opus-4-7")
+llm = LLMClient(model=MODEL)</code></pre>
+
+    <h3>2. User memory persists in your own database</h3>
+    <p>
+      Don't rely on conversation history living in the model's context window
+      as your only persistence. If you swap models tomorrow, that history
+      vanishes. Persist memory in your own DB (vector store + structured),
+      and load relevant slices into context per request.
+    </p>
+    <p>
+      This is also what makes <a href="agent-memory-systems.html">memory
+      systems</a> a separate piece — the rule is "own your memory layer."
+    </p>
+
+    <h3>3. Skills and tools are defined in your project, not in model-specific format</h3>
+    <p>
+      Tool schemas, skill files, integration definitions — store them in your
+      project. Adapt to whatever shape each model wants at call time.
+    </p>
+    <p>
+      The Anthropic SDK has one tool schema shape; OpenAI has another;
+      Gemini's tools look different again. Your skill definitions shouldn't
+      know which one you're using. Have an adapter layer that converts your
+      canonical format to whatever the active LLM expects.
+    </p>
+
+    <h3>4. Export/import is first-class</h3>
+    <p>
+      Build <code>/export</code> and <code>/import</code> endpoints from day one.
+      Your users should be able to:
+    </p>
+    <ul>
+      <li>Pull their entire identity bundle (memory, preferences, skills, integrations) out as JSON.</li>
+      <li>Reimport it into a fresh instance, possibly running on a different LLM.</li>
+    </ul>
+    <p>
+      This is the test of whether you've actually achieved portability. If
+      export/import roundtrips losslessly, your data is genuinely
+      LLM-independent. If it doesn't, something's coupled that shouldn't be.
+    </p>
+
+    <h2>Why this matters more than people expect</h2>
+    <ul>
+      <li>
+        <strong>Model churn is fast.</strong> The frontier model two years from
+        now will not be the one you started on. Apps that lock in to a specific
+        model become legacy quickly.
+      </li>
+      <li>
+        <strong>Multi-tenancy demands it.</strong> If different customers want
+        different models (cost, region, compliance), your app needs to swap per
+        request.
+      </li>
+      <li>
+        <strong>Testing benefits.</strong> Mock LLMs are trivial when your
+        domain code asks "the LLM" instead of a specific provider.
+      </li>
+      <li>
+        <strong>Compliance benefits.</strong> Some regulated industries require
+        the ability to migrate off specific vendors. Having that capability
+        in your design from day one avoids painful retrofits.
+      </li>
+      <li>
+        <strong>The cost story changes.</strong> Today's most expensive model
+        is sometimes tomorrow's mid-tier. Apps with portable identity can
+        downgrade automatically as cheaper models become capable enough.
+      </li>
+    </ul>
+
+    <h2>Anti-patterns</h2>
+    <ul>
+      <li>
+        <strong>Storing the model name on user records.</strong> Tells you which
+        model was active when this user signed up — but nothing else useful.
+        Better: store the data, let config decide the model.
+      </li>
+      <li>
+        <strong>Using model-specific features as the primary surface.</strong>
+        If your app's user-visible features are 1:1 with provider-specific API
+        features, you've locked in.
+      </li>
+      <li>
+        <strong>Conversation history as the only memory.</strong> When you
+        switch models, the new model's context starts empty. If history was
+        memory, it's gone.
+      </li>
+      <li>
+        <strong>Tool schemas in vendor format throughout the codebase.</strong>
+        Touches every integration when you switch.
+      </li>
+    </ul>
+
+    <h2>How it's enforced in project-starter</h2>
+    <p>
+      The Agent App's <code>CLAUDE.md</code> includes a section on portable
+      identity. Every time Claude opens an Agent App project, it sees the
+      rule. When you ask it to design a schema or add a new feature, the rule
+      is in context — Claude will check designs against "is this portable?"
+      before "is this convenient?"
+    </p>
+    <p>
+      You can amend the rule (loosen, tighten, scope) by editing your
+      project's <code>CLAUDE.md</code>.
+    </p>
+
+    <h2>How it relates to <code>agent-memory-systems</code></h2>
+    <p>
+      Memory systems is <em>how</em> you implement the persistence layer
+      (vector stores, structured DBs, chunking). Portable identity is
+      <em>why</em> that persistence has to live in your control rather than
+      in the LLM. Read them together.
+    </p>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://github.com/Lizo-RoadTown/project-starter/blob/main/templates/agent-app/CLAUDE.md.extension">The agent-app CLAUDE.md.extension source</a></li>
+        <li><a href="agent-memory-systems.html">Memory system design</a> — the implementation side</li>
+        <li><a href="claude-api.html">Anthropic SDK helper</a> — model migration tooling</li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="claude-api.html">
+        <span class="dir">← Previous</span>
+        <span class="title">Anthropic SDK helper</span>
+      </a>
+      <a class="next" href="../variants.html">
+        <span class="dir">All done →</span>
+        <span class="title">Back to variants hub</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

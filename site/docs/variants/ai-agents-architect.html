@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ai-agents-architect — Agent App pieces — project-starter docs</title>
+  <meta name="description" content="Architectural guidance for autonomous agents — ReAct, Plan-and-Execute, single vs multi-agent, when to introduce an orchestrator."/>
+  <link rel="icon" href="../../assets/favicon.svg"/>
+  <link rel="stylesheet" href="../docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="../getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="../what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="../next-steps.html">First conversation</a></li>
+      <li><a href="../glossary.html">Glossary</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../../">home</a><span class="sep">/</span>
+      <a href="../index.html">docs</a><span class="sep">/</span>
+      <a href="../variants.html">variants</a><span class="sep">/</span>ai-agents-architect
+    </nav>
+
+    <h1>Agent architecture guide</h1>
+    <p class="lede">
+      A decision-framework skill for autonomous-agent architecture. Helps you
+      pick between single-agent and multi-agent designs, between ReAct loops
+      and Plan-and-Execute, between adding an orchestrator now or later.
+    </p>
+
+    <dl class="at-glance">
+      <div>
+        <dt>Type</dt>
+        <dd>Skill (architectural guidance)</dd>
+      </div>
+      <div>
+        <dt>Maintainer</dt>
+        <dd><span class="pill community">community</span> Closest match: <code>mcpmarket.com/tools/skills/ai-agent-systems-architect</code></dd>
+      </div>
+      <div>
+        <dt>Triggers</dt>
+        <dd>Agent-architecture decisions, autonomy boundaries</dd>
+      </div>
+      <div>
+        <dt>Install</dt>
+        <dd>Varies by package — see References</dd>
+      </div>
+    </dl>
+
+    <div class="callout warn">
+      <div class="icon">!</div>
+      <div>
+        <p>
+          <strong>Heads-up:</strong> The exact slug <code>ai-agents-architect</code> isn't a definitive single public package. The patterns it documents are well-established in the agent-systems literature; the framework below is what any skill under this name should cover, drawn from public Anthropic guidance and the agent-systems research literature.
+        </p>
+      </div>
+    </div>
+
+    <h2>The first decision: how much autonomy?</h2>
+    <p>
+      Before picking architecture, decide where your agent sits on the
+      autonomy spectrum:
+    </p>
+    <ul>
+      <li><strong>Suggester</strong> — proposes actions, user approves each one. Lowest autonomy, lowest risk.</li>
+      <li><strong>Assistant</strong> — takes action within tight rails, reports back. Most current AI apps live here.</li>
+      <li><strong>Operator</strong> — takes multi-step action with checkpoints. Needs robust error handling.</li>
+      <li><strong>Autonomous</strong> — runs unsupervised on goals, only escalates exceptions. Needs hard guardrails.</li>
+    </ul>
+    <p>
+      Each level needs different architecture. A suggester can be a stateless
+      single call; an autonomous agent needs memory, retry logic, escalation
+      paths, and observability.
+    </p>
+
+    <h2>Pattern 1: ReAct (Reason + Act)</h2>
+    <p>
+      The simplest agent loop. On each turn:
+    </p>
+    <ol>
+      <li><strong>Reason</strong> — think about what to do next given the goal and current state.</li>
+      <li><strong>Act</strong> — call a tool.</li>
+      <li><strong>Observe</strong> — read the result.</li>
+      <li><strong>Repeat</strong> until the goal is met or the loop budget is exhausted.</li>
+    </ol>
+    <p>
+      <strong>Good for:</strong> tasks where the right next step depends on
+      what just happened. The agent can correct mid-flight.
+    </p>
+    <p>
+      <strong>Watch out for:</strong> infinite loops, getting stuck on
+      sub-problems. Cap the iteration count and add an escape valve.
+    </p>
+
+    <h2>Pattern 2: Plan-and-Execute</h2>
+    <p>
+      Two-phase. First the agent produces a complete plan (a list of steps).
+      Then it executes the plan, one step at a time. If a step fails,
+      optionally re-plan.
+    </p>
+    <p>
+      <strong>Good for:</strong> tasks with a knowable shape — research jobs,
+      data pipelines, multi-step transformations. The plan is auditable
+      before execution.
+    </p>
+    <p>
+      <strong>Watch out for:</strong> brittle plans. Real-world conditions
+      drift; if your agent can't re-plan mid-execution, it'll execute a stale
+      plan against a changed world.
+    </p>
+
+    <h2>Pattern 3: Tree-of-Thoughts / Explore-and-Backtrack</h2>
+    <p>
+      For tasks where you'd want a human to consider multiple approaches
+      before committing. The agent explores several possible action branches,
+      evaluates each, picks the best.
+    </p>
+    <p>
+      <strong>Good for:</strong> creative problems, puzzles, hard reasoning.
+    </p>
+    <p>
+      <strong>Watch out for:</strong> token cost. Each branch is its own
+      reasoning trace.
+    </p>
+
+    <h2>Single agent vs. multi-agent</h2>
+    <p>The skill's most important decision tree. Defaults:</p>
+    <h3>Use a single agent when…</h3>
+    <ul>
+      <li>The task fits in one mental model (one persona, one set of tools).</li>
+      <li>You can describe everything the agent does in one paragraph.</li>
+      <li>State and context flow linearly.</li>
+      <li>The cost of "what does this agent do?" is low enough to skip specialization.</li>
+    </ul>
+    <h3>Add a second agent when…</h3>
+    <ul>
+      <li>The personas are <em>genuinely</em> different (researcher vs. writer; reviewer vs. author).</li>
+      <li>Context for one role would pollute the other's reasoning.</li>
+      <li>You want to run two perspectives in parallel and compare outputs.</li>
+      <li>One role needs a much larger or much smaller context window than the other.</li>
+    </ul>
+    <p>
+      <strong>The trap:</strong> splitting an agent because "more agents = more
+      sophisticated." Multi-agent systems pay for themselves only when the
+      split has a real reason. Otherwise you've added handoffs and shared-state
+      bugs to fix what wasn't broken.
+    </p>
+
+    <h2>When to introduce an orchestrator</h2>
+    <p>
+      An orchestrator is a top-level agent that doesn't do the work itself —
+      it delegates to specialist sub-agents and merges results. Add one when:
+    </p>
+    <ul>
+      <li>You have ≥3 specialist agents and the routing logic is non-trivial.</li>
+      <li>You need to run sub-agents in parallel.</li>
+      <li>You need to enforce policies (cost limits, retries, fallbacks) across all sub-agents.</li>
+      <li>You need a single point of observability.</li>
+    </ul>
+    <p>
+      For 1-2 specialists, the calling code can usually orchestrate. An
+      explicit orchestrator pays its weight at 3+.
+    </p>
+
+    <h2>Common anti-patterns the skill warns against</h2>
+    <ul>
+      <li><strong>The infinite tool loop.</strong> No iteration cap. Agent keeps reasoning, never converges.</li>
+      <li><strong>Tool overload.</strong> Giving the agent 40 tools when 6 would do. Choice paralysis happens to LLMs too.</li>
+      <li><strong>Vague success criteria.</strong> "Help the user" is not a goal. "Return a JSON object matching this schema" is.</li>
+      <li><strong>Memory as an afterthought.</strong> Stateless agents pretend to remember by re-reading history every turn. Token-expensive and brittle.</li>
+      <li><strong>Multi-agent for its own sake.</strong> See above.</li>
+    </ul>
+
+    <h2>When it kicks in</h2>
+    <p>
+      Activates on prompts about agent design, autonomy boundaries, or
+      orchestration choices. Examples:
+    </p>
+    <ul>
+      <li>"Should this be one agent or multiple?"</li>
+      <li>"How do I structure an agent that can both research and write?"</li>
+      <li>"My agent is getting stuck in loops — what's wrong with the architecture?"</li>
+      <li>"When should I add an orchestrator?"</li>
+    </ul>
+
+    <h2>Related public material</h2>
+    <p>
+      If a specific install isn't available, these resources cover the same
+      ground:
+    </p>
+    <ul>
+      <li>Anthropic's <a href="https://www.anthropic.com/research/building-effective-agents">Building Effective Agents</a> guide — canonical reference on agent patterns.</li>
+      <li><a href="https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering">muratcankoylan/Agent-Skills-for-Context-Engineering</a> — adjacent skills (multi-agent-patterns, bdi-mental-states).</li>
+    </ul>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://www.anthropic.com/research/building-effective-agents">Anthropic — Building Effective Agents</a> (canonical guide)</li>
+        <li><a href="https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering">muratcankoylan/Agent-Skills-for-Context-Engineering</a></li>
+        <li><a href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting in Language Models</a> (Yao et al., 2022)</li>
+        <li><a href="https://arxiv.org/abs/2305.10601">Tree of Thoughts</a> (Yao et al., 2023)</li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="frontend-design.html">
+        <span class="dir">← Previous</span>
+        <span class="title">Frontend design helper</span>
+      </a>
+      <a class="next" href="agent-orchestrator.html">
+        <span class="dir">Next piece →</span>
+        <span class="title">Multi-agent coordination</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../../">demo site</a> ·
+    <a href="../getting-started.html">walkthrough</a> ·
+    <a href="../glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>
