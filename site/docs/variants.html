@@ -90,7 +90,24 @@
       <li><a href="what-is.html#terminal">What is the terminal?</a></li>
       <li><a href="what-is.html#git">What is git &amp; GitHub?</a></li>
       <li><a href="what-is.html#scaffolding">What is scaffolding?</a></li>
-      <li><a href="variants.html" class="active">What's in each variant?</a></li>
+      <li><a href="variants.html">Variants &amp; foundation</a></li>
+    </ul>
+    <h4>UI App</h4>
+    <ul>
+      <li><a href="variants/ui-ux-pro-max.html">99-rule design checklist</a></li>
+      <li><a href="variants/design-system.html">Design-system structure</a></li>
+      <li><a href="variants/ux-contract.html">Your project's UI rulebook</a></li>
+      <li><a href="variants/onboarding-psychologist.html">Onboarding playbook</a></li>
+      <li><a href="variants/frontend-design.html">Frontend design helper</a></li>
+    </ul>
+    <h4>Agent App</h4>
+    <ul>
+      <li><a href="variants/ai-agents-architect.html">Agent architecture guide</a></li>
+      <li><a href="variants/agent-orchestrator.html">Multi-agent coordination</a></li>
+      <li><a href="variants/ralph-loop.html">Iterative agent loops</a></li>
+      <li><a href="variants/agent-memory-systems.html">Memory system design</a></li>
+      <li><a href="variants/claude-api.html">Anthropic SDK helper</a></li>
+      <li><a href="variants/portable-identity.html">Portable-identity rule</a></li>
     </ul>
     <h4>Use the project</h4>
     <ul>
@@ -102,6 +119,21 @@
       <li><a href="../">Demo site</a></li>
       <li><a href="https://github.com/Lizo-RoadTown/project-starter">GitHub repo</a></li>
     </ul>
+    <script>
+      (function () {
+        var hereP = location.pathname.replace(/\/$/, '/index.html');
+        var hereH = location.hash || '';
+        document.querySelectorAll('.sidebar a').forEach(function (a) {
+          try {
+            var u = new URL(a.href);
+            var p = u.pathname.replace(/\/$/, '/index.html');
+            if (p === hereP && (u.hash || '') === hereH) {
+              a.setAttribute('aria-current', 'page');
+            }
+          } catch (e) {}
+        });
+      })();
+    </script>
   </aside>
 
   <main class="content">
@@ -110,47 +142,47 @@
       <a href="index.html">docs</a><span class="sep">/</span>variants
     </nav>
 
-    <h1>What's actually in each variant?</h1>
+    <h1>Variants &amp; the shared foundation</h1>
     <p class="lede">
-      When you scaffold a project you pick <strong>UI App</strong> or
-      <strong>Agent App</strong>. Both share the same foundation; each adds
-      extras grouped here by purpose. Every piece below links to a dedicated
-      documentation page with full details, source, and install instructions.
+      A short orientation. The full breakdown of every piece is in the sidebar
+      — under <strong>UI App</strong> and <strong>Agent App</strong> — one
+      page per piece.
     </p>
 
-    <h2 id="what-is-a-skill">First — what's a "skill"?</h2>
+    <h2 id="what-is-a-skill">What's a "skill"?</h2>
     <p>
-      Most of the extras are <strong>skills</strong>. A skill is a markdown file
-      (a <code>SKILL.md</code>) plus optional supporting files, stored at
-      <code>~/.claude/skills/</code> on your computer or shipped inside a plugin.
-      Each skill tells Claude how to handle a specific kind of task — writing UI,
-      planning, reviewing, calling an API — and which patterns to apply.
-      Installed once per machine, then any project can reach for them.
+      Most of the variant pieces are <strong>skills</strong>. A skill is a
+      markdown file (a <code>SKILL.md</code>) plus optional supporting files,
+      stored at <code>~/.claude/skills/</code> on your computer or shipped
+      inside a plugin. Each skill tells Claude how to handle a specific kind
+      of task — writing UI, planning, reviewing, calling an API — and which
+      patterns to apply. Installed once per machine, then any project can
+      reach for them.
     </p>
     <p>
       <strong>The scaffolded project doesn't install the skills</strong> — it
       references them in <code>CLAUDE.md</code> so Claude knows to reach for
-      them when relevant. If a skill isn't installed when Claude tries to use it,
-      you'll be told and given the install command.
+      them when relevant. If a skill isn't installed when Claude tries to use
+      it, you'll be told and given the install command.
     </p>
     <div class="callout info">
       <div class="icon">i</div>
       <div>
         <p>
-          A few extras aren't skills — they're files in your project (like
+          A few pieces aren't skills — they're files in your project (like
           <code>UX_CONTRACT.md</code>) or design principles baked into the
-          <code>CLAUDE.md</code> template. Each piece page makes the distinction
-          explicit.
+          <code>CLAUDE.md</code> template. Each piece's documentation page
+          makes the distinction explicit at the top.
         </p>
       </div>
     </div>
 
     <h2 id="shared-foundation">The shared foundation</h2>
     <p>
-      Both variants ship with this set — it's not listed under either variant
-      because it's always there. The main page's <a href="../#stack">foundation
-      section</a> covers it in summary; for the full breakdown see
-      <a href="../../docs/AGENTS.md">docs/AGENTS.md</a>.
+      Both variants ship with this set — it's always there, regardless of
+      which variant you pick. The main page's <a href="../#stack">foundation
+      section</a> covers it in summary; for the developer-flavored breakdown
+      see <a href="../../docs/AGENTS.md">docs/AGENTS.md</a>.
     </p>
     <ul>
       <li><strong>Memory hierarchy</strong> — proposals, plans, test-runs, auto-memory.</li>
@@ -160,137 +192,21 @@
       <li><strong>Commit + PR discipline</strong> — small PRs, cite proposals.</li>
     </ul>
 
-    <!-- ============= UI APP ============= -->
-    <section class="variant-section ui">
-      <h2 id="ui-app">UI App</h2>
-      <p class="meta">scaffolder flag: <code>--type ui-app</code> · for websites, dashboards, marketing pages</p>
+    <h2>The two variants</h2>
+    <p>
+      Pick <strong>UI App</strong> for websites, dashboards, marketing pages
+      — anything with a screen. Pick <strong>Agent App</strong> for LLM apps,
+      AI agents, anything that calls Claude or another model. Each adds extras
+      on top of the shared foundation; the sidebar has one page per piece.
+    </p>
 
-      <!-- Group 1: Visual design rulebook -->
-      <div class="category-band">
-        <p class="category-eyebrow">Group 1 of 3</p>
-        <h3 class="category-title">A visual design rulebook</h3>
-        <p class="category-intro">Specific rules for layout, color, animation, and accessibility — plus a contract file your project's PRs cite. Three pieces.</p>
-      </div>
-      <div class="piece-cards">
-        <a class="piece-card" href="variants/ui-ux-pro-max.html">
-          <h4>A 99-rule design checklist</h4>
-          <p class="pc-tech">skill · ui-ux-pro-max · community (nextlevelbuilder)</p>
-          <p class="pc-summary">67 UI styles, 99 UX guidelines, 161 color palettes, 57 font pairings — applied automatically when the prompt touches UI work.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-        <a class="piece-card" href="variants/design-system.html">
-          <h4>Design-system structure</h4>
-          <p class="pc-tech">skill · design-system · community</p>
-          <p class="pc-summary">The three-tier token architecture — primitive → semantic → component — and why semantic naming matters for AI agents.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-        <a class="piece-card" href="variants/ux-contract.html">
-          <h4>Your project's UI rulebook</h4>
-          <p class="pc-tech">file · docs/UX_CONTRACT.md · local to your project</p>
-          <p class="pc-summary">A 12-point review contract every UI PR must pass — color semantics, animation budget, accessibility minimums, anti-patterns.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-      </div>
-
-      <!-- Group 2: Onboarding -->
-      <div class="category-band">
-        <p class="category-eyebrow">Group 2 of 3</p>
-        <h3 class="category-title">First-use onboarding patterns</h3>
-        <p class="category-intro">A behavioral-research framework for first-time-user flows. One piece.</p>
-      </div>
-      <div class="piece-cards">
-        <a class="piece-card" href="variants/onboarding-psychologist.html">
-          <h4>Onboarding playbook</h4>
-          <p class="pc-tech">skill · onboarding-psychologist · unverified publicly</p>
-          <p class="pc-summary">The IDENTITY-TO-HABIT arc — define the first win, remove unnecessary setup, attach a cue, reinforce identity. Grounded in BJ Fogg + James Clear.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-      </div>
-
-      <!-- Group 3: Frontend plugin -->
-      <div class="category-band">
-        <p class="category-eyebrow">Group 3 of 3</p>
-        <h3 class="category-title">Anthropic's frontend plugin</h3>
-        <p class="category-intro">General-purpose assistance for component design and visual decisions. One piece.</p>
-      </div>
-      <div class="piece-cards">
-        <a class="piece-card" href="variants/frontend-design.html">
-          <h4>Frontend design helper</h4>
-          <p class="pc-tech">plugin · frontend-design · Anthropic official</p>
-          <p class="pc-summary">Anthropic's official frontend plugin. Generates production-grade HTML/CSS/JS with thoughtful typography and animation — explicitly designed to avoid "generic AI slop."</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============= AGENT APP ============= -->
-    <section class="variant-section agent">
-      <h2 id="agent-app">Agent App</h2>
-      <p class="meta">scaffolder flag: <code>--type agent-app</code> · for LLM apps and AI agents</p>
-
-      <!-- Group 1: Architecture & orchestration -->
-      <div class="category-band">
-        <p class="category-eyebrow">Group 1 of 3</p>
-        <h3 class="category-title">Agent architecture &amp; orchestration</h3>
-        <p class="category-intro">How to structure single-agent or multi-agent systems — handoffs, supervision, parallel work, iterative loops. Three pieces.</p>
-      </div>
-      <div class="piece-cards">
-        <a class="piece-card" href="variants/ai-agents-architect.html">
-          <h4>Agent architecture guide</h4>
-          <p class="pc-tech">skill · ai-agents-architect · community</p>
-          <p class="pc-summary">Decision framework for agent architecture — single agent vs. multi-agent, ReAct vs. Plan-and-Execute, when to introduce an orchestrator.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-        <a class="piece-card" href="variants/agent-orchestrator.html">
-          <h4>Multi-agent coordination patterns</h4>
-          <p class="pc-tech">skill · agent-orchestrator · community</p>
-          <p class="pc-summary">Coordination primitives (Handoff, Assign, send_message) and the three orchestration shapes — supervisor/worker, peer-to-peer, orchestrator-led.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-        <a class="piece-card" href="variants/ralph-loop.html">
-          <h4>Iterative agent loops</h4>
-          <p class="pc-tech">plugin · ralph-loop · Anthropic verified</p>
-          <p class="pc-summary">The "Ralph Wiggum" technique — a Stop hook that re-feeds the prompt across iterations until Claude emits a completion promise. For tasks with clear success criteria.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-      </div>
-
-      <!-- Group 2: Memory -->
-      <div class="category-band">
-        <p class="category-eyebrow">Group 2 of 3</p>
-        <h3 class="category-title">Memory between sessions</h3>
-        <p class="category-intro">Patterns for what your agent remembers and how — vector recall, structured facts, or both. One piece.</p>
-      </div>
-      <div class="piece-cards">
-        <a class="piece-card" href="variants/agent-memory-systems.html">
-          <h4>Memory system design</h4>
-          <p class="pc-tech">skill · agent-memory-systems · community</p>
-          <p class="pc-summary">The CoALA framework (semantic, episodic, procedural memory) plus vector store selection, chunking strategies, async consolidation, and memory decay.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-      </div>
-
-      <!-- Group 3: Building on the Claude API -->
-      <div class="category-band">
-        <p class="category-eyebrow">Group 3 of 3</p>
-        <h3 class="category-title">Building on the Claude API</h3>
-        <p class="category-intro">Anthropic's official SDK skill plus a portable-identity rule so user data survives if you swap LLMs. Two pieces.</p>
-      </div>
-      <div class="piece-cards">
-        <a class="piece-card" href="variants/claude-api.html">
-          <h4>Anthropic SDK helper</h4>
-          <p class="pc-tech">skill · claude-api · Anthropic official</p>
-          <p class="pc-summary">Up-to-date reference for the Messages API and Managed Agents. Covers caching, tool use, streaming, batching, model migration. Auto-loads when you import the SDK.</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-        <a class="piece-card" href="variants/portable-identity.html">
-          <h4>Portable-identity design rule</h4>
-          <p class="pc-tech">discipline · documented in CLAUDE.md · local</p>
-          <p class="pc-summary">A design principle: keep user data (memory, skills, integrations) decoupled from the LLM. Schema decisions answer "is this portable?" before "is this convenient?"</p>
-          <p class="pc-more">Read full documentation →</p>
-        </a>
-      </div>
-    </section>
+    <h2>How Claude reaches for skills</h2>
+    <p>
+      You don't have to memorize skill names. Claude has the list (from
+      <code>CLAUDE.md</code>) and reaches for them when the task fits. Skills
+      install at the user level (one-time per machine); once installed for one
+      project they're available everywhere.
+    </p>
 
     <h2>How to add or remove pieces</h2>
     <p>Variants aren't sacred. After scaffolding, every piece is just a file you can edit:</p>
@@ -301,22 +217,14 @@
       <li><strong>Add a new variant entirely</strong> → see <a href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> for the recipe.</li>
     </ul>
 
-    <h2>How Claude reaches for skills</h2>
-    <p>
-      You don't have to memorize skill names. Claude has the list (from
-      <code>CLAUDE.md</code>) and reaches for them when the task fits. Skills
-      install at the user level (one-time per machine); once installed for one
-      project they're available everywhere.
-    </p>
-
     <div class="pager">
       <a href="what-is.html">
         <span class="dir">← Back</span>
         <span class="title">What is all this?</span>
       </a>
-      <a class="next" href="getting-started.html">
-        <span class="dir">Next →</span>
-        <span class="title">Getting started</span>
+      <a class="next" href="variants/ui-ux-pro-max.html">
+        <span class="dir">First piece →</span>
+        <span class="title">UI App: 99-rule design checklist</span>
       </a>
     </div>
   </main>

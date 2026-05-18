@@ -188,7 +188,8 @@ pre code {
   background: rgba(125, 211, 252, 0.06);
   border-bottom-color: transparent;
 }
-.sidebar li a.active {
+.sidebar li a.active,
+.sidebar li a[aria-current="page"] {
   color: var(--cyan);
   background: rgba(125, 211, 252, 0.1);
   border-color: rgba(125, 211, 252, 0.25);

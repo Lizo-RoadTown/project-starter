@@ -34,13 +34,50 @@
       <li><a href="../what-is.html#terminal">What is the terminal?</a></li>
       <li><a href="../what-is.html#git">What is git &amp; GitHub?</a></li>
       <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
-      <li><a href="../variants.html" class="active">What's in each variant?</a></li>
+      <li><a href="../variants.html">Variants &amp; foundation</a></li>
+    </ul>
+    <h4>UI App</h4>
+    <ul>
+      <li><a href="ui-ux-pro-max.html">99-rule design checklist</a></li>
+      <li><a href="design-system.html">Design-system structure</a></li>
+      <li><a href="ux-contract.html">Your project's UI rulebook</a></li>
+      <li><a href="onboarding-psychologist.html">Onboarding playbook</a></li>
+      <li><a href="frontend-design.html">Frontend design helper</a></li>
+    </ul>
+    <h4>Agent App</h4>
+    <ul>
+      <li><a href="ai-agents-architect.html">Agent architecture guide</a></li>
+      <li><a href="agent-orchestrator.html">Multi-agent coordination</a></li>
+      <li><a href="ralph-loop.html">Iterative agent loops</a></li>
+      <li><a href="agent-memory-systems.html">Memory system design</a></li>
+      <li><a href="claude-api.html">Anthropic SDK helper</a></li>
+      <li><a href="portable-identity.html">Portable-identity rule</a></li>
     </ul>
     <h4>Use the project</h4>
     <ul>
       <li><a href="../next-steps.html">First conversation</a></li>
       <li><a href="../glossary.html">Glossary</a></li>
     </ul>
+    <h4>Reference</h4>
+    <ul>
+      <li><a href="../../">Demo site</a></li>
+      <li><a href="https://github.com/Lizo-RoadTown/project-starter">GitHub repo</a></li>
+    </ul>
+    <script>
+      (function () {
+        var hereP = location.pathname.replace(/\/$/, '/index.html');
+        var hereH = location.hash || '';
+        document.querySelectorAll('.sidebar a').forEach(function (a) {
+          try {
+            var u = new URL(a.href);
+            var p = u.pathname.replace(/\/$/, '/index.html');
+            if (p === hereP && (u.hash || '') === hereH) {
+              a.setAttribute('aria-current', 'page');
+            }
+          } catch (e) {}
+        });
+      })();
+    </script>
   </aside>
 
   <main class="content">
