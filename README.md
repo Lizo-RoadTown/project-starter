@@ -1,4 +1,4 @@
-# claude-project-starter
+#project-starter
 
 Day-1 scaffolding for new projects worked on with Claude Code. Captures the lessons learned about keeping token usage low, accuracy high, and architecture decisions visible across sessions.
 
