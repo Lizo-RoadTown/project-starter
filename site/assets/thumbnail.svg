@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">project-starter</title>
+  <desc id="desc">A seed sprouting into two branching forms — a geometric dashboard and a neural network — representing the ui-app and agent-app variants.</desc>
+
+  <defs>
+    <!-- background gradient -->
+    <radialGradient id="bg" cx="0.5" cy="0.55" r="0.85">
+      <stop offset="0" stop-color="#0f1a30"/>
+      <stop offset="0.6" stop-color="#0a1326"/>
+      <stop offset="1" stop-color="#06091a"/>
+    </radialGradient>
+
+    <!-- seed core glow -->
+    <radialGradient id="seedCore" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="0.45" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#b45309"/>
+    </radialGradient>
+
+    <!-- seed halo -->
+    <radialGradient id="seedHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fbbf24" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#f59e0b" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- trunk gradient: amber to neutral -->
+    <linearGradient id="trunk" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#b45309"/>
+      <stop offset="0.4" stop-color="#92591a"/>
+      <stop offset="1" stop-color="#475569"/>
+    </linearGradient>
+
+    <!-- left branch (ui-app — cyan) -->
+    <linearGradient id="branchL" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#475569"/>
+      <stop offset="1" stop-color="#7dd3fc"/>
+    </linearGradient>
+
+    <!-- right branch (agent-app — violet) -->
+    <linearGradient id="branchR" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#475569"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+
+    <!-- soft glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSmall" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="1200" fill="url(#bg)"/>
+
+  <!-- starfield -->
+  <g fill="#cbd5e1">
+    <circle cx="120" cy="180" r="1.4" opacity="0.5"/>
+    <circle cx="280" cy="90" r="1" opacity="0.4"/>
+    <circle cx="420" cy="220" r="1.2" opacity="0.35"/>
+    <circle cx="640" cy="120" r="1.6" opacity="0.6"/>
+    <circle cx="820" cy="80" r="1" opacity="0.4"/>
+    <circle cx="960" cy="200" r="1.3" opacity="0.45"/>
+    <circle cx="1080" cy="140" r="1" opacity="0.4"/>
+    <circle cx="160" cy="340" r="0.9" opacity="0.35"/>
+    <circle cx="540" cy="60" r="0.8" opacity="0.3"/>
+    <circle cx="1040" cy="380" r="1.1" opacity="0.4"/>
+    <circle cx="80" cy="540" r="1" opacity="0.35"/>
+    <circle cx="1130" cy="640" r="1.2" opacity="0.4"/>
+    <circle cx="70" cy="780" r="0.9" opacity="0.3"/>
+    <circle cx="1140" cy="900" r="1.1" opacity="0.4"/>
+    <circle cx="380" cy="1090" r="1" opacity="0.35"/>
+    <circle cx="900" cy="1110" r="1.3" opacity="0.45"/>
+    <circle cx="240" cy="40" r="0.7" opacity="0.3"/>
+    <circle cx="760" cy="40" r="0.7" opacity="0.3"/>
+  </g>
+
+  <!-- faint hexagonal ground grid (perspective) -->
+  <g stroke="#1e293b" stroke-width="1" opacity="0.35" fill="none">
+    <path d="M0 1050 Q 600 1010 1200 1050"/>
+    <path d="M0 1090 Q 600 1050 1200 1090"/>
+    <path d="M0 1140 Q 600 1100 1200 1140"/>
+    <path d="M200 1000 L 220 1180"/>
+    <path d="M400 990 L 410 1180"/>
+    <path d="M600 985 L 600 1180"/>
+    <path d="M800 990 L 790 1180"/>
+    <path d="M1000 1000 L 980 1180"/>
+  </g>
+
+  <!-- ROOTS fanning down from seed -->
+  <g stroke="#92591a" stroke-width="2.5" fill="none" opacity="0.7" stroke-linecap="round">
+    <path d="M600 990 Q 540 1020 480 1060 Q 440 1085 410 1130"/>
+    <path d="M600 990 Q 580 1030 560 1080 Q 545 1115 540 1160"/>
+    <path d="M600 990 Q 620 1030 645 1080 Q 660 1115 670 1160"/>
+    <path d="M600 990 Q 660 1020 720 1060 Q 760 1085 790 1130"/>
+    <path d="M600 990 Q 600 1010 600 1060 Q 600 1100 605 1150"/>
+    <!-- finer hairs -->
+    <path d="M600 990 Q 510 1010 440 1010" opacity="0.4"/>
+    <path d="M600 990 Q 690 1010 760 1010" opacity="0.4"/>
+  </g>
+
+  <!-- SEED HALO -->
+  <ellipse cx="600" cy="980" rx="180" ry="180" fill="url(#seedHalo)" filter="url(#glow)"/>
+
+  <!-- SEED -->
+  <g>
+    <ellipse cx="600" cy="980" rx="48" ry="62" fill="url(#seedCore)" filter="url(#glowSmall)"/>
+    <!-- highlight -->
+    <ellipse cx="586" cy="958" rx="14" ry="20" fill="#fef3c7" opacity="0.7"/>
+  </g>
+
+  <!-- TRUNK rising organically -->
+  <path d="M600 940
+           C 595 880, 612 820, 600 760
+           C 590 700, 610 640, 600 580
+           C 593 540, 605 510, 600 480"
+        stroke="url(#trunk)" stroke-width="14" fill="none" stroke-linecap="round"/>
+
+  <!-- subtle trunk highlight -->
+  <path d="M600 940
+           C 595 880, 612 820, 600 760
+           C 590 700, 610 640, 600 580
+           C 593 540, 605 510, 600 480"
+        stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.25"/>
+
+  <!-- BRANCHING POINT — fork at y=480 -->
+  <!-- LEFT BRANCH (curves up and left) -->
+  <path d="M600 480
+           C 580 440, 540 410, 480 380
+           C 420 350, 360 330, 310 290"
+        stroke="url(#branchL)" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- left branch sub-twigs -->
+  <g stroke="#7dd3fc" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7">
+    <path d="M450 365 Q 430 340 415 305"/>
+    <path d="M380 340 Q 370 310 360 275"/>
+  </g>
+
+  <!-- RIGHT BRANCH (curves up and right) -->
+  <path d="M600 480
+           C 620 440, 660 410, 720 380
+           C 780 350, 840 330, 890 290"
+        stroke="url(#branchR)" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- right branch sub-twigs -->
+  <g stroke="#a78bfa" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7">
+    <path d="M750 365 Q 770 340 785 305"/>
+    <path d="M820 340 Q 830 310 840 275"/>
+  </g>
+
+  <!-- LEFT FRUIT — ui-app dashboard cluster -->
+  <g transform="translate(180, 180)">
+    <!-- glow behind -->
+    <circle cx="100" cy="100" r="120" fill="#7dd3fc" opacity="0.08" filter="url(#glow)"/>
+    <!-- main panel -->
+    <rect x="20" y="40" width="180" height="120" rx="10" fill="#0f1a30" stroke="#7dd3fc" stroke-width="1.5" opacity="0.95"/>
+    <!-- header bar -->
+    <rect x="20" y="40" width="180" height="20" rx="10" fill="#7dd3fc" opacity="0.35"/>
+    <circle cx="32" cy="50" r="3" fill="#0b1220"/>
+    <circle cx="42" cy="50" r="3" fill="#0b1220"/>
+    <circle cx="52" cy="50" r="3" fill="#0b1220"/>
+    <!-- content rows -->
+    <rect x="32" y="72" width="80" height="6" rx="2" fill="#7dd3fc" opacity="0.6"/>
+    <rect x="32" y="86" width="120" height="6" rx="2" fill="#475569"/>
+    <rect x="32" y="100" width="100" height="6" rx="2" fill="#475569"/>
+    <!-- small cards row -->
+    <rect x="32" y="116" width="40" height="32" rx="4" fill="#1e293b" stroke="#7dd3fc" stroke-width="1"/>
+    <rect x="78" y="116" width="40" height="32" rx="4" fill="#1e293b" stroke="#7dd3fc" stroke-width="1"/>
+    <rect x="124" y="116" width="40" height="32" rx="4" fill="#1e293b" stroke="#7dd3fc" stroke-width="1"/>
+    <!-- floating mini-panel -->
+    <rect x="140" y="10" width="70" height="38" rx="6" fill="#0f1a30" stroke="#7dd3fc" stroke-width="1" opacity="0.9"/>
+    <rect x="148" y="20" width="40" height="4" rx="2" fill="#7dd3fc" opacity="0.7"/>
+    <rect x="148" y="30" width="30" height="4" rx="2" fill="#475569"/>
+  </g>
+
+  <!-- RIGHT FRUIT — agent-app neural constellation -->
+  <g transform="translate(820, 180)">
+    <!-- glow behind -->
+    <circle cx="100" cy="100" r="120" fill="#a78bfa" opacity="0.08" filter="url(#glow)"/>
+    <!-- connecting arcs -->
+    <g stroke="#a78bfa" stroke-width="1.2" fill="none" opacity="0.55">
+      <path d="M40 60 Q 90 30 150 50"/>
+      <path d="M40 60 Q 70 100 100 130"/>
+      <path d="M150 50 Q 180 90 170 140"/>
+      <path d="M100 130 Q 140 150 170 140"/>
+      <path d="M40 60 Q 100 90 150 50"/>
+      <path d="M170 140 Q 190 90 150 50"/>
+      <path d="M100 130 Q 60 90 40 60"/>
+      <path d="M85 30 Q 60 50 40 60"/>
+      <path d="M85 30 Q 120 30 150 50"/>
+      <path d="M195 95 Q 175 70 150 50"/>
+      <path d="M195 95 Q 185 120 170 140"/>
+    </g>
+    <!-- nodes -->
+    <g fill="#a78bfa">
+      <circle cx="40" cy="60" r="9"/>
+      <circle cx="85" cy="30" r="6"/>
+      <circle cx="150" cy="50" r="11"/>
+      <circle cx="195" cy="95" r="6"/>
+      <circle cx="170" cy="140" r="9"/>
+      <circle cx="100" cy="130" r="7"/>
+    </g>
+    <!-- node halos -->
+    <g fill="#a78bfa" opacity="0.3" filter="url(#glowSmall)">
+      <circle cx="40" cy="60" r="14"/>
+      <circle cx="150" cy="50" r="16"/>
+      <circle cx="170" cy="140" r="14"/>
+    </g>
+    <!-- highlights on big nodes -->
+    <g fill="#ede9fe">
+      <circle cx="37" cy="57" r="3" opacity="0.8"/>
+      <circle cx="147" cy="46" r="3.5" opacity="0.8"/>
+      <circle cx="167" cy="137" r="3" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- floating leaf accents along trunk -->
+  <g opacity="0.7">
+    <ellipse cx="555" cy="700" rx="14" ry="6" fill="#7dd3fc" opacity="0.4" transform="rotate(-30 555 700)"/>
+    <ellipse cx="650" cy="640" rx="14" ry="6" fill="#a78bfa" opacity="0.4" transform="rotate(35 650 640)"/>
+    <ellipse cx="570" cy="580" rx="12" ry="5" fill="#7dd3fc" opacity="0.35" transform="rotate(-20 570 580)"/>
+    <ellipse cx="635" cy="540" rx="12" ry="5" fill="#a78bfa" opacity="0.35" transform="rotate(40 635 540)"/>
+  </g>
+
+  <!-- pollen / spores floating -->
+  <g fill="#fbbf24" opacity="0.55">
+    <circle cx="500" cy="880" r="2"/>
+    <circle cx="710" cy="900" r="1.5"/>
+    <circle cx="460" cy="810" r="1.2"/>
+    <circle cx="740" cy="820" r="2"/>
+    <circle cx="520" cy="750" r="1.5"/>
+    <circle cx="680" cy="700" r="1.5"/>
+  </g>
+
+  <!-- TITLE -->
+  <g transform="translate(600, 1100)" text-anchor="middle">
+    <text font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
+          font-size="40" font-weight="700" fill="#f1f5f9" letter-spacing="-0.5">
+      project-starter
+    </text>
+    <text y="32" font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+          font-size="17" fill="#94a3b8" letter-spacing="2" text-transform="uppercase">
+      <tspan fill="#7dd3fc">ui-app</tspan>
+      <tspan dx="14" fill="#64748b">·</tspan>
+      <tspan dx="14" fill="#a78bfa">agent-app</tspan>
+    </text>
+  </g>
+
+  <!-- subtle film grain -->
+  <rect width="1200" height="1200" filter="url(#grain)" opacity="0.4"/>
+</svg>

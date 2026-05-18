@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>project-starter — day-1 scaffolding for Claude Code projects</title>
+  <meta name="description" content="A template repo for new Claude Code projects. Two variants — ui-app and agent-app. Pinned MCP servers, skill recommendations, persistent memory hierarchy."/>
+  <meta property="og:title" content="project-starter"/>
+  <meta property="og:description" content="Day-1 scaffolding for Claude Code projects."/>
+  <meta property="og:image" content="assets/thumbnail.svg"/>
+  <link rel="icon" href="assets/favicon.svg"/>
+  <style>
+    :root {
+      --bg-0: #06091a;
+      --bg-1: #0b1220;
+      --bg-2: #0f1a30;
+      --bg-3: #111a2e;
+      --surface: #0f1a30;
+      --border: #334155;
+      --border-soft: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      --text-faint: #64748b;
+      --cyan: #7dd3fc;
+      --violet: #a78bfa;
+      --amber: #fbbf24;
+      --amber-deep: #f59e0b;
+      --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at 50% 30%, var(--bg-3) 0%, var(--bg-1) 55%, var(--bg-0) 100%);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* faint starfield overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, #cbd5e1 50%, transparent),
+        radial-gradient(1px 1px at 28% 9%, #94a3b8 50%, transparent),
+        radial-gradient(1px 1px at 42% 22%, #cbd5e1 50%, transparent),
+        radial-gradient(1.2px 1.2px at 64% 12%, #cbd5e1 50%, transparent),
+        radial-gradient(1px 1px at 82% 8%, #94a3b8 50%, transparent),
+        radial-gradient(1px 1px at 96% 20%, #cbd5e1 50%, transparent),
+        radial-gradient(1px 1px at 8% 54%, #94a3b8 50%, transparent),
+        radial-gradient(1.2px 1.2px at 91% 64%, #cbd5e1 50%, transparent),
+        radial-gradient(1px 1px at 6% 78%, #94a3b8 50%, transparent),
+        radial-gradient(1.2px 1.2px at 95% 90%, #cbd5e1 50%, transparent),
+        radial-gradient(1px 1px at 38% 109%, #94a3b8 50%, transparent),
+        radial-gradient(1.2px 1.2px at 72% 111%, #cbd5e1 50%, transparent);
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    main, header, footer { position: relative; z-index: 1; }
+
+    a { color: var(--cyan); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 200ms ease; }
+    a:hover { border-bottom-color: currentColor; }
+    a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 2px; }
+
+    /* ---------- top bar ---------- */
+    .topbar {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 32px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+    .topbar .brand { color: var(--text); font-weight: 600; }
+    .topbar nav { display: flex; gap: 22px; }
+
+    /* ---------- hero ---------- */
+    .hero {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 56px 32px 72px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+      align-items: center;
+    }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; }
+    }
+
+    .hero h1 {
+      font-family: var(--mono);
+      font-size: clamp(36px, 5.5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 18px;
+      color: var(--text);
+    }
+    .hero h1 .dot-cyan { color: var(--cyan); }
+    .hero h1 .dot-violet { color: var(--violet); }
+    .hero p.lede {
+      font-size: clamp(17px, 1.4vw, 20px);
+      color: var(--text-muted);
+      max-width: 56ch;
+      margin: 0 0 32px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      font-family: var(--mono);
+      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: var(--cyan); background: #14223f; }
+    .btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+    .btn.primary { border-color: var(--cyan); background: rgba(125, 211, 252, 0.1); color: var(--cyan); }
+    .btn.primary:hover { background: rgba(125, 211, 252, 0.18); }
+    .btn .arrow { transition: transform 180ms ease; }
+    .btn:hover .arrow { transform: translateX(3px); }
+
+    /* hero illustration */
+    .hero-art {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      max-width: 520px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .hero-art svg { width: 100%; height: 100%; display: block; }
+
+    @keyframes pulse-seed {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50%      { opacity: 0.85; transform: scale(1.06); }
+    }
+    .seed-halo { transform-origin: center; animation: pulse-seed 4s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) {
+      .seed-halo { animation: none; }
+    }
+
+    /* ---------- section base ---------- */
+    section.section {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 72px 32px;
+    }
+    .section h2 {
+      font-family: var(--mono);
+      font-size: clamp(24px, 2.6vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+    .section p.section-lede {
+      font-size: 17px;
+      color: var(--text-dim);
+      max-width: 62ch;
+      margin: 0 0 36px;
+    }
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      margin: 0 0 10px;
+    }
+
+    /* ---------- scaffold (three columns) ---------- */
+    .scaffold-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 980px) {
+      .scaffold-grid { grid-template-columns: 1fr; }
+    }
+    .code-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color 200ms ease, transform 200ms ease;
+    }
+    .code-card:hover { border-color: #475569; transform: translateY(-2px); }
+    .code-card h3 {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 4px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .code-card .tag { font-size: 11px; color: var(--text-faint); font-weight: 400; }
+    .code-card p { font-size: 14px; color: var(--text-dim); margin: 4px 0 14px; }
+    .code-card pre {
+      background: var(--bg-0);
+      border: 1px solid var(--border-soft);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 0;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+    .code-card pre code { color: inherit; }
+    .code-card .cmt { color: var(--text-faint); }
+    .code-card .flag { color: var(--cyan); }
+    .code-card .str { color: var(--amber); }
+
+    /* ---------- variants ---------- */
+    .variants {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 880px) {
+      .variants { grid-template-columns: 1fr; }
+    }
+    .variant-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 200ms ease, transform 200ms ease;
+    }
+    .variant-card:hover { transform: translateY(-3px); }
+    .variant-card.ui    { border-color: rgba(125, 211, 252, 0.45); }
+    .variant-card.agent { border-color: rgba(167, 139, 250, 0.45); }
+    .variant-card.ui:hover    { border-color: var(--cyan); }
+    .variant-card.agent:hover { border-color: var(--violet); }
+    .variant-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background: radial-gradient(circle at 80% 0%, currentColor, transparent 60%);
+    }
+    .variant-card.ui::before    { color: var(--cyan); }
+    .variant-card.agent::before { color: var(--violet); }
+
+    .variant-card h3 {
+      font-family: var(--mono);
+      font-size: 24px;
+      margin: 0 0 6px;
+    }
+    .variant-card.ui h3    { color: var(--cyan); }
+    .variant-card.agent h3 { color: var(--violet); }
+    .variant-card .sub {
+      font-size: 14px;
+      color: var(--text-dim);
+      margin: 0 0 18px;
+    }
+    .variant-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .variant-card li {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding-left: 18px;
+      position: relative;
+    }
+    .variant-card li::before {
+      content: "+";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: var(--mono);
+      font-weight: 600;
+    }
+    .variant-card.ui li::before    { color: var(--cyan); }
+    .variant-card.agent li::before { color: var(--violet); }
+
+    /* ---------- stack diagram ---------- */
+    .stack {
+      display: grid;
+      gap: 10px;
+      max-width: 720px;
+    }
+    .stack-layer {
+      background: var(--bg-2);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: border-color 200ms ease;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 16px;
+    }
+    .stack-layer:hover { border-color: #475569; }
+    .stack-layer.cyan   { border-color: rgba(125, 211, 252, 0.5); }
+    .stack-layer.violet { border-color: rgba(167, 139, 250, 0.5); }
+    .stack-layer .name {
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .stack-layer .desc {
+      font-size: 13.5px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .stack-layer .badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .stack-layer.cyan   .badge { color: var(--cyan);   border-color: rgba(125, 211, 252, 0.4); }
+    .stack-layer.violet .badge { color: var(--violet); border-color: rgba(167, 139, 250, 0.4); }
+
+    /* ---------- footer ---------- */
+    footer {
+      max-width: 1180px;
+      margin: 40px auto 0;
+      padding: 28px 32px 48px;
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+    footer a { color: var(--text-dim); }
+  </style>
+</head>
+<body>
+
+<div class="topbar" aria-label="primary">
+  <div class="brand">project-starter</div>
+  <nav>
+    <a href="#scaffold">scaffold</a>
+    <a href="#variants">variants</a>
+    <a href="#stack">stack</a>
+    <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+  </nav>
+</div>
+
+<header>
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>
+        Day-1 scaffolding<br/>
+        for <span class="dot-cyan">Claude</span> <span class="dot-violet">Code</span><br/>
+        projects.
+      </h1>
+      <p class="lede">
+        A template repo with two variants, pinned MCP servers, a curated skill list,
+        and the persistent-memory discipline that keeps agents consistent across
+        sessions. Clone, scaffold, push, work.
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="#scaffold">Scaffold a project <span class="arrow">→</span></a>
+        <a class="btn" href="https://github.com/Lizo-RoadTown/project-starter">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <!-- Inline simplified illustration: seed → trunk → two branches → dashboard + neural cluster.
+           Mirrors docs/assets/thumbnail-illustrative.svg, smaller for hero use. -->
+      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="hseed" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#fde68a"/>
+            <stop offset=".45" stop-color="#f59e0b"/>
+            <stop offset="1" stop-color="#b45309"/>
+          </radialGradient>
+          <radialGradient id="hhalo" cx=".5" cy=".5" r=".5">
+            <stop offset="0" stop-color="#fbbf24" stop-opacity=".55"/>
+            <stop offset=".5" stop-color="#f59e0b" stop-opacity=".15"/>
+            <stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="htrunk" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#b45309"/>
+            <stop offset=".4" stop-color="#92591a"/>
+            <stop offset="1" stop-color="#475569"/>
+          </linearGradient>
+          <linearGradient id="hbranchL" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#475569"/>
+            <stop offset="1" stop-color="#7dd3fc"/>
+          </linearGradient>
+          <linearGradient id="hbranchR" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0" stop-color="#475569"/>
+            <stop offset="1" stop-color="#a78bfa"/>
+          </linearGradient>
+          <filter id="hglow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="10" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- ground curves -->
+        <g stroke="#1e293b" stroke-width="1" opacity=".5" fill="none">
+          <path d="M0 525 Q 300 495 600 525"/>
+          <path d="M0 555 Q 300 525 600 555"/>
+        </g>
+
+        <!-- roots -->
+        <g stroke="#92591a" stroke-width="2" fill="none" opacity=".7" stroke-linecap="round">
+          <path d="M300 495 Q 260 515 220 545 Q 200 565 190 590"/>
+          <path d="M300 495 Q 290 520 280 555 Q 275 580 275 600"/>
+          <path d="M300 495 Q 310 520 320 555 Q 325 580 325 600"/>
+          <path d="M300 495 Q 340 515 380 545 Q 400 565 410 590"/>
+        </g>
+
+        <!-- halo + seed -->
+        <ellipse cx="300" cy="490" rx="90" ry="90" fill="url(#hhalo)" filter="url(#hglow)" class="seed-halo"/>
+        <ellipse cx="300" cy="490" rx="26" ry="34" fill="url(#hseed)"/>
+        <ellipse cx="293" cy="478" rx="7" ry="10" fill="#fef3c7" opacity=".75"/>
+
+        <!-- trunk -->
+        <path d="M300 460
+                 C 297 420, 308 380, 300 340
+                 C 293 300, 306 270, 300 240"
+              stroke="url(#htrunk)" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+        <!-- left branch -->
+        <path d="M300 240
+                 C 285 215, 255 195, 215 175
+                 C 175 155, 135 140, 100 115"
+              stroke="url(#hbranchL)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <!-- right branch -->
+        <path d="M300 240
+                 C 315 215, 345 195, 385 175
+                 C 425 155, 465 140, 500 115"
+              stroke="url(#hbranchR)" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+        <!-- left fruit: tiny dashboard cluster -->
+        <g transform="translate(20, 50)">
+          <circle cx="80" cy="65" r="75" fill="#7dd3fc" opacity=".07" filter="url(#hglow)"/>
+          <rect x="20" y="30" width="120" height="80" rx="8" fill="#0f1a30" stroke="#7dd3fc" stroke-width="1.2"/>
+          <rect x="20" y="30" width="120" height="14" rx="8" fill="#7dd3fc" opacity=".3"/>
+          <circle cx="28" cy="37" r="2" fill="#0b1220"/>
+          <circle cx="35" cy="37" r="2" fill="#0b1220"/>
+          <circle cx="42" cy="37" r="2" fill="#0b1220"/>
+          <rect x="28" y="54" width="60" height="4" rx="2" fill="#7dd3fc" opacity=".7"/>
+          <rect x="28" y="64" width="85" height="4" rx="2" fill="#475569"/>
+          <rect x="28" y="74" width="70" height="4" rx="2" fill="#475569"/>
+          <rect x="28" y="86" width="28" height="20" rx="3" fill="#1e293b" stroke="#7dd3fc" stroke-width=".8"/>
+          <rect x="60" y="86" width="28" height="20" rx="3" fill="#1e293b" stroke="#7dd3fc" stroke-width=".8"/>
+          <rect x="92" y="86" width="28" height="20" rx="3" fill="#1e293b" stroke="#7dd3fc" stroke-width=".8"/>
+        </g>
+
+        <!-- right fruit: neural constellation -->
+        <g transform="translate(420, 50)">
+          <circle cx="80" cy="65" r="75" fill="#a78bfa" opacity=".07" filter="url(#hglow)"/>
+          <g stroke="#a78bfa" stroke-width="1" fill="none" opacity=".55">
+            <path d="M30 40 Q 70 15 130 35"/>
+            <path d="M30 40 Q 55 75 80 100"/>
+            <path d="M130 35 Q 155 70 145 110"/>
+            <path d="M80 100 Q 115 115 145 110"/>
+            <path d="M30 40 Q 80 65 130 35"/>
+            <path d="M145 110 Q 165 75 130 35"/>
+          </g>
+          <g fill="#a78bfa">
+            <circle cx="30" cy="40" r="6"/>
+            <circle cx="80" cy="20" r="4.5"/>
+            <circle cx="130" cy="35" r="7.5"/>
+            <circle cx="165" cy="75" r="4.5"/>
+            <circle cx="145" cy="110" r="6"/>
+            <circle cx="80" cy="100" r="5"/>
+          </g>
+          <g fill="#ede9fe" opacity=".8">
+            <circle cx="28" cy="38" r="1.8"/>
+            <circle cx="128" cy="33" r="2.2"/>
+            <circle cx="143" cy="108" r="1.8"/>
+          </g>
+        </g>
+
+        <!-- leaves on trunk -->
+        <g opacity=".7">
+          <ellipse cx="278" cy="350" rx="9" ry="4" fill="#7dd3fc" opacity=".4" transform="rotate(-30 278 350)"/>
+          <ellipse cx="325" cy="320" rx="9" ry="4" fill="#a78bfa" opacity=".4" transform="rotate(35 325 320)"/>
+          <ellipse cx="285" cy="285" rx="8" ry="3.5" fill="#7dd3fc" opacity=".35" transform="rotate(-20 285 285)"/>
+          <ellipse cx="318" cy="265" rx="8" ry="3.5" fill="#a78bfa" opacity=".35" transform="rotate(40 318 265)"/>
+        </g>
+
+        <!-- pollen -->
+        <g fill="#fbbf24" opacity=".55">
+          <circle cx="250" cy="430" r="1.2"/>
+          <circle cx="355" cy="440" r="1"/>
+          <circle cx="230" cy="395" r="1"/>
+          <circle cx="370" cy="400" r="1.4"/>
+          <circle cx="260" cy="365" r="1"/>
+          <circle cx="340" cy="335" r="1"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+</header>
+
+<main>
+
+  <!-- ---------- SCAFFOLD ---------- -->
+  <section class="section" id="scaffold">
+    <p class="eyebrow">Three ways · same output</p>
+    <h2>Scaffold a new project</h2>
+    <p class="section-lede">
+      Pick whichever shell you have. All three copy the templates, fill placeholders,
+      <code>git init</code>, and make the first commit.
+    </p>
+
+    <div class="scaffold-grid">
+      <article class="code-card">
+        <h3>PowerShell <span class="tag">Windows default</span></h3>
+        <p>Native Windows. Ships preinstalled.</p>
+<pre><code><span class="cmt"># clone the starter</span>
+git clone https://github.com/<span class="str">Lizo-RoadTown</span>/<span class="str">project-starter</span>
+cd project-starter
+
+<span class="cmt"># scaffold</span>
+./scripts/new-project.ps1 `
+  <span class="flag">-Type</span> ui-app `
+  <span class="flag">-Name</span> my-site `
+  <span class="flag">-Target</span> C:\dev</code></pre>
+      </article>
+
+      <article class="code-card">
+        <h3>Bash <span class="tag">Mac · Linux · WSL</span></h3>
+        <p>Standard POSIX shell.</p>
+<pre><code><span class="cmt"># clone the starter</span>
+git clone https://github.com/<span class="str">Lizo-RoadTown</span>/<span class="str">project-starter</span>
+cd project-starter
+
+<span class="cmt"># scaffold</span>
+./scripts/new-project.sh \
+  <span class="flag">--type</span> ui-app \
+  <span class="flag">--name</span> my-site \
+  <span class="flag">--target</span> ~/dev</code></pre>
+      </article>
+
+      <article class="code-card">
+        <h3>Docker <span class="tag">no shell preference</span></h3>
+        <p>Reproducible. No local toolchain.</p>
+<pre><code><span class="cmt"># one-time build</span>
+docker build -t project-starter .
+
+<span class="cmt"># scaffold into ./out</span>
+docker run --rm \
+  -v "<span class="str">$(pwd)/out:/out</span>" \
+  project-starter \
+  <span class="flag">--type</span> ui-app \
+  <span class="flag">--name</span> my-site \
+  <span class="flag">--target</span> /out</code></pre>
+      </article>
+    </div>
+  </section>
+
+  <!-- ---------- VARIANTS ---------- -->
+  <section class="section" id="variants">
+    <p class="eyebrow">Two variants</p>
+    <h2>Pick the shape that fits.</h2>
+    <p class="section-lede">
+      Both share <code>_common</code> — same memory hierarchy, same MCP servers, same
+      skill discipline. Each variant adds the skills and contracts specific to its
+      project shape.
+    </p>
+
+    <div class="variants">
+      <article class="variant-card ui">
+        <h3>ui-app</h3>
+        <p class="sub">Next.js · consumer web · dashboards</p>
+        <ul>
+          <li><code>ui-ux-pro-max</code> · 99 UX guidelines, anti-patterns</li>
+          <li><code>design-system</code> · three-layer token architecture</li>
+          <li><code>onboarding-psychologist</code> · IDENTITY-TO-HABIT arc</li>
+          <li><code>frontend-design</code> · official frontend plugin</li>
+          <li><strong>UX_CONTRACT.md</strong> · the discipline every UI PR cites</li>
+        </ul>
+      </article>
+
+      <article class="variant-card agent">
+        <h3>agent-app</h3>
+        <p class="sub">LLM agents · Claude API apps · multi-agent systems</p>
+        <ul>
+          <li><code>ai-agents-architect</code> · agent / orchestration patterns</li>
+          <li><code>agent-memory-systems</code> · vector / structured memory</li>
+          <li><code>agent-orchestrator</code> · multi-agent coordination</li>
+          <li><code>claude-api</code> · official Anthropic SDK skill</li>
+          <li><strong>Portable identity</strong> · memory + skills + tools survive LLM swaps</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ---------- STACK ---------- -->
+  <section class="section" id="stack">
+    <p class="eyebrow">Four-layer agent stack</p>
+    <h2>What every scaffolded project gets.</h2>
+    <p class="section-lede">
+      Listed bottom-up. The bottom two layers are what makes this repo distinct —
+      pinned MCP servers and the persistent-memory discipline travel with every project.
+    </p>
+
+    <div class="stack">
+      <div class="stack-layer">
+        <div>
+          <div class="name">Built-in capabilities</div>
+          <div class="desc">plan mode · todos · Explore agent · web fetch — always available, no install.</div>
+        </div>
+        <div class="badge">built-in</div>
+      </div>
+      <div class="stack-layer">
+        <div>
+          <div class="name">Skills</div>
+          <div class="desc">concise-planning · code-reviewer · ui-ux-pro-max · claude-api — referenced in <code>CLAUDE.md</code>.</div>
+        </div>
+        <div class="badge">user-installed</div>
+      </div>
+      <div class="stack-layer cyan">
+        <div>
+          <div class="name">MCP servers</div>
+          <div class="desc">Serena (semantic code retrieval) · Context7 (live library docs) · GitHub.</div>
+        </div>
+        <div class="badge">.mcp.json</div>
+      </div>
+      <div class="stack-layer violet">
+        <div>
+          <div class="name">Auto-memory</div>
+          <div class="desc">user · feedback · project · reference — persistent context across every session.</div>
+        </div>
+        <div class="badge">~/.claude</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    <a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a>
+    &nbsp;·&nbsp; Apache 2.0
+  </div>
+  <div>
+    <a href="../docs/WALKTHROUGH.md">walkthrough</a>
+    &nbsp;·&nbsp;
+    <a href="../docs/AGENTS.md">agents</a>
+    &nbsp;·&nbsp;
+    <a href="../docs/DOCKER.md">docker</a>
+  </div>
+</footer>
+
+</body>
+</html>
