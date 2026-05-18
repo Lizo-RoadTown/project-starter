@@ -1,0 +1,30 @@
+# docker-compose.yml — convenience wrapper around the scaffolder image.
+#
+# Two usage patterns:
+#
+# 1) One-shot scaffold (most common):
+#       docker compose run --rm scaffold \
+#         --type ui-app --name my-new-site --target /out \
+#         --frontend "Next.js 16" --backend "FastAPI"
+#    The new project appears at ./out/my-new-site/
+#
+# 2) Interactive shell (debug / explore the templates):
+#       docker compose run --rm --entrypoint bash scaffold
+#
+# Override git identity for the initial commit if you want it attributed:
+#   GIT_AUTHOR_NAME="Liz Osborn" GIT_AUTHOR_EMAIL="liz@example.com" \
+#     docker compose run --rm scaffold --type ui-app --name x --target /out
+
+services:
+  scaffold:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: project-starter:local
+    volumes:
+      - ./out:/out
+    environment:
+      GIT_AUTHOR_NAME: ${GIT_AUTHOR_NAME:-project-starter}
+      GIT_AUTHOR_EMAIL: ${GIT_AUTHOR_EMAIL:-project-starter@local}
+      GIT_COMMITTER_NAME: ${GIT_AUTHOR_NAME:-project-starter}
+      GIT_COMMITTER_EMAIL: ${GIT_AUTHOR_EMAIL:-project-starter@local}

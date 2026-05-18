@@ -1,0 +1,14 @@
+# Force LF on files that must use Unix line endings to work correctly.
+# Without this, Windows clones of the bash script and Dockerfile get CRLF,
+# which breaks execution inside Linux containers (`/bin/bash^M: bad interpreter`).
+
+*.sh         text eol=lf
+Dockerfile   text eol=lf
+.dockerignore text eol=lf
+*.yml        text eol=lf
+*.yaml       text eol=lf
+
+# Markdown and source: let git default handle them per-platform.
+*.md         text
+*.json       text
+*.ps1        text

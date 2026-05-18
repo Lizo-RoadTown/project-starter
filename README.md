@@ -1,4 +1,4 @@
-#project-starter
+# project-starter
 
 Day-1 scaffolding for new projects worked on with Claude Code. Captures the lessons learned about keeping token usage low, accuracy high, and architecture decisions visible across sessions.
 
@@ -23,36 +23,59 @@ More variants (api-service, library, …) can be added — see [CONTRIBUTING.md]
 
 ## Usage
 
-### Quick path — copy with the script
+Three ways to scaffold — pick the one that matches your shell. All three produce the same output.
+
+### PowerShell (Windows default)
 
 ```powershell
-git clone https://github.com/{{YOUR-ORG}}/claude-project-starter
-cd claude-project-starter
+git clone https://github.com/Lizo-RoadTown/project-starter
+cd project-starter
 
 # Scaffold a UI app:
 ./scripts/new-project.ps1 -Type ui-app -Name my-website -Target C:\dev `
   -Frontend "Next.js 16, React 19, Tailwind v4" `
   -Backend "FastAPI" -DB "Postgres on Render" `
-  -Auth "Auth.js v5" -Deploy "Vercel"
+  -Auth "Auth.js v5" -Deploy "Render"
 
 # Scaffold an agent app:
 ./scripts/new-project.ps1 -Type agent-app -Name my-agent-app -Target C:\dev `
   -Backend "FastAPI + deepagents" -DB "Postgres + LanceDB"
 ```
 
-The script copies `_common` + the chosen variant, fills in placeholders, runs `git init`, makes the first commit. Then you `gh repo create` to push to GitHub.
+### Bash (Mac, Linux, WSL)
 
-### Manual path — clone + copy by hand
+```bash
+git clone https://github.com/Lizo-RoadTown/project-starter
+cd project-starter
 
-```powershell
-git clone https://github.com/{{YOUR-ORG}}/claude-project-starter temp-starter
-mkdir my-new-project
-Copy-Item -Path "temp-starter/templates/_common/*" -Destination my-new-project/ -Recurse
-Copy-Item -Path "temp-starter/templates/ui-app/*" -Destination my-new-project/ -Recurse
-# Append CLAUDE.md.extension to CLAUDE.md, edit placeholders, then:
-cd my-new-project
-git init && git add . && git commit -m "Initial scaffold"
+./scripts/new-project.sh --type ui-app --name my-website --target ~/dev \
+  --frontend "Next.js 16, React 19, Tailwind v4" \
+  --backend "FastAPI" --db "Postgres on Render" \
+  --auth "Auth.js v5" --deploy "Render"
 ```
+
+### Docker (no PowerShell, no shell preference, fully reproducible)
+
+```bash
+docker build -t project-starter .
+mkdir -p out
+docker run --rm -v "$(pwd)/out:/out" project-starter \
+  --type ui-app --name my-website --target /out \
+  --frontend "Next.js 16" --backend "FastAPI"
+```
+
+See [docs/DOCKER.md](docs/DOCKER.md) for compose, environment variables, and Windows path quoting.
+
+---
+
+All three scripts copy `_common` + the chosen variant, fill placeholders, run `git init`, and commit. Then you `gh repo create` to push to GitHub.
+
+## Documentation
+
+- **[docs/WALKTHROUGH.md](docs/WALKTHROUGH.md)** — hands-on, five-minute first scaffold with concrete output and common-issue fixes.
+- **[docs/AGENTS.md](docs/AGENTS.md)** — what each MCP server does, what skills the templates reference, and how the layers fit together.
+- **[docs/DOCKER.md](docs/DOCKER.md)** — running the scaffolder in a container.
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** — how to add a new variant or refine `_common`.
 
 ## Why this exists
 

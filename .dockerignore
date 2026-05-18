@@ -1,0 +1,10 @@
+.git
+out/
+docs/test-runs/
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
