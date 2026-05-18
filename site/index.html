@@ -290,29 +290,40 @@
     .variant-card.agent::before { color: var(--violet); }
 
     .variant-card h3 {
-      font-family: var(--mono);
-      font-size: 24px;
-      margin: 0 0 6px;
+      font-family: var(--sans);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin: 0 0 2px;
     }
     .variant-card.ui h3    { color: var(--cyan); }
     .variant-card.agent h3 { color: var(--violet); }
+    .variant-card .codename {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-faint);
+      margin: 0 0 4px;
+      letter-spacing: 0.04em;
+    }
+    .variant-card .codename code { background: none; color: inherit; padding: 0; }
     .variant-card .sub {
-      font-size: 14px;
+      font-size: 14.5px;
       color: var(--text-dim);
-      margin: 0 0 18px;
+      margin: 6px 0 20px;
     }
     .variant-card ul {
       list-style: none;
       padding: 0;
       margin: 0;
       display: grid;
-      gap: 8px;
+      gap: 14px;
     }
     .variant-card li {
       font-size: 14px;
       color: var(--text-muted);
-      padding-left: 18px;
+      padding-left: 20px;
       position: relative;
+      line-height: 1.5;
     }
     .variant-card li::before {
       content: "+";
@@ -320,10 +331,35 @@
       left: 0;
       top: 0;
       font-family: var(--mono);
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 15px;
     }
     .variant-card.ui li::before    { color: var(--cyan); }
     .variant-card.agent li::before { color: var(--violet); }
+    .variant-card li .label {
+      display: block;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14.5px;
+      margin-bottom: 2px;
+    }
+    .variant-card li .tech {
+      display: block;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--text-faint);
+      margin-top: 3px;
+      letter-spacing: 0.02em;
+    }
+    .variant-card .learn-more {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-soft);
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+    .variant-card.ui    .learn-more a { color: var(--cyan); }
+    .variant-card.agent .learn-more a { color: var(--violet); }
 
     /* ---------- stack diagram ---------- */
     .stack {
@@ -619,34 +655,79 @@ docker run --rm \
     <p class="eyebrow">Two variants</p>
     <h2>Pick the shape that fits.</h2>
     <p class="section-lede">
-      Both share <code>_common</code> — same memory hierarchy, same MCP servers, same
-      skill discipline. Each variant adds the skills and contracts specific to its
-      project shape.
+      Both share the same foundation — memory hierarchy, code-search tools, voice
+      rules. Each variant adds the extras that match its project shape. Every
+      "extra" below is something Claude can reach for during your project, with
+      a one-line explanation of what it actually does.
     </p>
 
     <div class="variants">
       <article class="variant-card ui">
-        <h3>ui-app</h3>
-        <p class="sub">Next.js · consumer web · dashboards</p>
+        <h3>UI App</h3>
+        <p class="codename">scaffolder flag: <code>--type ui-app</code></p>
+        <p class="sub">For websites, dashboards, marketing pages — anything with a screen.</p>
         <ul>
-          <li><code>ui-ux-pro-max</code> · 99 UX guidelines, anti-patterns</li>
-          <li><code>design-system</code> · three-layer token architecture</li>
-          <li><code>onboarding-psychologist</code> · IDENTITY-TO-HABIT arc</li>
-          <li><code>frontend-design</code> · official frontend plugin</li>
-          <li><strong>UX_CONTRACT.md</strong> · the discipline every UI PR cites</li>
+          <li>
+            <span class="label">A 99-rule design checklist</span>
+            Claude consults it when designing or reviewing visuals — covers color contrast, button sizes, animation timing, and anti-patterns to refuse.
+            <span class="tech">skill · ui-ux-pro-max</span>
+          </li>
+          <li>
+            <span class="label">Design-system structure</span>
+            A way to organize colors, spacing, and sizes in three layers so they stay consistent across every page.
+            <span class="tech">skill · design-system</span>
+          </li>
+          <li>
+            <span class="label">Onboarding playbook</span>
+            A behavioral-research-backed framework for first-time-user flows — how to take someone from curious to committed.
+            <span class="tech">skill · onboarding-psychologist</span>
+          </li>
+          <li>
+            <span class="label">Frontend design helper</span>
+            Anthropic's official frontend plugin — general assistance for component design and visual decisions.
+            <span class="tech">plugin · frontend-design</span>
+          </li>
+          <li>
+            <span class="label">Your project's UI rulebook</span>
+            A file that lists the visual rules every PR must pass. Claude checks against it before suggesting any UI change.
+            <span class="tech">file · docs/UX_CONTRACT.md</span>
+          </li>
         </ul>
+        <p class="learn-more"><a href="docs/variants.html#ui-app">What each of these actually does →</a></p>
       </article>
 
       <article class="variant-card agent">
-        <h3>agent-app</h3>
-        <p class="sub">LLM agents · Claude API apps · multi-agent systems</p>
+        <h3>Agent App</h3>
+        <p class="codename">scaffolder flag: <code>--type agent-app</code></p>
+        <p class="sub">For LLM apps, AI agents, anything that calls Claude or another model.</p>
         <ul>
-          <li><code>ai-agents-architect</code> · agent / orchestration patterns</li>
-          <li><code>agent-memory-systems</code> · vector / structured memory</li>
-          <li><code>agent-orchestrator</code> · multi-agent coordination</li>
-          <li><code>claude-api</code> · official Anthropic SDK skill</li>
-          <li><strong>Portable identity</strong> · memory + skills + tools survive LLM swaps</li>
+          <li>
+            <span class="label">Agent architecture guide</span>
+            Helps decide if your app needs one agent, several agents talking to each other, or an orchestrator coordinating them.
+            <span class="tech">skill · ai-agents-architect</span>
+          </li>
+          <li>
+            <span class="label">Memory system design</span>
+            Patterns for how your agent remembers things between sessions — vector databases for fuzzy recall, structured DBs for facts.
+            <span class="tech">skill · agent-memory-systems</span>
+          </li>
+          <li>
+            <span class="label">Multi-agent coordination patterns</span>
+            How to get multiple AI agents to cooperate — handoffs, supervision, parallel work without stepping on each other.
+            <span class="tech">skill · agent-orchestrator</span>
+          </li>
+          <li>
+            <span class="label">Anthropic SDK helper</span>
+            Anthropic's official skill for apps that call Claude — covers caching, tool use, streaming, batching. Auto-loads when you import the SDK.
+            <span class="tech">skill · claude-api</span>
+          </li>
+          <li>
+            <span class="label">Portable-identity design rule</span>
+            A built-in principle: your user's memory, skills, and integrations stay intact if you switch LLMs later. Avoids vendor lock-in.
+            <span class="tech">discipline · documented in CLAUDE.md</span>
+          </li>
         </ul>
+        <p class="learn-more"><a href="docs/variants.html#agent-app">What each of these actually does →</a></p>
       </article>
     </div>
   </section>
