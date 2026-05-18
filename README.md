@@ -1,5 +1,9 @@
 # project-starter
 
+<p align="center">
+  <img src="docs/assets/thumbnail-illustrative.svg" alt="A glowing amber seed sprouts an organic trunk that branches into a cyan dashboard cluster on the left and a violet neural-network constellation on the right, against a deep navy starfield." width="640">
+</p>
+
 Day-1 scaffolding for new projects worked on with Claude Code. Captures the lessons learned about keeping token usage low, accuracy high, and architecture decisions visible across sessions.
 
 ## What this is

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>First conversation — project-starter docs</title>
+  <meta name="description" content="You've scaffolded a project. Here's what to ask Claude first, and what to expect."/>
+  <link rel="icon" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="what-is.html#scaffolding">What is scaffolding?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="next-steps.html" class="active">First conversation</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+    </ul>
+    <h4>Reference</h4>
+    <ul>
+      <li><a href="../">Demo site</a></li>
+      <li><a href="https://github.com/Lizo-RoadTown/project-starter">GitHub repo</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../">home</a><span class="sep">/</span>
+      <a href="index.html">docs</a><span class="sep">/</span>first conversation
+    </nav>
+
+    <h1>Your first conversation</h1>
+    <p class="lede">
+      You have a scaffolded project open in Claude Code. Now what? A few prompts that
+      get great results, plus what to expect back.
+    </p>
+
+    <div class="callout info">
+      <div class="icon">i</div>
+      <div>
+        <p>
+          <strong>Claude Code's job is not to guess what you want.</strong> Tell it
+          plainly. Short, specific prompts beat long vague ones. Saying "make me a
+          website" sends Claude in a direction that's almost certainly not yours.
+        </p>
+      </div>
+    </div>
+
+    <h2>Three good first prompts</h2>
+
+    <h3>1. Audit what you have</h3>
+<pre><code>Read CLAUDE.md and tell me, in plain English, what this project is
+configured for and what's still TBD. Don't change anything yet.</code></pre>
+    <p>
+      Claude will read your <code>CLAUDE.md</code>, summarize the stack and discipline,
+      and list anything still blank. This is a cheap way to verify the scaffold
+      worked and to see what Claude understands about your project.
+    </p>
+
+    <h3>2. Write your first proposal</h3>
+<pre><code>I want to build a [thing]. Help me write a proposal for it in
+docs/proposals/ following the TEMPLATE.md format. Ask me clarifying
+questions one at a time before writing.</code></pre>
+    <p>
+      The scaffolded project comes with a <code>docs/proposals/</code> folder and a
+      template. Writing a proposal first — even a short one — captures the design
+      decisions before code happens. Future-you (and future-Claude) will thank you.
+    </p>
+
+    <h3>3. Plan the first feature</h3>
+<pre><code>Now make a plan in docs/plans/ dated today, for shipping the first
+working version of [thing]. Use the TEMPLATE.md format. Keep action
+items atomic — one PR worth each.</code></pre>
+    <p>
+      Plans are time-bounded execution lists. They live in <code>docs/plans/</code>
+      and are dated like <code>2026-05-17-first-version.md</code>. Atomic action items
+      let Claude (or you) work through them one at a time without drift.
+    </p>
+
+    <h2>What Claude knows by default</h2>
+    <p>
+      Because <code>CLAUDE.md</code> is loaded automatically, Claude already knows:
+    </p>
+    <ul>
+      <li>Your project's tech stack (whatever you filled in for Frontend / Backend / DB).</li>
+      <li>The four-layer memory hierarchy — memory, proposals, plans, git history.</li>
+      <li>Token discipline — to use semantic search instead of reading whole files when possible.</li>
+      <li>Voice rules — describe what is, not what it isn't; no marketing language.</li>
+      <li>Commit and PR discipline — small PRs, cite proposals, never <code>--no-verify</code>.</li>
+    </ul>
+
+    <p>
+      You don't have to repeat any of this in your prompts. Claude already has it.
+    </p>
+
+    <h2>The skills Claude can reach for</h2>
+    <p>
+      Your <code>CLAUDE.md</code> lists Claude Code <strong>skills</strong> that fit
+      your project. Some examples:
+    </p>
+    <ul>
+      <li><code>concise-planning</code> — produces atomic checklists with very few clarifying questions.</li>
+      <li><code>code-reviewer</code> — runs before you merge.</li>
+      <li><code>ui-ux-pro-max</code> (UI variant) — 99 UX guidelines applied to UI work.</li>
+      <li><code>claude-api</code> (agent variant) — for building apps that call the Claude API.</li>
+    </ul>
+    <p>
+      You don't have to know skill names to use them — Claude reaches for them automatically
+      when the task fits. If a skill isn't installed, Claude will tell you, and you can
+      install it with a single command.
+    </p>
+
+    <h2>The memory layer that grows with you</h2>
+    <p>
+      As you work, Claude writes "auto-memory" notes to a folder at
+      <code>~/.claude/projects/&lt;your-project&gt;/memory/</code>. This is permanent
+      across sessions. Examples of what gets saved:
+    </p>
+    <ul>
+      <li>Your role and background, if you mention it.</li>
+      <li>Feedback you've given ("don't use mocks in tests", "prefer Bash over PowerShell").</li>
+      <li>Project-level facts and deadlines.</li>
+    </ul>
+    <p>
+      Every future session loads this memory automatically. Over weeks, Claude
+      accumulates context about how <em>you</em> work — without you re-explaining.
+    </p>
+
+    <div class="callout tip">
+      <div class="icon">!</div>
+      <div>
+        <p><strong>Ask Claude what it remembers</strong> at any time:</p>
+<pre><code>What do you have in memory about me and this project?</code></pre>
+        <p>It'll show you the saved files. You can also tell it to forget specific things if
+          they're outdated.</p>
+      </div>
+    </div>
+
+    <h2>When to ask Claude to plan vs. just code</h2>
+    <p>
+      For anything beyond a tiny fix: <strong>ask for a plan first</strong>. Even
+      one sentence:
+    </p>
+<pre><code>Before you make any changes, write a one-paragraph plan: what you're
+going to change, in which files, and why.</code></pre>
+    <p>
+      This catches misunderstandings before Claude touches code. You'll redirect
+      the plan once and save yourself untangling unwanted changes.
+    </p>
+
+    <h2>How to commit your changes</h2>
+    <p>
+      When you and Claude have made a change you're happy with, save it with git.
+      In Claude Code, just ask:
+    </p>
+<pre><code>Commit the changes you just made with a clear commit message.</code></pre>
+    <p>
+      Claude will run <code>git add</code> and <code>git commit</code> for you. Then in
+      GitHub Desktop, click <strong>Push origin</strong> to send the commit up to GitHub.
+    </p>
+
+    <h2>When to start a new session</h2>
+    <p>
+      Long conversations get expensive in tokens and Claude can lose focus. Rough rule:
+      end the session when the current task is done, and start a new one for the next
+      task. Auto-memory persists across sessions, so you don't lose context — just
+      the back-and-forth of that specific conversation.
+    </p>
+
+    <h2>Where to learn more</h2>
+    <ul>
+      <li><a href="https://docs.claude.com/en/docs/claude-code/overview">Claude Code's own docs</a> — the official reference for every feature.</li>
+      <li><a href="../../docs/AGENTS.md">docs/AGENTS.md</a> — what each MCP server does and which skills the templates reference.</li>
+      <li><a href="../../docs/WALKTHROUGH.md">docs/WALKTHROUGH.md</a> — the developer-flavored walkthrough (assumes git and shells are familiar).</li>
+      <li><a href="glossary.html">Glossary</a> — every term used across these docs.</li>
+    </ul>
+
+    <div class="pager">
+      <a href="getting-started.html">
+        <span class="dir">← Back</span>
+        <span class="title">Getting started</span>
+      </a>
+      <a class="next" href="glossary.html">
+        <span class="dir">Next →</span>
+        <span class="title">Glossary</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../">demo site</a> ·
+    <a href="getting-started.html">walkthrough</a> ·
+    <a href="glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

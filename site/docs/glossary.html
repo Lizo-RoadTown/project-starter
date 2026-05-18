@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Glossary — project-starter docs</title>
+  <meta name="description" content="Plain-language definitions for every technical term used in the project-starter docs."/>
+  <link rel="icon" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="what-is.html#scaffolding">What is scaffolding?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="next-steps.html">First conversation</a></li>
+      <li><a href="glossary.html" class="active">Glossary</a></li>
+    </ul>
+    <h4>Reference</h4>
+    <ul>
+      <li><a href="../">Demo site</a></li>
+      <li><a href="https://github.com/Lizo-RoadTown/project-starter">GitHub repo</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../">home</a><span class="sep">/</span>
+      <a href="index.html">docs</a><span class="sep">/</span>glossary
+    </nav>
+
+    <h1>Glossary</h1>
+    <p class="lede">
+      Every technical term used across these docs, in plain English.
+      Ordered alphabetically.
+    </p>
+
+    <dl class="glossary">
+
+      <div class="glossary-entry">
+        <dt>Agent</dt>
+        <dd>An AI program that takes goals as input and does work over multiple steps to achieve them, usually using tools. Claude Code is an agent. The <code>agent-app</code> variant is for projects where <em>you're</em> building an agent.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Anthropic</dt>
+        <dd>The company that makes Claude (the AI) and Claude Code (the coding assistant).</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Auto-memory</dt>
+        <dd>Files Claude Code writes to <code>~/.claude/projects/&lt;your-project&gt;/memory/</code> as you work. Persists across sessions. Saves user role, feedback, project facts, and references — so future sessions start with context already loaded.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Bash</dt>
+        <dd>The default shell on Mac and Linux. The "language" you type in the terminal there. On Windows, the equivalent is PowerShell.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Branch (git)</dt>
+        <dd>A parallel line of changes in your git history. <code>main</code> is the default branch. You make a new branch to work on something risky without affecting <code>main</code>, then merge it back when it's working.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>CLAUDE.md</dt>
+        <dd>The file in your project that Claude Code reads at the start of every session. Contains the project's tech stack, conventions, and discipline. project-starter pre-fills this.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Claude Code</dt>
+        <dd>Anthropic's AI coding assistant. Available as a CLI, desktop app, web app, or editor extension. See <a href="what-is.html#claude-code">What is Claude Code?</a></dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>CLI</dt>
+        <dd>"Command-Line Interface." A program you run by typing commands in the terminal, instead of clicking buttons. <code>git</code>, <code>gh</code>, and Claude Code's CLI version are all examples.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Clone</dt>
+        <dd>To download a copy of a git repository from somewhere (usually GitHub) onto your computer. <code>git clone &lt;url&gt;</code>.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Commit</dt>
+        <dd>A saved snapshot of your project at a moment in time. Every commit has a short message explaining what changed. You commit often; commits are how git tracks history.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Context</dt>
+        <dd>Everything Claude has loaded in its working memory for the current conversation. Includes your messages, files Claude has read, and tool results. Bigger context = more capable but also slower and more expensive.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Context7</dt>
+        <dd>An MCP server that fetches up-to-date docs for libraries and frameworks. Pinned in project-starter's <code>.mcp.json</code> so Claude always has fresh library docs.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Docker</dt>
+        <dd>A tool for running programs in isolated, reproducible "containers." project-starter ships a Docker image so the scaffolder works the same way on every machine without installing PowerShell or Bash.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt><code>.gitignore</code></dt>
+        <dd>A file that tells git which files to never track. Used to exclude things like passwords, build output, and editor configs that shouldn't end up on GitHub.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>GitHub</dt>
+        <dd>A website (owned by Microsoft) that hosts git repositories online. Free for personal projects. Your code lives there as a backup and so others can see / contribute.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>GitHub Desktop</dt>
+        <dd>A free app from GitHub that gives you buttons for the common git actions — commit, push, pull, branch. Easier than the terminal for beginners.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt><code>gh</code></dt>
+        <dd>The GitHub command-line tool. Lets you create repos, open PRs, browse issues — without leaving the terminal. Optional. Installed alongside GitHub Desktop on Mac/Windows.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Git</dt>
+        <dd>The tool that tracks changes to a folder of files. Separate from GitHub — git runs locally on your computer, GitHub is just a place to keep git repositories online.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>LLM</dt>
+        <dd>"Large Language Model." The kind of AI that powers Claude, ChatGPT, etc. project-starter's <code>agent-app</code> variant is for projects that build apps on top of LLMs.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>MCP</dt>
+        <dd>"Model Context Protocol." A standard for connecting extra tools to AI assistants like Claude Code. An MCP server gives Claude new capabilities — like searching your code, fetching docs, or talking to GitHub.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt><code>.mcp.json</code></dt>
+        <dd>A config file in your project that lists which MCP servers should be loaded automatically when Claude Code opens it. project-starter pins three: Serena, Context7, and GitHub.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt><code>npx</code></dt>
+        <dd>A tool that runs Node.js packages without permanently installing them. Used here only as an option for the local static server when previewing the docs site.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Plan (project-starter sense)</dt>
+        <dd>A dated, time-bounded execution list in <code>docs/plans/</code>. Different from a proposal: proposals decide <em>what to build</em>, plans decide <em>how to ship it this week</em>.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>PowerShell</dt>
+        <dd>The default shell on Windows. The "language" you type in the terminal there. Equivalent to Bash on Mac/Linux.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>PR</dt>
+        <dd>"Pull Request." A proposal on GitHub to merge a branch into <code>main</code>. PRs have descriptions, allow code review, and run automated checks before merging.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Proposal (project-starter sense)</dt>
+        <dd>An architecture decision captured in <code>docs/proposals/</code> <em>before</em> code is written. Has a Problem → Decision → Migration path structure. Searchable history of why the project is shaped the way it is.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Push</dt>
+        <dd>Send your local commits up to GitHub. <code>git push</code> in the terminal, or the "Push origin" button in GitHub Desktop.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Render</dt>
+        <dd>A cloud hosting service. project-starter's demo site is configured to deploy on Render via <code>render.yaml</code>.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Repository (repo)</dt>
+        <dd>A folder that git is tracking. Local repos live on your computer; remote repos live on GitHub. "Repo" is short for "repository."</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Scaffold</dt>
+        <dd>To create a new project's starting structure from a template — make the folder, copy in the files, fill in the project name. See <a href="what-is.html#scaffolding">What is scaffolding?</a></dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Serena</dt>
+        <dd>An MCP server that gives Claude semantic code search powered by language servers. Lets Claude find symbols and references without reading whole files. Pinned in project-starter's <code>.mcp.json</code>.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Shell</dt>
+        <dd>The "language" you type in the terminal. PowerShell on Windows, Bash on Mac/Linux. (Technically the shell is the program; the terminal is the window. People use the words interchangeably.)</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Skill (Claude Code sense)</dt>
+        <dd>A markdown file at <code>~/.claude/skills/</code> that tells Claude how to handle a specific kind of task — planning, code review, refactoring, etc. Auto-loaded based on triggers. Installed once per machine.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Stack (tech stack)</dt>
+        <dd>The set of technologies a project uses — e.g. "Next.js + FastAPI + Postgres on Render." Filled into <code>CLAUDE.md</code> at scaffold time so Claude knows what to assume.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Template</dt>
+        <dd>A pre-built set of files you copy to start a new project from. project-starter ships templates for <code>ui-app</code> and <code>agent-app</code>.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Terminal</dt>
+        <dd>The window where you type shell commands. Every OS has one. See <a href="what-is.html#terminal">What is the terminal?</a></dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Token</dt>
+        <dd>The unit of text an LLM reads and writes — roughly ¾ of a word. Conversations have token limits and cost money per token. project-starter's <code>CLAUDE.md</code> bakes in "token discipline" so Claude reads efficiently.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>UX_CONTRACT.md</dt>
+        <dd>A file in the <code>ui-app</code> variant that lists the UX rules every visual change must follow — color semantics, animation budget, accessibility minimums, anti-patterns.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>Variant (project-starter sense)</dt>
+        <dd>The flavor of project you're scaffolding. <code>ui-app</code> = websites/dashboards. <code>agent-app</code> = LLM agents / Claude API apps. Each variant adds variant-specific skills and contracts on top of the shared <code>_common</code> template.</dd>
+      </div>
+
+      <div class="glossary-entry">
+        <dt>VS Code</dt>
+        <dd>A free code editor from Microsoft. Very popular. Claude Code has a VS Code extension that puts Claude in the sidebar.</dd>
+      </div>
+
+    </dl>
+
+    <div class="pager">
+      <a href="next-steps.html">
+        <span class="dir">← Back</span>
+        <span class="title">First conversation</span>
+      </a>
+      <a class="next" href="index.html">
+        <span class="dir">Done →</span>
+        <span class="title">Docs home</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../">demo site</a> ·
+    <a href="getting-started.html">walkthrough</a> ·
+    <a href="glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

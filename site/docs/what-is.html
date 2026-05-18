@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>What is all this? — project-starter docs</title>
+  <meta name="description" content="Plain-language explanations of Claude Code, the terminal, git, GitHub, and scaffolding."/>
+  <link rel="icon" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="#claude-code" class="active">What is Claude Code?</a></li>
+      <li><a href="#terminal">What is the terminal?</a></li>
+      <li><a href="#git">What is git &amp; GitHub?</a></li>
+      <li><a href="#scaffolding">What is scaffolding?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="next-steps.html">First conversation</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+    </ul>
+    <h4>Reference</h4>
+    <ul>
+      <li><a href="../">Demo site</a></li>
+      <li><a href="https://github.com/Lizo-RoadTown/project-starter">GitHub repo</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../">home</a><span class="sep">/</span>
+      <a href="index.html">docs</a><span class="sep">/</span>concepts
+    </nav>
+
+    <h1>What is all this?</h1>
+    <p class="lede">
+      Four concepts you need before the rest of the docs make sense. None of
+      these are complicated — they each get a few paragraphs and a "what
+      success looks like" check.
+    </p>
+
+    <!-- ============= Claude Code ============= -->
+    <h2 id="claude-code">What is Claude Code?</h2>
+
+    <p>
+      <strong>Claude Code is an AI coding assistant made by Anthropic.</strong>
+      You install it once on your computer, point it at a folder, and then
+      chat with it in plain English. It reads your code, writes new code,
+      runs commands, and explains what it's doing.
+    </p>
+
+    <p>
+      Think of it as pair-programming with someone who has read every
+      open-source library and never gets tired. You describe what you want; it
+      proposes changes; you accept or redirect.
+    </p>
+
+    <p>It comes in a few flavors:</p>
+    <ul>
+      <li><strong>CLI</strong> — runs in a terminal window. Most flexible.</li>
+      <li><strong>Desktop app</strong> (Mac &amp; Windows) — its own window, no terminal needed. Easiest if you're new.</li>
+      <li><strong>Web app</strong> at <a href="https://claude.ai/code">claude.ai/code</a> — same idea, in a browser.</li>
+      <li><strong>VS Code &amp; JetBrains extensions</strong> — Claude lives inside your editor.</li>
+    </ul>
+
+    <div class="callout info">
+      <div class="icon">i</div>
+      <div>
+        <p><strong>Beginner recommendation:</strong> install the desktop app first.
+        It hides the terminal and gives you a clean chat window. You can switch to
+        the CLI or VS Code extension later when you want more control.</p>
+        <p>Download: <a href="https://claude.com/claude-code">claude.com/claude-code</a></p>
+      </div>
+    </div>
+
+    <h3>What "project-starter" has to do with it</h3>
+    <p>
+      When you open a folder in Claude Code, it looks for special files like
+      <code>CLAUDE.md</code> and <code>.mcp.json</code>. These files tell
+      Claude:
+    </p>
+    <ul>
+      <li><strong>What this project is</strong> — the tech stack, the conventions, the goals.</li>
+      <li><strong>Which extra tools to load</strong> — like a code-search tool or live docs lookups.</li>
+      <li><strong>What rules to follow</strong> — voice, commit style, what to never do.</li>
+    </ul>
+    <p>
+      Without these files, Claude has to re-figure-out your project every time you
+      open a session. With them, every session starts already knowing how things work.
+    </p>
+    <p>
+      <strong>project-starter is a pre-filled set of these files.</strong> Instead
+      of writing them from scratch for every new project, you copy the template,
+      fill in your project name, and you're ready.
+    </p>
+
+    <!-- ============= Terminal ============= -->
+    <h2 id="terminal">What is the terminal?</h2>
+
+    <p>
+      <strong>The terminal is a window where you type commands instead of
+      clicking buttons.</strong> Every operating system ships with one. It looks
+      old-fashioned, but it's the most precise way to control your computer.
+    </p>
+
+    <p>
+      You'll use the terminal to run two commands during setup:
+      <code>git clone</code> (to download project-starter) and a scaffolder
+      script (to make your new project folder). After that, the desktop
+      Claude Code app handles things for you if you prefer.
+    </p>
+
+    <h3>How to open the terminal</h3>
+
+    <div class="platforms">
+      <div class="platform">
+        <div class="platform-head windows"><span class="dot"></span>Windows</div>
+        <pre><code>Press <kbd>Win</kbd> + <kbd>X</kbd> then click "Terminal" (or "Windows PowerShell").
+Or press <kbd>Win</kbd>, type "Terminal", press <kbd>Enter</kbd>.</code></pre>
+      </div>
+      <div class="platform">
+        <div class="platform-head mac"><span class="dot"></span>Mac</div>
+        <pre><code>Press <kbd>Cmd</kbd> + <kbd>Space</kbd>, type "Terminal", press <kbd>Return</kbd>.
+Or find it in Applications → Utilities → Terminal.</code></pre>
+      </div>
+      <div class="platform">
+        <div class="platform-head linux"><span class="dot"></span>Linux</div>
+        <pre><code>Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd> (most distributions).
+Or open your launcher and search for "Terminal".</code></pre>
+      </div>
+    </div>
+
+    <h3>What it looks like when it works</h3>
+    <p>
+      A black or dark window with text. The cursor sits after a short prompt that
+      ends with <code>$</code> (Mac/Linux) or <code>&gt;</code> (Windows). You type
+      a command, press <kbd>Enter</kbd>, and the terminal runs it and shows the
+      output. That's it.
+    </p>
+
+    <div class="callout tip">
+      <div class="icon">!</div>
+      <div>
+        <p><strong>Two terminal habits worth learning right away:</strong></p>
+        <ul>
+          <li><kbd>↑</kbd> recalls the previous command. Saves typing.</li>
+          <li>You can paste with right-click (Windows) or <kbd>Cmd</kbd>+<kbd>V</kbd> (Mac).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============= Git & GitHub ============= -->
+    <h2 id="git">What is git &amp; GitHub?</h2>
+
+    <p>
+      <strong>Git is a tool that tracks every change you ever make to a folder
+      of files.</strong> You can rewind to any past state, see who changed what,
+      and merge work from multiple people. It's a separate program from your
+      editor — it works on any folder.
+    </p>
+
+    <p>
+      <strong>GitHub is a website that stores git folders online.</strong> Free
+      for personal projects. Two reasons you want it:
+    </p>
+    <ol>
+      <li><strong>Backup.</strong> If your laptop dies, your code is still on GitHub.</li>
+      <li><strong>Shareability.</strong> Anyone with the link can see your project,
+        fork it, suggest changes.</li>
+    </ol>
+
+    <h3>The flow you'll do once per project</h3>
+    <ol>
+      <li><strong>git init</strong> — start tracking a folder (project-starter does this for you in the scaffolder).</li>
+      <li><strong>git add &amp; git commit</strong> — save a snapshot of the current state.</li>
+      <li><strong>git push</strong> — send your snapshots up to GitHub.</li>
+    </ol>
+
+    <h3>You don't have to learn the command-line version yet</h3>
+    <p>
+      <strong>GitHub Desktop</strong> is a free app that does all of this with
+      buttons. For your first project, this is the easiest path. The walkthrough
+      shows both options.
+    </p>
+
+    <div class="callout info">
+      <div class="icon">i</div>
+      <div>
+        <p>Downloads:</p>
+        <ul>
+          <li>Git itself (required either way): <a href="https://git-scm.com">git-scm.com</a></li>
+          <li>GitHub Desktop (recommended for beginners): <a href="https://desktop.github.com">desktop.github.com</a></li>
+          <li>Sign up for a free GitHub account: <a href="https://github.com">github.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ============= Scaffolding ============= -->
+    <h2 id="scaffolding">What is "scaffolding"?</h2>
+
+    <p>
+      <strong>Scaffolding means creating the starting structure of a project
+      from a template.</strong> The name comes from construction — scaffolding
+      is the temporary structure that lets you build the real thing.
+    </p>
+
+    <p>In coding, scaffolding a project usually means:</p>
+    <ol>
+      <li>Make a new empty folder.</li>
+      <li>Copy a bunch of starter files into it (config, folder structure, README).</li>
+      <li>Fill in the project name and a few details so the files match <em>your</em> project.</li>
+      <li>Start the project's version history (<code>git init</code>).</li>
+    </ol>
+
+    <p>
+      Doing this by hand every time is tedious and error-prone. A scaffolder
+      script does it in one command.
+    </p>
+
+    <h3>What project-starter scaffolds</h3>
+    <p>When you run the scaffolder, your new folder ends up with:</p>
+    <ul>
+      <li><code>CLAUDE.md</code> — the file Claude Code reads at the start of every session.</li>
+      <li><code>.mcp.json</code> — config for extra tools (semantic code search, live docs).</li>
+      <li><code>docs/</code> — folders for architecture proposals, plans, and test logs.</li>
+      <li><code>.gitignore</code> — tells git which files to never track (like secrets and build output).</li>
+      <li>A first git commit, so your version history starts clean.</li>
+    </ul>
+
+    <p>
+      You pick a <strong>variant</strong> when you scaffold — <code>ui-app</code>
+      for websites/dashboards, <code>agent-app</code> for AI agents. The variant
+      decides which extra files and skill recommendations get added on top.
+    </p>
+
+    <div class="callout tip">
+      <div class="icon">!</div>
+      <div>
+        <p><strong>You're not locked in.</strong> The scaffolded files are just
+        files — edit, rename, or delete anything. The starter gives you a sensible
+        default, not a contract.</p>
+      </div>
+    </div>
+
+    <h2>Ready?</h2>
+    <p>
+      Now you have the vocabulary. The walkthrough on the next page assumes you've
+      read this section.
+    </p>
+
+    <div class="pager">
+      <a href="index.html">
+        <span class="dir">← Back</span>
+        <span class="title">Overview</span>
+      </a>
+      <a class="next" href="getting-started.html">
+        <span class="dir">Next →</span>
+        <span class="title">Getting started</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../">demo site</a> ·
+    <a href="getting-started.html">walkthrough</a> ·
+    <a href="glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

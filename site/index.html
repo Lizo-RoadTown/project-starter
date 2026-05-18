@@ -147,6 +147,20 @@
     .btn .arrow { transition: transform 180ms ease; }
     .btn:hover .arrow { transform: translateX(3px); }
 
+    .new-here {
+      margin-top: 20px;
+      font-size: 14.5px;
+      color: var(--text-dim);
+      border-left: 2px solid var(--amber);
+      padding: 4px 0 4px 14px;
+    }
+    .new-here strong { color: var(--text); font-weight: 600; }
+    .new-here a {
+      color: var(--amber);
+      margin-left: 6px;
+    }
+    .new-here a:hover { border-bottom-color: currentColor; }
+
     /* hero illustration */
     .hero-art {
       position: relative;
@@ -378,6 +392,7 @@
 <div class="topbar" aria-label="primary">
   <div class="brand">project-starter</div>
   <nav>
+    <a href="docs/">docs</a>
     <a href="#scaffold">scaffold</a>
     <a href="#variants">variants</a>
     <a href="#stack">stack</a>
@@ -402,6 +417,10 @@
         <a class="btn primary" href="#scaffold">Scaffold a project <span class="arrow">→</span></a>
         <a class="btn" href="https://github.com/Lizo-RoadTown/project-starter">View on GitHub</a>
       </div>
+      <p class="new-here">
+        <strong>Never built a coding project before?</strong>
+        <a href="docs/getting-started.html">Start with the walkthrough →</a>
+      </p>
     </div>
 
     <div class="hero-art" aria-hidden="true">

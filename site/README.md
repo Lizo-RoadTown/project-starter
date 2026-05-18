@@ -51,8 +51,24 @@ That's the entire config.
 | File | Role |
 |---|---|
 | [index.html](index.html) | Single-page site. Inline CSS + inline simplified hero illustration. |
+| [docs/](docs/) | Beginner-friendly documentation site (landing, concept explainers, walkthrough, first-conversation guide, glossary). |
+| [docs/docs.css](docs/docs.css) | Shared styles for every docs page (sidebar layout, step badges, callouts). |
 | [assets/thumbnail.svg](assets/thumbnail.svg) | Full illustrative thumbnail (also used as `og:image`). |
 | [assets/favicon.svg](assets/favicon.svg) | 64×64 mark — seed + trunk + two branches. |
+
+### Docs site (`site/docs/`)
+
+A standalone documentation site for absolute beginners. Multi-page, sidebar nav,
+written assuming zero prior knowledge of Claude Code, git, the terminal, or
+scaffolding.
+
+| Page | Role |
+|---|---|
+| [docs/index.html](docs/index.html) | Landing — suggested reading order, topic cards. |
+| [docs/what-is.html](docs/what-is.html) | Plain-language explainers — Claude Code, terminal, git/GitHub, scaffolding. |
+| [docs/getting-started.html](docs/getting-started.html) | 10-step click-by-click walkthrough from "nothing installed" to "project on GitHub." Includes troubleshooting. |
+| [docs/next-steps.html](docs/next-steps.html) | What to ask Claude in your first conversation. |
+| [docs/glossary.html](docs/glossary.html) | Every technical term used across the docs, in plain English. |
 
 ## Design system (inline in `index.html`)
 

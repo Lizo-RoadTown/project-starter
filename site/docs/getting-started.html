@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Getting started — project-starter docs</title>
+  <meta name="description" content="A click-by-click walkthrough from 'nothing installed' to 'first project pushed to GitHub'."/>
+  <link rel="icon" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="getting-started.html" class="active">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="what-is.html#scaffolding">What is scaffolding?</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="next-steps.html">First conversation</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+    </ul>
+    <h4>Reference</h4>
+    <ul>
+      <li><a href="../">Demo site</a></li>
+      <li><a href="https://github.com/Lizo-RoadTown/project-starter">GitHub repo</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../">home</a><span class="sep">/</span>
+      <a href="index.html">docs</a><span class="sep">/</span>getting started
+    </nav>
+
+    <h1>Getting started</h1>
+    <p class="lede">
+      A click-by-click walkthrough. Start with nothing installed; end with a working
+      project on GitHub, open in Claude Code. About 20–30 minutes, mostly waiting
+      for downloads.
+    </p>
+
+    <div class="callout info">
+      <div class="icon">i</div>
+      <div>
+        <p><strong>What you'll have at the end:</strong> a new folder on your computer
+        called <code>my-first-project</code>, a copy of it on GitHub at
+        <code>github.com/&lt;your-username&gt;/my-first-project</code>, and Claude
+        Code open and ready to help you build in it.</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="icon">!</div>
+      <div>
+        <p><strong>If you get stuck on any step,</strong> scroll to the
+        <a href="#troubleshooting">Troubleshooting</a> section at the bottom — it covers the
+        most common confusion. Every step also has a "you should see…" so you can
+        check you're on track.</p>
+      </div>
+    </div>
+
+    <!-- ============= STEP 1 ============= -->
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h2>Make a GitHub account</h2>
+        <p>
+          GitHub is the website your project will live on. Free.
+          Go to <a href="https://github.com">github.com</a> and click <strong>Sign up</strong>.
+        </p>
+        <p>
+          You'll need a username (this becomes part of your project URLs, so pick something
+          you're OK with publicly), an email, and a password. Verify your email when GitHub
+          sends you the link.
+        </p>
+        <div class="callout warn">
+          <div class="icon">!</div>
+          <div>
+            <p><strong>Write down your username.</strong> You'll need it in a later step.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= STEP 2 ============= -->
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h2>Install git</h2>
+        <p>
+          Git is the tool that tracks changes to your project. Even if you use the
+          GitHub Desktop app later, git itself still needs to be installed.
+        </p>
+        <p>
+          Go to <a href="https://git-scm.com">git-scm.com</a> and click the download
+          button for your operating system. Run the installer with all the default settings —
+          you don't need to change anything.
+        </p>
+
+        <h3>Check that it worked</h3>
+        <p>Open a terminal (<a href="what-is.html#terminal">how?</a>) and run:</p>
+<pre><code>git --version</code></pre>
+        <p>
+          <strong>You should see</strong> something like <code>git version 2.42.0</code>.
+          If you do, git is installed. If you see "command not found," restart your
+          terminal and try again.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============= STEP 3 ============= -->
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h2>Install GitHub Desktop</h2>
+        <p>
+          This is the app that puts your code on GitHub with a button click. Not strictly
+          required — you can do it from the terminal — but it's the easiest path for a
+          first project.
+        </p>
+        <p>
+          Go to <a href="https://desktop.github.com">desktop.github.com</a>, download,
+          install, and open. Sign in with the GitHub account you just made.
+        </p>
+        <p>
+          <strong>You should see</strong> the GitHub Desktop welcome screen with options
+          like "Clone a Repository" and "Create a New Repository." Leave it for now —
+          we'll come back to it in step 7.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============= STEP 4 ============= -->
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h2>Install Claude Code</h2>
+        <p>
+          The AI assistant that will work in your scaffolded project.
+        </p>
+        <p>
+          Go to <a href="https://claude.com/claude-code">claude.com/claude-code</a>.
+          For your first project, pick the <strong>desktop app</strong> (Mac or Windows) —
+          it's the friendliest entry point. Download, install, open, and sign in with your
+          Anthropic / Claude account (create one if you don't have one).
+        </p>
+        <p>
+          <strong>You should see</strong> the Claude Code welcome screen with a chat
+          input. Leave it open. We'll point it at your new project in step 9.
+        </p>
+        <div class="callout info">
+          <div class="icon">i</div>
+          <div>
+            <p>If you'd rather use Claude Code in your editor instead of as a standalone
+            app, install the <strong>VS Code extension</strong> instead. It does the
+            same thing, but inside VS Code.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= STEP 5 ============= -->
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h2>Download project-starter</h2>
+        <p>This is the template you'll scaffold your project from.</p>
+        <p>Open your terminal and run:</p>
+<pre><code><span class="cmt"># Move to wherever you want to keep your code — pick a folder you can find easily.</span>
+<span class="cmt"># Example for Windows:</span>
+cd <span class="str">C:\Users\YOURNAME\Documents</span>
+
+<span class="cmt"># Or on Mac/Linux:</span>
+cd <span class="str">~/Documents</span>
+
+<span class="cmt"># Now clone (= download a copy of) the starter:</span>
+git clone https://github.com/Lizo-RoadTown/project-starter
+
+<span class="cmt"># Step into it:</span>
+cd project-starter</code></pre>
+        <p>
+          <strong>You should see</strong> a few lines of output ending with something
+          like <code>Resolving deltas: 100% (12/12), done.</code> Then your terminal
+          prompt should now end with <code>project-starter</code>.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============= STEP 6 ============= -->
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h2>Scaffold your first project</h2>
+        <p>This runs the script that builds your new project folder.</p>
+
+        <h3>Pick a name</h3>
+        <p>
+          Use lowercase letters, numbers, and dashes only — no spaces or capitals.
+          Good: <code>my-first-project</code>, <code>weather-app</code>. Bad:
+          <code>My First Project</code> (has spaces and capitals).
+        </p>
+
+        <h3>Run the right command for your shell</h3>
+
+        <div class="platforms">
+          <div class="platform">
+            <div class="platform-head windows"><span class="dot"></span>Windows PowerShell</div>
+<pre><code>./scripts/new-project.ps1 <span class="flag">-Type</span> ui-app <span class="flag">-Name</span> my-first-project</code></pre>
+          </div>
+          <div class="platform">
+            <div class="platform-head mac"><span class="dot"></span>Mac / Linux Bash</div>
+<pre><code>./scripts/new-project.sh <span class="flag">--type</span> ui-app <span class="flag">--name</span> my-first-project</code></pre>
+          </div>
+        </div>
+
+        <p>
+          <code>ui-app</code> is the right pick for websites, dashboards, and most
+          web projects. If you'll be building an AI agent or LLM app, use
+          <code>agent-app</code> instead.
+        </p>
+
+        <p>
+          <strong>You should see</strong> output ending with:
+        </p>
+<pre><code>Done. Next steps:
+  cd my-first-project
+  # Open CLAUDE.md and fill in any TBD fields
+  # Add a remote and push:
+  #   gh repo create my-first-project --private --source=. --push</code></pre>
+
+        <p>
+          A new folder called <code>my-first-project</code> now exists next to the
+          <code>project-starter</code> folder. It's already a git repository with one commit.
+        </p>
+
+        <div class="callout stuck">
+          <div class="icon">?</div>
+          <div>
+            <p><strong>"Cannot run script" on Windows?</strong> Run this once, then try
+            step 6 again:</p>
+<pre><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre>
+            <p>Press <kbd>Y</kbd> when asked to confirm. This lets PowerShell run local
+            scripts you've downloaded.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= STEP 7 ============= -->
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <h2>Put it on GitHub</h2>
+
+        <h3>The easy way — GitHub Desktop</h3>
+        <ol>
+          <li>Open GitHub Desktop.</li>
+          <li>Menu: <strong>File → Add Local Repository</strong> (or drag the
+            <code>my-first-project</code> folder into the GitHub Desktop window).</li>
+          <li>Click <strong>Publish repository</strong> in the top-right.</li>
+          <li>Pick a name (the folder name fills in automatically), choose
+            <strong>Keep this code private</strong> (or uncheck if you want it public),
+            click <strong>Publish</strong>.</li>
+        </ol>
+
+        <p>
+          <strong>You should see</strong> a green confirmation. Your project is now on
+          GitHub at <code>github.com/&lt;your-username&gt;/my-first-project</code>.
+        </p>
+
+        <h3>The terminal way (optional)</h3>
+        <p>
+          If you've installed the <code>gh</code> command-line tool (it ships with
+          GitHub Desktop on Mac/Windows), you can do the same thing from the terminal:
+        </p>
+<pre><code>cd ../my-first-project
+gh repo create my-first-project <span class="flag">--private</span> <span class="flag">--source</span>=. <span class="flag">--push</span></code></pre>
+      </div>
+    </div>
+
+    <!-- ============= STEP 8 ============= -->
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-body">
+        <h2>Look at what you got</h2>
+        <p>Open the <code>my-first-project</code> folder in your file browser:</p>
+        <ul>
+          <li><strong>Windows:</strong> File Explorer → Documents → my-first-project</li>
+          <li><strong>Mac:</strong> Finder → Documents → my-first-project</li>
+        </ul>
+        <p>You'll see something like:</p>
+<pre><code>my-first-project/
+├── CLAUDE.md           <span class="cmt"># what Claude reads at the start of every session</span>
+├── .mcp.json           <span class="cmt"># config for extra tools Claude can use</span>
+├── .gitignore          <span class="cmt"># list of files git should never track</span>
+└── docs/
+    ├── plans/          <span class="cmt"># in-flight plans (proposals + action items)</span>
+    ├── proposals/      <span class="cmt"># architecture decisions, captured BEFORE you code them</span>
+    ├── test-runs/      <span class="cmt"># real end-to-end run logs (UX bugs &amp; gotchas)</span>
+    └── UX_CONTRACT.md  <span class="cmt"># the UI discipline every visual change passes</span></code></pre>
+
+        <p>
+          Open <code>CLAUDE.md</code> in any text editor (Notepad, TextEdit, VS Code).
+          Find any line that says <code>TBD</code> — for example
+          <code>Frontend | TBD</code> — and fill in what you actually want to use. If
+          you don't know yet, leave them and ask Claude in step 9 to help you decide.
+        </p>
+      </div>
+    </div>
+
+    <!-- ============= STEP 9 ============= -->
+    <div class="step">
+      <div class="step-num">9</div>
+      <div class="step-body">
+        <h2>Open the project in Claude Code</h2>
+
+        <h3>In the desktop app</h3>
+        <ol>
+          <li>Open Claude Code.</li>
+          <li>Click <strong>Open Folder</strong> (or <strong>Open Project</strong> — the wording varies by version).</li>
+          <li>Navigate to and select <code>my-first-project</code>.</li>
+        </ol>
+
+        <p>
+          The first time you open it, Claude will ask permission to use the
+          extra tools listed in <code>.mcp.json</code> (Serena for code search,
+          Context7 for live docs, GitHub for repo data). Approve them — they make
+          Claude much smarter about your project.
+        </p>
+
+        <p>
+          <strong>You should see</strong> Claude's chat panel with an input box at
+          the bottom. It already knows about your project — <code>CLAUDE.md</code>
+          loaded automatically.
+        </p>
+
+        <h3>In the VS Code extension</h3>
+        <ol>
+          <li>Open VS Code.</li>
+          <li><strong>File → Open Folder</strong> → pick <code>my-first-project</code>.</li>
+          <li>Open the Claude Code sidebar (the icon with the Claude logo).</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ============= STEP 10 ============= -->
+    <div class="step">
+      <div class="step-num">10</div>
+      <div class="step-body">
+        <h2>Your first prompt</h2>
+        <p>
+          Type something like:
+        </p>
+<pre><code>Read CLAUDE.md, then suggest what the first feature of this project should
+be. I want to build a simple weather dashboard but I'm not sure where to start.</code></pre>
+        <p>
+          Claude will read your <code>CLAUDE.md</code>, ask one or two clarifying
+          questions, and propose a starting plan. You can accept, redirect, or ask
+          for alternatives — it's a conversation, not a one-shot.
+        </p>
+
+        <div class="callout tip">
+          <div class="icon">!</div>
+          <div>
+            <p><strong>Next:</strong> the
+            <a href="next-steps.html">First conversation</a> page has a few more
+            prompts that get great results from a fresh project.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= TROUBLESHOOTING ============= -->
+    <h2 id="troubleshooting">Troubleshooting</h2>
+    <p>The most common things that go sideways, and what to do about them.</p>
+
+    <h3>"command not found" after running <code>git</code> or <code>gh</code></h3>
+    <p>
+      You need to <strong>fully close and reopen the terminal</strong> after installing
+      a new command-line tool. New tools don't show up in already-open terminal windows.
+    </p>
+
+    <h3>"Permission denied" running the scaffolder on Mac/Linux</h3>
+    <p>Run this once, then try the scaffolder again:</p>
+<pre><code>chmod +x scripts/new-project.sh</code></pre>
+
+    <h3>"Cannot run script because running scripts is disabled" on Windows</h3>
+    <p>Run this once in PowerShell (press <kbd>Y</kbd> to confirm), then try again:</p>
+<pre><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre>
+
+    <h3>Claude Code can't find <code>uvx</code></h3>
+    <p>
+      <code>uvx</code> is needed to run the Serena code-search tool. Install it:
+    </p>
+    <div class="platforms">
+      <div class="platform">
+        <div class="platform-head windows"><span class="dot"></span>Windows</div>
+<pre><code>winget install astral-sh.uv</code></pre>
+      </div>
+      <div class="platform">
+        <div class="platform-head mac"><span class="dot"></span>Mac / Linux</div>
+<pre><code>curl <span class="flag">-LsSf</span> https://astral.sh/uv/install.sh | sh</code></pre>
+      </div>
+    </div>
+
+    <h3>I want to undo everything</h3>
+    <p>
+      The scaffolded folder is just a folder. Delete it from your file browser to undo
+      step 6. To remove the project from GitHub, go to your repo page on github.com,
+      click <strong>Settings</strong>, scroll to the bottom, and click
+      <strong>Delete this repository</strong>. None of this affects project-starter
+      itself — that's still in the folder you cloned in step 5.
+    </p>
+
+    <h3>Still stuck?</h3>
+    <p>
+      Open an issue at
+      <a href="https://github.com/Lizo-RoadTown/project-starter/issues">github.com/Lizo-RoadTown/project-starter/issues</a>
+      with what step failed and the exact error message. Include your operating
+      system. Better than guessing.
+    </p>
+
+    <div class="pager">
+      <a href="what-is.html">
+        <span class="dir">← Back</span>
+        <span class="title">What is all this?</span>
+      </a>
+      <a class="next" href="next-steps.html">
+        <span class="dir">Next →</span>
+        <span class="title">First conversation</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../">demo site</a> ·
+    <a href="getting-started.html">walkthrough</a> ·
+    <a href="glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>
