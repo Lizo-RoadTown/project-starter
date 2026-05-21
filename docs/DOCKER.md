@@ -73,7 +73,22 @@ docker run --rm `
 
 ## After scaffolding
 
-The output directory has its own git repo (committed by the container). To push to GitHub from your host:
+The output directory has its own git repo (committed by the container). Two more steps before Claude Code is fully equipped.
+
+### 1. Install the skills your `CLAUDE.md` references — on your host, not in the container
+
+The container scaffolds the project, but skills install at the **user level** on your host machine (`~/.claude/skills/`) where Claude Code actually runs. So you run `install-skills` on the host after the container exits:
+
+```bash
+# From the project-starter repo on your host:
+./scripts/install-skills.sh --variant ui-app   # or agent-app, or both
+```
+
+Auto-installs the shell-installable pieces (`ui-ux-pro-max` via npm, `design-system` and `agent-memory-systems` via git clone). Then prints the `/plugin install …` commands for the Claude Code marketplace plugins you'll run from inside Claude Code.
+
+Your scaffolded project also has a `SKILLS.md` at its root listing everything.
+
+### 2. Push to GitHub
 
 ```bash
 cd out/my-new-site
@@ -98,6 +113,7 @@ By design:
 - No Node, no Python, no language runtimes — your scaffolded project picks those.
 - No `gh` CLI — runs on your host so it can use your auth.
 - No Claude Code — runs on your host where your MCP servers, skills, and auto-memory live.
+- No skill installer — `install-skills.sh` also runs on your host (skills install to `~/.claude/skills/`, not into the container).
 - No editor — you open the scaffolded project in your usual editor / Claude Code session on the host.
 
-The container has one job: run `new-project.sh` reproducibly.
+The container has one job: run `new-project.sh` reproducibly. Everything that has to live on your machine across sessions stays on your machine.

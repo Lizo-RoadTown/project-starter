@@ -305,6 +305,89 @@ cd project-starter</code></pre>
     <div class="step">
       <div class="step-num">7</div>
       <div class="step-body">
+        <h2>Install the skills your project references</h2>
+        <p>
+          Your scaffolded <code>CLAUDE.md</code> references several skills and
+          plugins — things like <code>ui-ux-pro-max</code> (a UI design
+          checklist) and <code>frontend-design</code> (Anthropic's frontend
+          plugin). These aren't installed automatically. If you skip this step,
+          Claude will still work — it'll just tell you when a skill isn't
+          available.
+        </p>
+        <p>
+          Skills install at the user level (<code>~/.claude/skills/</code>), so
+          this is <strong>one-time per computer</strong>. Future projects on this
+          machine reuse them.
+        </p>
+
+        <h3>Run the install-skills script</h3>
+        <p>From the <code>project-starter</code> folder (not your new project folder):</p>
+
+        <div class="platforms">
+          <div class="platform">
+            <div class="platform-head windows"><span class="dot"></span>Windows PowerShell</div>
+<pre><code>./scripts/install-skills.ps1 <span class="flag">-Variant</span> ui-app</code></pre>
+          </div>
+          <div class="platform">
+            <div class="platform-head mac"><span class="dot"></span>Mac / Linux Bash</div>
+<pre><code>./scripts/install-skills.sh <span class="flag">--variant</span> ui-app</code></pre>
+          </div>
+        </div>
+        <p>
+          Use <code>agent-app</code> instead of <code>ui-app</code> if that's
+          the variant you scaffolded. Or <code>both</code> if you ever expect
+          to do both.
+        </p>
+
+        <p>
+          <strong>You should see</strong> the script run npm and git commands
+          to install the shell-available pieces (<code>ui-ux-pro-max</code>,
+          <code>design-system</code>, <code>agent-memory-systems</code>), then
+          finish with a printed list of <code>/plugin install …</code>
+          commands.
+        </p>
+
+        <h3>Finish the install inside Claude Code</h3>
+        <p>
+          The printed <code>/plugin install</code> commands install Anthropic
+          marketplace plugins (<code>frontend-design</code>,
+          <code>claude-api</code>, <code>ralph-loop</code>). They can't run
+          from the shell — they run inside an active Claude Code session.
+        </p>
+        <p>
+          You'll do this in step 9 once you've opened the project in Claude
+          Code. For now, leave the printed list visible — you'll copy from it.
+        </p>
+
+        <div class="callout info">
+          <div class="icon">i</div>
+          <div>
+            <p>
+              Full reference for the marketplace, the <code>/plugin</code>
+              commands, and exactly what each piece does:
+              <a href="marketplace-and-plugins.html">Marketplace &amp; plugins</a>.
+              Your project also has a <code>SKILLS.md</code> file at its root
+              that lists everything.
+            </p>
+          </div>
+        </div>
+
+        <div class="callout stuck">
+          <div class="icon">?</div>
+          <div>
+            <p><strong>"npm: command not found" or "git: command not found"?</strong>
+            Install Node.js (<a href="https://nodejs.org">nodejs.org</a>) and
+            git (<a href="https://git-scm.com">git-scm.com</a>). They're
+            required for the auto-installable parts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============= STEP 8 (was 7) ============= -->
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-body">
         <h2>Put it on GitHub</h2>
 
         <h3>The easy way — GitHub Desktop</h3>
@@ -335,7 +418,7 @@ gh repo create my-first-project <span class="flag">--private</span> <span class=
 
     <!-- ============= STEP 8 ============= -->
     <div class="step">
-      <div class="step-num">8</div>
+      <div class="step-num">9</div>
       <div class="step-body">
         <h2>Look at what you got</h2>
         <p>Open the <code>my-first-project</code> folder in your file browser:</p>
@@ -365,9 +448,9 @@ gh repo create my-first-project <span class="flag">--private</span> <span class=
 
     <!-- ============= STEP 9 ============= -->
     <div class="step">
-      <div class="step-num">9</div>
+      <div class="step-num">10</div>
       <div class="step-body">
-        <h2>Open the project in Claude Code</h2>
+        <h2>Open the project in Claude Code &amp; finish the plugin install</h2>
 
         <h3>In the desktop app</h3>
         <ol>
@@ -395,12 +478,44 @@ gh repo create my-first-project <span class="flag">--private</span> <span class=
           <li><strong>File → Open Folder</strong> → pick <code>my-first-project</code>.</li>
           <li>Open the Claude Code sidebar (the icon with the Claude logo).</li>
         </ol>
+
+        <h3>Finish the plugin install</h3>
+        <p>
+          Remember the <code>/plugin install</code> commands the install-skills
+          script printed in step 7? Paste them into Claude Code's chat input
+          now (one per line — Claude Code runs each as a slash command).
+        </p>
+        <p>For the UI App variant, that's typically:</p>
+<pre><code>/plugin marketplace add anthropics/claude-plugins-official
+/plugin install frontend-design</code></pre>
+        <p>For the Agent App variant:</p>
+<pre><code>/plugin marketplace add anthropics/skills
+/plugin install claude-api@anthropic-agent-skills
+
+/plugin marketplace add anthropics/claude-plugins-official
+/plugin install ralph-loop</code></pre>
+        <p>
+          <strong>You should see</strong> Claude confirm each install. Run
+          <code>/plugin list</code> first to skip anything already bundled with
+          your Claude Code install.
+        </p>
+
+        <div class="callout tip">
+          <div class="icon">!</div>
+          <div>
+            <p>
+              <strong>Verify:</strong> ask Claude
+              <em>"Which of the skills referenced in CLAUDE.md do you have installed?"</em>
+              and it'll tell you. Install any it flags as missing.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- ============= STEP 10 ============= -->
+    <!-- ============= STEP 11 ============= -->
     <div class="step">
-      <div class="step-num">10</div>
+      <div class="step-num">11</div>
       <div class="step-body">
         <h2>Your first prompt</h2>
         <p>

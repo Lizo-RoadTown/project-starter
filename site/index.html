@@ -154,6 +154,14 @@
       border-left: 2px solid var(--amber);
       padding: 4px 0 4px 14px;
     }
+    .scaffold-note {
+      margin-top: 24px;
+      font-size: 14.5px;
+      color: var(--text-dim);
+      border-left: 2px solid var(--amber);
+      padding: 8px 0 8px 14px;
+    }
+    .scaffold-note strong { color: var(--text); }
     .new-here strong { color: var(--text); font-weight: 600; }
     .new-here a {
       color: var(--amber);
@@ -697,58 +705,75 @@
   <!-- ---------- SCAFFOLD (last) ---------- -->
   <section class="section" id="scaffold">
     <p class="eyebrow">Now do it · three ways · same output</p>
-    <h2>Scaffold a new project.</h2>
+    <h2>Scaffold a new project &amp; install its skills.</h2>
     <p class="section-lede">
-      Pick whichever shell you have. All three copy the templates, fill placeholders,
-      <code>git init</code>, and make the first commit. Replace <code>my-site</code>
-      with your project name and <code>ui-app</code> with <code>agent-app</code> if
-      that's the variant you picked above.
+      Pick whichever shell you have. <strong>Each path is two commands</strong>
+      — first scaffold the folder, then install the skills the project's
+      <code>CLAUDE.md</code> references. Skip the install step and the
+      references in your <code>CLAUDE.md</code> won't resolve.
     </p>
 
     <div class="scaffold-grid">
       <article class="code-card">
         <h3>PowerShell <span class="tag">Windows default</span></h3>
         <p>Native Windows. Ships preinstalled.</p>
-<pre><code><span class="cmt"># clone the starter</span>
+<pre><code><span class="cmt"># 1. clone the starter</span>
 git clone https://github.com/<span class="str">Lizo-RoadTown</span>/<span class="str">project-starter</span>
 cd project-starter
 
-<span class="cmt"># scaffold</span>
+<span class="cmt"># 2. scaffold a project</span>
 ./scripts/new-project.ps1 `
   <span class="flag">-Type</span> ui-app `
   <span class="flag">-Name</span> my-site `
-  <span class="flag">-Target</span> C:\dev</code></pre>
+  <span class="flag">-Target</span> C:\dev
+
+<span class="cmt"># 3. install the skills (one-time per computer)</span>
+./scripts/install-skills.ps1 <span class="flag">-Variant</span> ui-app</code></pre>
       </article>
 
       <article class="code-card">
         <h3>Bash <span class="tag">Mac · Linux · WSL</span></h3>
         <p>Standard POSIX shell.</p>
-<pre><code><span class="cmt"># clone the starter</span>
+<pre><code><span class="cmt"># 1. clone the starter</span>
 git clone https://github.com/<span class="str">Lizo-RoadTown</span>/<span class="str">project-starter</span>
 cd project-starter
 
-<span class="cmt"># scaffold</span>
+<span class="cmt"># 2. scaffold a project</span>
 ./scripts/new-project.sh \
   <span class="flag">--type</span> ui-app \
   <span class="flag">--name</span> my-site \
-  <span class="flag">--target</span> ~/dev</code></pre>
+  <span class="flag">--target</span> ~/dev
+
+<span class="cmt"># 3. install the skills (one-time per computer)</span>
+./scripts/install-skills.sh <span class="flag">--variant</span> ui-app</code></pre>
       </article>
 
       <article class="code-card">
         <h3>Docker <span class="tag">no shell preference</span></h3>
-        <p>Reproducible. No local toolchain.</p>
-<pre><code><span class="cmt"># one-time build</span>
+        <p>Reproducible scaffold. Install runs on host.</p>
+<pre><code><span class="cmt"># 1. build &amp; scaffold via container</span>
 docker build -t project-starter .
-
-<span class="cmt"># scaffold into ./out</span>
 docker run --rm \
   -v "<span class="str">$(pwd)/out:/out</span>" \
   project-starter \
-  <span class="flag">--type</span> ui-app \
-  <span class="flag">--name</span> my-site \
-  <span class="flag">--target</span> /out</code></pre>
+  <span class="flag">--type</span> ui-app <span class="flag">--name</span> my-site <span class="flag">--target</span> /out
+
+<span class="cmt"># 2. install skills on your HOST (not in the container —
+#    skills live at ~/.claude/skills/ where Claude Code runs)</span>
+./scripts/install-skills.sh <span class="flag">--variant</span> ui-app</code></pre>
       </article>
     </div>
+
+    <p class="scaffold-note">
+      <strong>After step 3,</strong> open
+      <code>SKILLS.md</code> inside your scaffolded project — it lists the
+      Claude Code marketplace plugins (like <code>frontend-design</code>,
+      <code>claude-api</code>, <code>ralph-loop</code>) that have to be
+      installed from inside a Claude Code session with <code>/plugin install</code>.
+      The install-skills script prints the exact commands to copy-paste.
+      Full breakdown at
+      <a href="docs/marketplace-and-plugins.html">docs/marketplace &amp; plugins</a>.
+    </p>
   </section>
 
 </main>

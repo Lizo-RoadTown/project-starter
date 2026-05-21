@@ -96,7 +96,28 @@ ls
 
 Open `CLAUDE.md` and fill in any remaining `TBD` fields — usually just `{{ENVIRONMENT_NOTES}}` if you didn't pass it as a flag.
 
-## 4. Push to GitHub
+## 4. Install the skills your `CLAUDE.md` references
+
+Your scaffolded `CLAUDE.md` references skills and plugins (`ui-ux-pro-max`, `frontend-design`, `claude-api`, etc.) that aren't installed by default. Skills live at `~/.claude/skills/` — **one-time per computer**.
+
+```powershell
+# From the project-starter folder (not your new project):
+./scripts/install-skills.ps1 -Variant ui-app   # or agent-app, or both
+```
+
+```bash
+# Mac/Linux/WSL equivalent:
+./scripts/install-skills.sh --variant ui-app
+```
+
+What it does:
+
+- **Auto-installs** the shell-installable pieces: `ui-ux-pro-max` (via npm), `design-system` (git clone), `agent-memory-systems` (git clone + symlink).
+- **Prints** the `/plugin install …` commands for the Claude Code marketplace plugins (`frontend-design`, `claude-api`, `ralph-loop`, `multi-agent-patterns`). You'll paste those into your Claude Code session after step 6.
+
+Your scaffolded project also has a `SKILLS.md` at its root with the full list and source URLs. See [docs/marketplace-and-plugins](../site/docs/marketplace-and-plugins.html) for the full breakdown of marketplaces and the `/plugin` command surface.
+
+## 5. Push to GitHub
 
 ```powershell
 gh repo create my-new-website --private --source=. --push
@@ -104,7 +125,7 @@ gh repo create my-new-website --private --source=. --push
 
 That creates a new private repo under your GitHub account, sets the remote, and pushes the initial commit.
 
-## 5. Open in Claude Code
+## 6. Open in Claude Code
 
 ```powershell
 claude .
@@ -116,6 +137,17 @@ After that, every session starts with:
 - The full `CLAUDE.md` loaded as context
 - Serena / Context7 / GitHub MCP servers available
 - Auto-memory at `~/.claude/projects/<this-project>/memory/MEMORY.md` building up across sessions
+
+## 7. Finish the plugin install inside Claude Code
+
+Paste the `/plugin install …` commands that `install-skills` printed in step 4. Example for UI App:
+
+```text
+/plugin marketplace add anthropics/claude-plugins-official
+/plugin install frontend-design
+```
+
+Run `/plugin list` first to skip anything already bundled with your Claude Code install. Then ask Claude *"Which of the skills referenced in CLAUDE.md do you have installed?"* to verify nothing's missing.
 
 ## What to do next
 
