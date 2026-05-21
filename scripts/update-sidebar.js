@@ -30,6 +30,7 @@ const SHALLOW_INNER = `
       <li><a href="what-is.html#git">What is git &amp; GitHub?</a></li>
       <li><a href="what-is.html#scaffolding">What is scaffolding?</a></li>
       <li><a href="variants.html">Variants &amp; foundation</a></li>
+      <li><a href="marketplace-and-plugins.html">Marketplace &amp; plugins</a></li>
     </ul>
     <h4>UI App</h4>
     <ul>
@@ -87,7 +88,7 @@ const SHALLOW_INNER = `
 //   - "../"                 becomes "../../"
 function toDeep(inner) {
   return inner
-    .replace(/href="(index|getting-started|what-is|variants|next-steps|glossary)\.html/g,
+    .replace(/href="(index|getting-started|what-is|variants|marketplace-and-plugins|next-steps|glossary)\.html/g,
              'href="../$1.html')
     .replace(/href="variants\//g, 'href="')
     .replace(/href="\.\.\/"/, 'href="../../"');

@@ -115,9 +115,22 @@ if (-not $NoGit) {
     }
 }
 
+$starterRoot = Split-Path $PSScriptRoot -Parent
+$installSkillsScript = Join-Path $starterRoot "scripts\install-skills.ps1"
+
 Write-Host ""
 Write-Host "Done. Next steps:" -ForegroundColor Green
 Write-Host "  cd $projectDir"
-Write-Host "  # Open CLAUDE.md and fill in any TBD fields"
-Write-Host "  # Add a remote and push:"
-Write-Host "  #   gh repo create $Name --private --source=. --push"
+Write-Host "  # 1. Open CLAUDE.md and fill in any TBD fields"
+Write-Host ""
+Write-Host "  # 2. Install the skills your CLAUDE.md references (one-time per computer):" -ForegroundColor Cyan
+Write-Host "  #    Auto-install the shell-installable ones:"
+Write-Host "  #      $installSkillsScript -Variant $Type"
+Write-Host "  #    Then read SKILLS.md for the Claude Code marketplace plugins:"
+Write-Host "  #      Get-Content `"$projectDir\SKILLS.md`""
+Write-Host ""
+Write-Host "  # 3. Add a remote and push:"
+Write-Host "  #      gh repo create $Name --private --source=. --push"
+Write-Host ""
+Write-Host "  # 4. Open in Claude Code:"
+Write-Host "  #      claude `"$projectDir`""

@@ -142,11 +142,24 @@ if [[ $NO_GIT -eq 0 ]]; then
   echo "Git initialized with first commit."
 fi
 
+STARTER_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+INSTALL_SKILLS="$STARTER_ROOT/scripts/install-skills.sh"
+
 cat <<EOF
 
 Done. Next steps:
   cd $PROJECT_DIR
-  # Open CLAUDE.md and fill in any TBD fields
-  # Add a remote and push:
-  #   gh repo create $NAME --private --source=. --push
+  # 1. Open CLAUDE.md and fill in any TBD fields
+
+  # 2. Install the skills your CLAUDE.md references (one-time per computer):
+  #    Auto-install the shell-installable ones:
+  #      $INSTALL_SKILLS --variant $TYPE
+  #    Then read SKILLS.md for the Claude Code marketplace plugins:
+  #      cat $PROJECT_DIR/SKILLS.md
+
+  # 3. Add a remote and push:
+  #      gh repo create $NAME --private --source=. --push
+
+  # 4. Open in Claude Code:
+  #      claude $PROJECT_DIR
 EOF

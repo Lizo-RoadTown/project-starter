@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Marketplace &amp; plugins — project-starter docs</title>
+  <meta name="description" content="How the Claude Code marketplace works, how to install plugins, and exactly which plugins this project's templates reference."/>
+  <link rel="icon" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="variants.html">Variants &amp; foundation</a></li>
+      <li><a href="marketplace-and-plugins.html">Marketplace &amp; plugins</a></li>
+    </ul>
+    <h4>UI App</h4>
+    <ul>
+      <li><a href="variants/ui-ux-pro-max.html">99-rule design checklist</a></li>
+      <li><a href="variants/design-system.html">Design-system structure</a></li>
+      <li><a href="variants/ux-contract.html">Your project's UI rulebook</a></li>
+      <li><a href="variants/onboarding-psychologist.html">Onboarding playbook</a></li>
+      <li><a href="variants/frontend-design.html">Frontend design helper</a></li>
+    </ul>
+    <h4>Agent App</h4>
+    <ul>
+      <li><a href="variants/ai-agents-architect.html">Agent architecture guide</a></li>
+      <li><a href="variants/agent-orchestrator.html">Multi-agent coordination</a></li>
+      <li><a href="variants/ralph-loop.html">Iterative agent loops</a></li>
+      <li><a href="variants/agent-memory-systems.html">Memory system design</a></li>
+      <li><a href="variants/claude-api.html">Anthropic SDK helper</a></li>
+      <li><a href="variants/portable-identity.html">Portable-identity rule</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="next-steps.html">First conversation</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+    </ul>
+    <h4>Reference</h4>
+    <ul>
+      <li><a href="../">Demo site</a></li>
+      <li><a href="https://github.com/Lizo-RoadTown/project-starter">GitHub repo</a></li>
+    </ul>
+    <script>
+      (function () {
+        var hereP = location.pathname.replace(/\/$/, '/index.html');
+        var hereH = location.hash || '';
+        document.querySelectorAll('.sidebar a').forEach(function (a) {
+          try {
+            var u = new URL(a.href);
+            var p = u.pathname.replace(/\/$/, '/index.html');
+            if (p === hereP && (u.hash || '') === hereH) {
+              a.setAttribute('aria-current', 'page');
+            }
+          } catch (e) {}
+        });
+      })();
+    </script>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../">home</a><span class="sep">/</span>
+      <a href="index.html">docs</a><span class="sep">/</span>marketplace &amp; plugins
+    </nav>
+
+    <h1>The Claude Code marketplace &amp; plugins</h1>
+    <p class="lede">
+      Most of the extras the templates reference are <strong>plugins</strong> or
+      <strong>skills</strong> that live in a marketplace. This page explains
+      how the marketplace works, how to install plugins, and exactly which
+      ones this project needs.
+    </p>
+
+    <div class="callout info">
+      <div class="icon">i</div>
+      <div>
+        <p>
+          <strong>Quick install:</strong> run <code>./scripts/install-skills.ps1 -Variant ui-app</code>
+          (or <code>./scripts/install-skills.sh --variant ui-app</code>) from the
+          project-starter root. That handles the shell-installable parts and
+          prints the Claude-Code-only commands for you to copy-paste.
+        </p>
+      </div>
+    </div>
+
+    <h2>What's a plugin?</h2>
+    <p>
+      A <strong>plugin</strong> is a bundle of Claude Code extensions —
+      skills, slash commands, hooks, and scripts — packaged together. You
+      install a plugin once per computer; every project on that computer can
+      then use it.
+    </p>
+    <p>
+      Plugins live in <strong>marketplaces</strong> — GitHub repos that publish
+      a catalog. Anthropic runs the official marketplaces; community
+      maintainers publish their own.
+    </p>
+    <p>
+      A <strong>skill</strong> is one of the things a plugin can contain — a
+      <code>SKILL.md</code> file that tells Claude how to handle a specific
+      kind of task. Some skills ship standalone (not inside a plugin); for
+      those, you install via npm or git clone instead of the marketplace.
+    </p>
+
+    <h2>The three marketplaces this project uses</h2>
+
+    <h3>1. <code>anthropics/claude-plugins-official</code></h3>
+    <p>
+      Anthropic's official verified plugin marketplace. Contains
+      <code>frontend-design</code>, <code>ralph-loop</code>, and several
+      others. Most of these come bundled with Claude Code when you install it
+      — but if you installed Claude Code via a method that didn't include
+      them, this is where they come from.
+    </p>
+<pre><code>/plugin marketplace add anthropics/claude-plugins-official
+/plugin list                            <span class="cmt"># see what's available</span>
+/plugin install &lt;name&gt;                  <span class="cmt"># install one</span></code></pre>
+
+    <h3>2. <code>anthropics/skills</code></h3>
+    <p>
+      Anthropic's official skills marketplace — distinct from the plugins
+      marketplace. Contains <code>claude-api</code> and other standalone skills
+      that don't need plugin packaging.
+    </p>
+<pre><code>/plugin marketplace add anthropics/skills
+/plugin install claude-api@anthropic-agent-skills</code></pre>
+
+    <h3>3. Community marketplaces</h3>
+    <p>
+      Anyone can publish a marketplace as a GitHub repo with the right manifest.
+      Examples this project references:
+    </p>
+    <ul>
+      <li><strong><code>muratcankoylan/Agent-Skills-for-Context-Engineering</code></strong> — contains <code>multi-agent-patterns</code>.</li>
+      <li><strong><code>nextlevelbuilder/ui-ux-pro-max-skill</code></strong> — distributed via npm rather than as a marketplace plugin (use <code>npm install -g uipro-cli</code>).</li>
+      <li><strong><code>sickn33/antigravity-awesome-skills</code></strong> — distributed as a git repo to clone (contains <code>agent-memory-systems</code>).</li>
+    </ul>
+
+    <h2>The <code>/plugin</code> command — invoke from inside Claude Code</h2>
+    <p>
+      All <code>/plugin</code> commands run <strong>inside an active Claude
+      Code session</strong>, not in your terminal. Open Claude Code, then type
+      these into the chat input:
+    </p>
+    <ul>
+      <li><code>/plugin marketplace add &lt;repo&gt;</code> — register a marketplace by GitHub repo</li>
+      <li><code>/plugin marketplace list</code> — show registered marketplaces</li>
+      <li><code>/plugin install &lt;name&gt;</code> — install a plugin or skill</li>
+      <li><code>/plugin install &lt;name&gt;@&lt;marketplace&gt;</code> — install from a specific marketplace</li>
+      <li><code>/plugin list</code> — show installed plugins</li>
+      <li><code>/plugin remove &lt;name&gt;</code> — uninstall</li>
+      <li><code>/plugin update</code> — pull latest versions</li>
+    </ul>
+    <p>
+      Why these can't be done from a shell: plugins integrate with Claude
+      Code's settings, skill registry, and hook system at install time. The
+      shell doesn't have that integration; Claude Code itself does.
+    </p>
+
+    <h2>Standalone skills (not in any marketplace)</h2>
+    <p>
+      Some skills are just <code>SKILL.md</code> files in a GitHub repo. To
+      install them, clone or copy the SKILL.md into your
+      <code>~/.claude/skills/</code> directory:
+    </p>
+<pre><code><span class="cmt"># Mac/Linux</span>
+cd ~/.claude/skills
+git clone https://github.com/&lt;user&gt;/&lt;repo&gt; &lt;skill-name&gt;
+
+<span class="cmt"># Windows PowerShell</span>
+cd $env:USERPROFILE\.claude\skills
+git clone https://github.com/&lt;user&gt;/&lt;repo&gt; &lt;skill-name&gt;</code></pre>
+    <p>
+      For some skills (like <code>ui-ux-pro-max</code>) you install a CLI
+      tool that knows how to set the skill up correctly:
+    </p>
+<pre><code>npm install -g uipro-cli
+uipro init --ai claude</code></pre>
+
+    <h2>What this project needs — the full list</h2>
+    <p>
+      Both variants reference some plugins/skills. Run the install-skills
+      script for your variant to handle the shell-installable parts, then run
+      the <code>/plugin</code> commands inside Claude Code for the rest.
+    </p>
+
+    <h3>UI App variant</h3>
+    <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">Piece</th>
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">Source</th>
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">How</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/ui-ux-pro-max.html">ui-ux-pro-max</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">npm package</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">shell · install-skills.ps1</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/design-system.html">design-system</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">git repo (Triptease)</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">shell · install-skills.ps1</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/frontend-design.html">frontend-design</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">anthropics/claude-plugins-official</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">Claude Code · /plugin install</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/onboarding-psychologist.html">onboarding-psychologist</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">no public source</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">skip or substitute</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 14px;"><a href="variants/ux-contract.html">UX_CONTRACT.md</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">local file in project</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">already in scaffold ✓</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Agent App variant</h3>
+    <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">Piece</th>
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">Source</th>
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">How</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/claude-api.html">claude-api</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">anthropics/skills</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">Claude Code · /plugin install</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/ralph-loop.html">ralph-loop</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">anthropics/claude-plugins-official</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">Claude Code · /plugin install</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/agent-memory-systems.html">agent-memory-systems</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">git repo (sickn33)</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">shell · install-skills.ps1</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/agent-orchestrator.html">agent-orchestrator</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">community marketplace</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">Claude Code · /plugin install</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/ai-agents-architect.html">ai-agents-architect</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">no canonical source</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">docs only (no skill)</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 14px;"><a href="variants/portable-identity.html">portable-identity</a></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">discipline in CLAUDE.md</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">already in scaffold ✓</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>The install workflow, end to end</h2>
+    <ol>
+      <li>Scaffold your project (<code>new-project.ps1</code> / <code>new-project.sh</code>).</li>
+      <li>Run the install-skills script for your variant:
+<pre><code><span class="cmt"># Windows PowerShell</span>
+./scripts/install-skills.ps1 <span class="flag">-Variant</span> ui-app
+
+<span class="cmt"># Mac/Linux Bash</span>
+./scripts/install-skills.sh <span class="flag">--variant</span> ui-app
+
+<span class="cmt"># Add --dry-run to see what would happen first</span></code></pre>
+      </li>
+      <li>Open Claude Code in your scaffolded project.</li>
+      <li>Run <code>/plugin list</code> to see what's already bundled.</li>
+      <li>Run the <code>/plugin install</code> commands the script printed (only the ones not already present).</li>
+      <li>Ask Claude <em>"Which of the skills referenced in CLAUDE.md do you have installed?"</em> to verify.</li>
+    </ol>
+
+    <h2>Troubleshooting</h2>
+    <h3>"Plugin not found" when running <code>/plugin install</code></h3>
+    <p>
+      Make sure you ran <code>/plugin marketplace add &lt;repo&gt;</code> first for
+      that plugin's source marketplace. <code>/plugin install</code> looks
+      only in marketplaces you've registered.
+    </p>
+
+    <h3>"Already exists" from install-skills.ps1</h3>
+    <p>
+      Safe to ignore. The script checks for existing installs and skips them.
+      Re-run with the same args anytime — it's idempotent.
+    </p>
+
+    <h3>npm or git not found</h3>
+    <p>
+      Install <a href="https://nodejs.org">Node.js</a> (includes npm) and
+      <a href="https://git-scm.com">git</a>. They're prerequisites for the
+      install-skills script.
+    </p>
+
+    <h3>The plugin installed but Claude doesn't seem to use it</h3>
+    <p>
+      Open a fresh Claude Code session in your project. Plugin registration
+      reloads at session start. Ask Claude <em>"is &lt;skill-name&gt; available?"</em>
+      to verify it's loaded.
+    </p>
+
+    <div class="refs">
+      <h3>References</h3>
+      <ul>
+        <li><a href="https://docs.claude.com/en/docs/claude-code/plugins">Claude Code — plugins docs</a></li>
+        <li><a href="https://github.com/anthropics/claude-plugins-official">anthropics/claude-plugins-official</a></li>
+        <li><a href="https://github.com/anthropics/skills">anthropics/skills</a></li>
+        <li><a href="https://github.com/Lizo-RoadTown/project-starter/blob/main/scripts/install-skills.ps1">install-skills.ps1 source</a></li>
+        <li><a href="https://github.com/Lizo-RoadTown/project-starter/blob/main/scripts/install-skills.sh">install-skills.sh source</a></li>
+      </ul>
+    </div>
+
+    <div class="pager">
+      <a href="variants.html">
+        <span class="dir">← Back</span>
+        <span class="title">Variants &amp; foundation</span>
+      </a>
+      <a class="next" href="next-steps.html">
+        <span class="dir">Next →</span>
+        <span class="title">Your first conversation</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../">demo site</a> ·
+    <a href="getting-started.html">walkthrough</a> ·
+    <a href="glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>
