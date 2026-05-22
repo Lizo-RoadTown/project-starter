@@ -36,6 +36,7 @@
       <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
       <li><a href="../variants.html">Variants &amp; foundation</a></li>
       <li><a href="../marketplace-and-plugins.html">Marketplace &amp; plugins</a></li>
+      <li><a href="other-clients.html">Other Agent Skills clients</a></li>
     </ul>
     <h4>UI App</h4>
     <ul>
@@ -98,35 +99,34 @@
     <dl class="at-glance">
       <div>
         <dt>Type</dt>
-        <dd>Skill (SKILL.md, location varies)</dd>
+        <dd>Skill (agentskills.io-compliant SKILL.md)</dd>
       </div>
       <div>
-        <dt>Maintainer</dt>
-        <dd><span class="pill unverified">unverified</span> No public source found under this exact name</dd>
+        <dt>Author</dt>
+        <dd><span class="pill official">Lizo-RoadTown</span> <a href="https://github.com/Lizo-RoadTown">Liz Osborn</a></dd>
       </div>
       <div>
         <dt>Triggers</dt>
-        <dd>First-time-user flow design, signup, empty states</dd>
+        <dd>First-time-user flow design, signup, empty states, reactivation</dd>
       </div>
       <div>
         <dt>Install</dt>
-        <dd>Likely private/local — see "Verification status" below</dd>
+        <dd><code>/plugin marketplace add Lizo-RoadTown/claude-skills-marketplace</code> then <code>/plugin install onboarding-psychologist@lizo-skills</code></dd>
       </div>
     </dl>
 
-    <div class="callout stuck">
-      <div class="icon">?</div>
+    <div class="callout info">
+      <div class="icon">i</div>
       <div>
         <p>
-          <strong>Verification status:</strong> No public repo, marketplace
-          listing, or <code>SKILL.md</code> surfaces under the exact name
-          <code>onboarding-psychologist</code>. The behavioral framework it
-          references (IDENTITY-TO-HABIT) maps directly to published research
-          by <strong>BJ Fogg</strong> (Tiny Habits / Hook Model) and
+          <strong>Authored by Liz Osborn.</strong> Now available via the
+          <a href="https://github.com/Lizo-RoadTown/claude-skills-marketplace">Lizo-RoadTown/claude-skills-marketplace</a>.
+          The skill follows the open <a href="https://agentskills.io/specification">agentskills.io</a> standard,
+          so it works in Claude Code, Cursor, Gemini CLI, OpenCode, Junie, Goose, Amp, and
+          <a href="https://agentskills.io/clients">other compatible clients</a>.
+          The behavioral framework draws on published research by
+          <strong>BJ Fogg</strong> (Tiny Habits / Hook Model) and
           <strong>James Clear</strong> (Atomic Habits, identity-based habits).
-          The skill is likely private or locally-defined; the framework below
-          stands on its own regardless of which specific skill implementation
-          you use.
         </p>
       </div>
     </div>

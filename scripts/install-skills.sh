@@ -121,6 +121,10 @@ if [[ "$VARIANT" == "ui-app" || "$VARIANT" == "both" ]]; then
   echo "  /plugin marketplace add anthropics/claude-plugins-official"
   echo "  /plugin install frontend-design"
   echo
+  echo "  # Onboarding playbook -- by Liz Osborn"
+  echo "  /plugin marketplace add Lizo-RoadTown/claude-skills-marketplace"
+  echo "  /plugin install onboarding-psychologist@lizo-skills"
+  echo
 fi
 
 if [[ "$VARIANT" == "agent-app" || "$VARIANT" == "both" ]]; then
@@ -133,6 +137,10 @@ if [[ "$VARIANT" == "agent-app" || "$VARIANT" == "both" ]]; then
   echo
   echo "  /plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering"
   echo "  /plugin install multi-agent-patterns@context-engineering"
+  echo
+  echo "  # Agent architecture guide -- by Liz Osborn"
+  echo "  /plugin marketplace add Lizo-RoadTown/claude-skills-marketplace"
+  echo "  /plugin install ai-agents-architect@lizo-skills"
   echo
 fi
 

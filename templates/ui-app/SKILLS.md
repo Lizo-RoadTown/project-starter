@@ -68,21 +68,23 @@ Source: <https://claude.com/plugins/frontend-design>
 
 ---
 
-## 4. `onboarding-psychologist` — UNVERIFIED, no public install
+## 4. `onboarding-psychologist` — by Liz Osborn
 
-This skill name is referenced in the template but has no public source. The
-IDENTITY-TO-HABIT framework it documents is real (grounded in BJ Fogg's Tiny
-Habits and James Clear's identity-based habits) and the variants docs page
-covers the framework in detail.
+What it is: the IDENTITY-TO-HABIT framework for first-time-user flows.
+Authored by Liz Osborn (Lizo-RoadTown). Grounded in BJ Fogg's Tiny Habits
+and James Clear's identity-based habits.
 
-**Two options:**
+Install from inside a Claude Code session:
 
-1. **Skip it** — the framework lives in the docs; you can apply it manually.
-2. **Substitute** — install a published onboarding skill instead, then update
-   your `CLAUDE.md` to reference it. Two close substitutes:
-   - `adamlyttleapps/claude-skill-app-onboarding-questionnaire` —
-     <https://github.com/adamlyttleapps/claude-skill-app-onboarding-questionnaire>
-   - "Onboard" skill on MCP Market
+```text
+/plugin marketplace add Lizo-RoadTown/claude-skills-marketplace
+/plugin install onboarding-psychologist@lizo-skills
+```
+
+Source: <https://github.com/Lizo-RoadTown/claude-skills-marketplace>
+
+Cross-compatible: follows the open agentskills.io standard, so it also works
+in Cursor, Gemini CLI, OpenCode, Junie, Goose, Amp, and other clients.
 
 ---
 

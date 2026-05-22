@@ -566,6 +566,24 @@ footer a { color: var(--text-dim); }
 .pill.local     { background: rgba(251, 191, 36, 0.15);  color: var(--amber);  border: 1px solid rgba(251, 191, 36, 0.35); }
 .pill.unverified{ background: rgba(251, 113, 133, 0.15); color: var(--rose);   border: 1px solid rgba(251, 113, 133, 0.35); }
 
+/* ---------- compatibility badge (top of each piece page) ---------- */
+.compat-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -8px 0 26px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border-soft);
+  font-size: 13.5px;
+  color: var(--text-dim);
+}
+.compat-badge.claude   { background: rgba(125, 211, 252, 0.05); border-left: 3px solid var(--cyan); }
+.compat-badge.portable { background: rgba(251, 191, 36, 0.05);  border-left: 3px solid var(--amber); }
+.compat-badge.universal{ background: rgba(167, 139, 250, 0.05); border-left: 3px solid var(--violet); }
+.compat-badge .pill { margin-right: 2px; }
+.compat-badge strong { color: var(--text); }
+
 .refs {
   margin-top: 32px;
   padding: 18px 22px;

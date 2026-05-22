@@ -1,0 +1,31 @@
+# CODEOWNERS for project-starter
+#
+# Every PR routes a review request to the listed owners. The last matching
+# pattern wins.
+
+# Default — Liz reviews everything
+*                                       @Lizo-RoadTown
+
+# Scaffolder scripts — Liz approves changes
+/scripts/                               @Lizo-RoadTown
+
+# Variant templates — Liz approves changes that flow into every future project
+/templates/                             @Lizo-RoadTown
+
+# Docs (markdown)
+/docs/                                  @Lizo-RoadTown
+
+# Site (HTML/CSS) — separate review category
+/site/                                  @Lizo-RoadTown
+
+# OSS hygiene + governance
+/CODE_OF_CONDUCT.md                     @Lizo-RoadTown
+/SECURITY.md                            @Lizo-RoadTown
+/CHANGELOG.md                           @Lizo-RoadTown
+/LICENSE                                @Lizo-RoadTown
+
+# CI changes affect every contributor
+/.github/workflows/                     @Lizo-RoadTown
+
+# Render deploy config — production-affecting
+/render.yaml                            @Lizo-RoadTown

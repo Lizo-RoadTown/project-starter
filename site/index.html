@@ -162,6 +162,61 @@
       padding: 8px 0 8px 14px;
     }
     .scaffold-note strong { color: var(--text); }
+
+    /* ---------- path picker (bifurcation hero) ---------- */
+    .path-picker {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 720px) {
+      .path-picker { grid-template-columns: 1fr; }
+    }
+    .path-card {
+      display: block;
+      padding: 22px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: inherit;
+      text-decoration: none;
+      transition: border-color 200ms ease, transform 200ms ease;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .path-card:hover { transform: translateY(-2px); border-bottom-color: transparent; }
+    .path-claude       { border-color: rgba(125, 211, 252, 0.45); }
+    .path-claude:hover { border-color: var(--cyan); }
+    .path-other        { border-color: rgba(251, 191, 36, 0.45); }
+    .path-other:hover  { border-color: var(--amber); }
+    .path-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+    .path-claude .path-eyebrow { color: var(--cyan); }
+    .path-other  .path-eyebrow { color: var(--amber); }
+    .path-title {
+      font-family: var(--sans);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin: 4px 0 8px;
+    }
+    .path-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+    .path-cta {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--cyan);
+    }
+    .path-other .path-cta { color: var(--amber); }
     .new-here strong { color: var(--text); font-weight: 600; }
     .new-here a {
       color: var(--amber);
@@ -465,6 +520,34 @@
         <strong>Never built a coding project before?</strong>
         <a href="docs/getting-started.html">Start with the walkthrough →</a>
       </p>
+
+      <div class="path-picker" aria-label="Pick your client">
+        <a class="path-card path-claude" href="#scaffold">
+          <div class="path-eyebrow">Path A · complete</div>
+          <div class="path-title">Claude Code</div>
+          <div class="path-desc">
+            Every piece works. <code>CLAUDE.md</code>, <code>.mcp.json</code>,
+            <code>/plugin install</code> for Anthropic plugins
+            (<code>frontend-design</code>, <code>claude-api</code>,
+            <code>ralph-loop</code>), the full scaffolder, auto-memory at
+            <code>~/.claude/</code>.
+          </div>
+          <div class="path-cta">Scaffold for Claude Code →</div>
+        </a>
+
+        <a class="path-card path-other" href="docs/other-clients.html">
+          <div class="path-eyebrow">Path B · portable subset</div>
+          <div class="path-title">Other Agent Skills clients</div>
+          <div class="path-desc">
+            Cursor, Gemini CLI, OpenCode, Junie, Goose, Amp, and
+            <a href="https://agentskills.io/clients" onclick="event.stopPropagation()">others</a>.
+            The skills, scaffolder, memory hierarchy, and design discipline
+            all work — Claude-Code-specific pieces (Anthropic plugins, MCP
+            servers) don't.
+          </div>
+          <div class="path-cta">See what works in other clients →</div>
+        </a>
+      </div>
     </div>
 
     <div class="hero-art" aria-hidden="true">

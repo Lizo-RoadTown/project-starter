@@ -36,6 +36,7 @@
       <li><a href="../what-is.html#scaffolding">What is scaffolding?</a></li>
       <li><a href="../variants.html">Variants &amp; foundation</a></li>
       <li><a href="../marketplace-and-plugins.html">Marketplace &amp; plugins</a></li>
+      <li><a href="other-clients.html">Other Agent Skills clients</a></li>
     </ul>
     <h4>UI App</h4>
     <ul>
@@ -98,27 +99,33 @@
     <dl class="at-glance">
       <div>
         <dt>Type</dt>
-        <dd>Skill (architectural guidance)</dd>
+        <dd>Skill (agentskills.io-compliant SKILL.md)</dd>
       </div>
       <div>
-        <dt>Maintainer</dt>
-        <dd><span class="pill community">community</span> Closest match: <code>mcpmarket.com/tools/skills/ai-agent-systems-architect</code></dd>
+        <dt>Author</dt>
+        <dd><span class="pill official">Lizo-RoadTown</span> <a href="https://github.com/Lizo-RoadTown">Liz Osborn</a></dd>
       </div>
       <div>
         <dt>Triggers</dt>
-        <dd>Agent-architecture decisions, autonomy boundaries</dd>
+        <dd>Agent-architecture decisions, autonomy boundaries, orchestration choices</dd>
       </div>
       <div>
         <dt>Install</dt>
-        <dd>Varies by package — see References</dd>
+        <dd><code>/plugin marketplace add Lizo-RoadTown/claude-skills-marketplace</code> then <code>/plugin install ai-agents-architect@lizo-skills</code></dd>
       </div>
     </dl>
 
-    <div class="callout warn">
-      <div class="icon">!</div>
+    <div class="callout info">
+      <div class="icon">i</div>
       <div>
         <p>
-          <strong>Heads-up:</strong> The exact slug <code>ai-agents-architect</code> isn't a definitive single public package. The patterns it documents are well-established in the agent-systems literature; the framework below is what any skill under this name should cover, drawn from public Anthropic guidance and the agent-systems research literature.
+          <strong>Authored by Liz Osborn.</strong> Now available via the
+          <a href="https://github.com/Lizo-RoadTown/claude-skills-marketplace">Lizo-RoadTown/claude-skills-marketplace</a>.
+          The skill follows the open <a href="https://agentskills.io/specification">agentskills.io</a> standard,
+          so it works in Claude Code, Cursor, Gemini CLI, OpenCode, Junie, Goose, Amp, and
+          <a href="https://agentskills.io/clients">other compatible clients</a>.
+          The decision framework draws on Anthropic's <a href="https://www.anthropic.com/research/building-effective-agents">Building Effective Agents</a>
+          and published research on ReAct and Tree-of-Thoughts patterns.
         </p>
       </div>
     </div>

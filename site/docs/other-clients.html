@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Other Agent Skills clients — project-starter docs</title>
+  <meta name="description" content="Which pieces of project-starter work with Cursor, Gemini CLI, OpenCode, Junie, Goose, Amp, and other Agent-Skills-compatible clients."/>
+  <link rel="icon" href="../assets/favicon.svg"/>
+  <link rel="stylesheet" href="docs.css"/>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../">project-starter <span class="dot-amber">·</span> docs</a>
+    <nav>
+      <a href="../">demo site</a>
+      <a href="https://github.com/Lizo-RoadTown/project-starter">github →</a>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar" aria-label="Docs navigation">
+    <h4>Start here</h4>
+    <ul>
+      <li><a href="index.html">Overview</a></li>
+      <li><a href="getting-started.html">Getting started</a></li>
+    </ul>
+    <h4>Concepts</h4>
+    <ul>
+      <li><a href="what-is.html#claude-code">What is Claude Code?</a></li>
+      <li><a href="what-is.html#terminal">What is the terminal?</a></li>
+      <li><a href="what-is.html#git">What is git &amp; GitHub?</a></li>
+      <li><a href="what-is.html#scaffolding">What is scaffolding?</a></li>
+      <li><a href="variants.html">Variants &amp; foundation</a></li>
+      <li><a href="marketplace-and-plugins.html">Marketplace &amp; plugins</a></li>
+      <li><a href="other-clients.html">Other Agent Skills clients</a></li>
+    </ul>
+    <h4>UI App</h4>
+    <ul>
+      <li><a href="variants/ui-ux-pro-max.html">99-rule design checklist</a></li>
+      <li><a href="variants/design-system.html">Design-system structure</a></li>
+      <li><a href="variants/ux-contract.html">Your project's UI rulebook</a></li>
+      <li><a href="variants/onboarding-psychologist.html">Onboarding playbook</a></li>
+      <li><a href="variants/frontend-design.html">Frontend design helper</a></li>
+    </ul>
+    <h4>Agent App</h4>
+    <ul>
+      <li><a href="variants/ai-agents-architect.html">Agent architecture guide</a></li>
+      <li><a href="variants/agent-orchestrator.html">Multi-agent coordination</a></li>
+      <li><a href="variants/ralph-loop.html">Iterative agent loops</a></li>
+      <li><a href="variants/agent-memory-systems.html">Memory system design</a></li>
+      <li><a href="variants/claude-api.html">Anthropic SDK helper</a></li>
+      <li><a href="variants/portable-identity.html">Portable-identity rule</a></li>
+    </ul>
+    <h4>Use the project</h4>
+    <ul>
+      <li><a href="next-steps.html">First conversation</a></li>
+      <li><a href="glossary.html">Glossary</a></li>
+    </ul>
+    <h4>Reference</h4>
+    <ul>
+      <li><a href="../">Demo site</a></li>
+      <li><a href="https://github.com/Lizo-RoadTown/project-starter">GitHub repo</a></li>
+    </ul>
+    <script>
+      (function () {
+        var hereP = location.pathname.replace(/\/$/, '/index.html');
+        var hereH = location.hash || '';
+        document.querySelectorAll('.sidebar a').forEach(function (a) {
+          try {
+            var u = new URL(a.href);
+            var p = u.pathname.replace(/\/$/, '/index.html');
+            if (p === hereP && (u.hash || '') === hereH) {
+              a.setAttribute('aria-current', 'page');
+            }
+          } catch (e) {}
+        });
+      })();
+    </script>
+  </aside>
+
+  <main class="content">
+    <nav class="crumbs">
+      <a href="../">home</a><span class="sep">/</span>
+      <a href="index.html">docs</a><span class="sep">/</span>other Agent Skills clients
+    </nav>
+
+    <h1>Using project-starter with other Agent Skills clients</h1>
+    <p class="lede">
+      project-starter is built primarily for Claude Code, but the open
+      <a href="https://agentskills.io">Agent Skills</a> standard means a
+      large subset of what it provides works in Cursor, Gemini CLI,
+      OpenCode, Junie, Goose, Amp, and <a href="https://agentskills.io/clients">other compatible clients</a>.
+      This page is honest about what travels and what doesn't.
+    </p>
+
+    <h2>The split: what's portable, what's Claude-Code-only</h2>
+
+    <table style="width: 100%; border-collapse: collapse; margin: 18px 0;">
+      <thead>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">Piece</th>
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">Status</th>
+          <th style="text-align: left; padding: 10px 14px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;">The scaffolder scripts</td>
+          <td style="padding: 12px 14px;"><span class="pill local">universal</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Just shell scripts that copy files. Agent-agnostic.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;">Memory hierarchy (proposals/, plans/, test-runs/)</td>
+          <td style="padding: 12px 14px;"><span class="pill local">universal</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Just folders + markdown templates. Works in any agent or no agent.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><code>UX_CONTRACT.md</code></td>
+          <td style="padding: 12px 14px;"><span class="pill local">universal</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Plain markdown. Every agent that reads project files can use it.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;">Portable-identity discipline</td>
+          <td style="padding: 12px 14px;"><span class="pill local">universal</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Design principle. Works regardless of agent.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/onboarding-psychologist.html">onboarding-psychologist</a></td>
+          <td style="padding: 12px 14px;"><span class="pill community">Agent Skills compatible</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">SKILL.md follows agentskills.io spec. Works in every compatible client.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/ai-agents-architect.html">ai-agents-architect</a></td>
+          <td style="padding: 12px 14px;"><span class="pill community">Agent Skills compatible</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">SKILL.md follows agentskills.io spec. Works in every compatible client.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/agent-memory-systems.html">agent-memory-systems</a></td>
+          <td style="padding: 12px 14px;"><span class="pill community">Agent Skills compatible</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Standard SKILL.md. Concept (CoALA framework) is agent-agnostic.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/ui-ux-pro-max.html">ui-ux-pro-max</a></td>
+          <td style="padding: 12px 14px;"><span class="pill community">Agent Skills compatible</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);"><code>uipro init --ai claude</code> targets Claude specifically, but the underlying skill files install for other clients too.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/design-system.html">design-system</a></td>
+          <td style="padding: 12px 14px;"><span class="pill community">Agent Skills compatible</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">The pattern is universal. The Triptease implementation is just files; copy into any client's skills dir.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/ux-contract.html">UX_CONTRACT.md</a> (full content)</td>
+          <td style="padding: 12px 14px;"><span class="pill local">universal</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">A project file. Reference it from whatever your client's "always-load context" mechanism is.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/frontend-design.html">frontend-design</a></td>
+          <td style="padding: 12px 14px;"><span class="pill official">Claude Code only</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Anthropic plugin distributed via Claude Code's marketplace. No equivalent in other clients (yet).</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/claude-api.html">claude-api</a></td>
+          <td style="padding: 12px 14px;"><span class="pill official">Claude Code only</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Anthropic plugin. About building apps with the Claude API, so naturally Claude-specific.</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border-soft);">
+          <td style="padding: 12px 14px;"><a href="variants/ralph-loop.html">ralph-loop</a></td>
+          <td style="padding: 12px 14px;"><span class="pill official">Claude Code only</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Uses Claude Code's Stop hook system, which is Claude-Code-specific.</td>
+        </tr>
+        <tr>
+          <td style="padding: 12px 14px;"><a href="variants/agent-orchestrator.html">agent-orchestrator</a></td>
+          <td style="padding: 12px 14px;"><span class="pill local">mixed</span></td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">The patterns are universal. AWS CAO works anywhere; the muratcankoylan skill plugin is Claude Code only.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>How to install Agent-Skills-compatible skills in your client</h2>
+    <p>
+      Every client has its own way of registering skills. The skill files
+      themselves (the <code>SKILL.md</code> + supporting files) are the same.
+      Find your client's docs:
+    </p>
+
+    <h3>Cursor</h3>
+    <p>
+      Cursor uses <code>.cursor/rules/</code> and a separate skills system. See
+      <a href="https://cursor.com/docs/context/skills">Cursor's skills docs</a>.
+      Copy SKILL.md files from a marketplace clone into the appropriate Cursor
+      directory.
+    </p>
+
+    <h3>Gemini CLI</h3>
+    <p>
+      Gemini CLI's skills live in a specific directory loaded at startup. See
+      <a href="https://geminicli.com/docs/cli/skills/">Gemini CLI skills docs</a>.
+    </p>
+
+    <h3>OpenCode</h3>
+    <p>
+      OpenCode loads skills from <code>.opencode/</code> or a global skills
+      directory. See <a href="https://opencode.ai/docs/skills/">OpenCode skills docs</a>.
+    </p>
+
+    <h3>Junie</h3>
+    <p>
+      JetBrains' Junie supports Agent Skills directly. See
+      <a href="https://junie.jetbrains.com/docs/agent-skills.html">Junie's Agent Skills docs</a>.
+    </p>
+
+    <h3>Goose, Amp, OpenHands, and others</h3>
+    <p>
+      See the full <a href="https://agentskills.io/clients">agentskills.io client showcase</a>
+      — each card links to that client's specific skill-registration docs.
+    </p>
+
+    <h2>Using Liz's skills outside Claude Code</h2>
+    <p>
+      The two skills authored for project-starter
+      (<a href="variants/onboarding-psychologist.html">onboarding-psychologist</a>
+      and <a href="variants/ai-agents-architect.html">ai-agents-architect</a>) ship from
+      <a href="https://github.com/Lizo-RoadTown/claude-skills-marketplace">Lizo-RoadTown/claude-skills-marketplace</a>.
+      For non-Claude-Code clients:
+    </p>
+
+    <ol>
+      <li>Clone the marketplace: <code>git clone https://github.com/Lizo-RoadTown/claude-skills-marketplace</code></li>
+      <li>The skills are at <code>claude-skills-marketplace/plugins/&lt;name&gt;/skills/&lt;name&gt;/SKILL.md</code></li>
+      <li>Copy each <code>SKILL.md</code> + its parent directory into your client's skills directory (or symlink it)</li>
+      <li>Restart your agent client so it picks up the new skills</li>
+    </ol>
+
+    <h2>What you give up without Claude Code</h2>
+    <ul>
+      <li><strong>No <code>frontend-design</code>, <code>claude-api</code>, or <code>ralph-loop</code> equivalents.</strong> These are Anthropic plugins for Claude Code specifically.</li>
+      <li><strong>No MCP server pinning via <code>.mcp.json</code>.</strong> Other clients have their own tool/integration mechanisms.</li>
+      <li><strong>Auto-memory lives somewhere different.</strong> The <code>~/.claude/projects/&lt;name&gt;/memory/</code> auto-memory system is Claude-Code-specific; other clients have their own persistence approaches.</li>
+      <li><strong>The <code>CLAUDE.md</code> filename convention.</strong> Cursor uses <code>.cursorrules</code>; Gemini CLI uses <code>GEMINI.md</code>; etc. Same content, different filenames — adapt the scaffold output accordingly, or symlink.</li>
+    </ul>
+
+    <h2>What you keep without Claude Code</h2>
+    <ul>
+      <li>Every Agent-Skills-compliant skill (the marked ones above)</li>
+      <li>The full memory hierarchy (proposals, plans, test-runs)</li>
+      <li>The portable-identity discipline</li>
+      <li>The UX contract pattern</li>
+      <li>The scaffolder itself (just renames files at the top)</li>
+      <li>Voice rules, commit/PR discipline, token discipline — all just text in a markdown file</li>
+    </ul>
+
+    <p>
+      Net: roughly <strong>60-70%</strong> of project-starter works without
+      Claude Code. The portable bits also happen to be the most opinionated
+      and most reusable parts.
+    </p>
+
+    <div class="pager">
+      <a href="marketplace-and-plugins.html">
+        <span class="dir">← Back</span>
+        <span class="title">Marketplace &amp; plugins</span>
+      </a>
+      <a class="next" href="next-steps.html">
+        <span class="dir">Next →</span>
+        <span class="title">Your first conversation</span>
+      </a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div><a href="https://github.com/Lizo-RoadTown/project-starter">github.com/Lizo-RoadTown/project-starter</a> · Apache 2.0</div>
+  <div>
+    <a href="../">demo site</a> ·
+    <a href="getting-started.html">walkthrough</a> ·
+    <a href="glossary.html">glossary</a>
+  </div>
+</footer>
+
+</body>
+</html>

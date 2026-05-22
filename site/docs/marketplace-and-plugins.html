@@ -149,10 +149,27 @@
 <pre><code>/plugin marketplace add anthropics/skills
 /plugin install claude-api@anthropic-agent-skills</code></pre>
 
-    <h3>3. Community marketplaces</h3>
+    <h3>3. <code>Lizo-RoadTown/claude-skills-marketplace</code></h3>
     <p>
-      Anyone can publish a marketplace as a GitHub repo with the right manifest.
-      Examples this project references:
+      Liz Osborn's own marketplace, the home for skills authored for project-starter's
+      variant templates. Currently ships:
+    </p>
+    <ul>
+      <li><strong><code>onboarding-psychologist</code></strong> — IDENTITY-TO-HABIT arc for first-time-user flows.</li>
+      <li><strong><code>ai-agents-architect</code></strong> — decision framework for autonomous-agent architecture.</li>
+    </ul>
+<pre><code>/plugin marketplace add Lizo-RoadTown/claude-skills-marketplace
+/plugin install onboarding-psychologist@lizo-skills
+/plugin install ai-agents-architect@lizo-skills</code></pre>
+    <p>
+      Source: <a href="https://github.com/Lizo-RoadTown/claude-skills-marketplace">github.com/Lizo-RoadTown/claude-skills-marketplace</a>.
+      The skills themselves are <a href="https://agentskills.io/specification">agentskills.io</a>-compliant,
+      so they also work in Cursor, Gemini CLI, OpenCode, and other compatible clients.
+    </p>
+
+    <h3>4. Other community marketplaces</h3>
+    <p>
+      Anyone can publish a marketplace. Examples this project references:
     </p>
     <ul>
       <li><strong><code>muratcankoylan/Agent-Skills-for-Context-Engineering</code></strong> — contains <code>multi-agent-patterns</code>.</li>
@@ -235,8 +252,8 @@ uipro init --ai claude</code></pre>
         </tr>
         <tr style="border-bottom: 1px solid var(--border-soft);">
           <td style="padding: 12px 14px;"><a href="variants/onboarding-psychologist.html">onboarding-psychologist</a></td>
-          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">no public source</td>
-          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">skip or substitute</td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Lizo-RoadTown/claude-skills-marketplace</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">Claude Code · /plugin install</td>
         </tr>
         <tr>
           <td style="padding: 12px 14px;"><a href="variants/ux-contract.html">UX_CONTRACT.md</a></td>
@@ -278,8 +295,8 @@ uipro init --ai claude</code></pre>
         </tr>
         <tr style="border-bottom: 1px solid var(--border-soft);">
           <td style="padding: 12px 14px;"><a href="variants/ai-agents-architect.html">ai-agents-architect</a></td>
-          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">no canonical source</td>
-          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">docs only (no skill)</td>
+          <td style="padding: 12px 14px; font-size: 14px; color: var(--text-dim);">Lizo-RoadTown/claude-skills-marketplace</td>
+          <td style="padding: 12px 14px; font-family: var(--mono); font-size: 13px;">Claude Code · /plugin install</td>
         </tr>
         <tr>
           <td style="padding: 12px 14px;"><a href="variants/portable-identity.html">portable-identity</a></td>

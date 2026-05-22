@@ -1,0 +1,52 @@
+# CITATION.cff — Citation File Format 1.2.0
+# https://citation-file-format.github.io/
+cff-version: 1.2.0
+message: "If you use project-starter in your work, please cite it as below."
+title: "project-starter"
+abstract: >-
+  Day-1 scaffolding for AI agent projects. Templates and tooling that produce
+  consistent project structure, persistent agent memory, design discipline,
+  and skill recommendations. Primary target is Claude Code; the portable
+  subset (skills, scaffolder, memory hierarchy, contracts) works with any
+  Agent Skills-compatible client (Cursor, Gemini CLI, OpenCode, Junie, Goose,
+  Amp, and others). Authored by Liz Osborn.
+type: software
+authors:
+  - given-names: Liz
+    family-names: Osborn
+    alias: Lizo-RoadTown
+    orcid: ""
+repository-code: "https://github.com/Lizo-RoadTown/project-starter"
+url: "https://github.com/Lizo-RoadTown/project-starter"
+license: Apache-2.0
+version: 0.2.0
+date-released: 2026-05-21
+keywords:
+  - claude-code
+  - agent-skills
+  - cursor
+  - gemini-cli
+  - opencode
+  - project-template
+  - scaffolder
+  - ai-agents
+  - llm
+  - design-system
+  - onboarding
+references:
+  - type: software
+    title: "Lizo's Skills Marketplace"
+    authors:
+      - given-names: Liz
+        family-names: Osborn
+    url: "https://github.com/Lizo-RoadTown/claude-skills-marketplace"
+  - type: software
+    title: "Agent Skills Specification"
+    authors:
+      - name: "Anthropic"
+    url: "https://agentskills.io/specification"
+  - type: software
+    title: "Claude Code"
+    authors:
+      - name: "Anthropic"
+    url: "https://claude.com/claude-code"

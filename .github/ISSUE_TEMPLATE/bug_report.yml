@@ -1,0 +1,67 @@
+name: "Bug report"
+description: "Something in the scaffolder, install scripts, templates, or docs site is broken."
+title: "[bug] "
+labels: ["bug", "needs-triage"]
+assignees: ["Lizo-RoadTown"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Which area?"
+      options:
+        - "Scaffolder (new-project.ps1 / new-project.sh / docker)"
+        - "Install-skills script (install-skills.ps1 / install-skills.sh)"
+        - "Template content (templates/_common, templates/ui-app, templates/agent-app)"
+        - "Docs site (site/docs/...)"
+        - "Demo site (site/)"
+        - "Other / unsure"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: "Version (commit SHA or tag)"
+      description: "Run `git rev-parse HEAD` in the project-starter repo, or look at the deployed site's footer."
+      placeholder: "v0.2.0 or main@<sha>"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: "Operating system"
+      options:
+        - "Windows"
+        - "macOS"
+        - "Linux"
+        - "WSL"
+        - "Docker"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: "What happened?"
+      description: "Describe the actual behavior, with exact error messages if any."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "What did you expect?"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: "Steps to reproduce"
+      placeholder: |
+        1. Clone project-starter
+        2. Run `./scripts/new-project.ps1 -Type ui-app -Name test`
+        3. Observe: ...
+    validations:
+      required: true

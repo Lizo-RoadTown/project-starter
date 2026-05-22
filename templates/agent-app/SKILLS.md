@@ -114,22 +114,26 @@ Source: <https://github.com/awslabs/cli-agent-orchestrator>
 
 ---
 
-## 5. `ai-agents-architect` — architectural guidance (community, slug-ambiguous)
+## 5. `ai-agents-architect` — by Liz Osborn
 
-What it is: a decision framework for agent architecture — ReAct vs.
-Plan-and-Execute, single vs. multi-agent, when to introduce an orchestrator.
+What it is: a decision framework for agent architecture — autonomy
+spectrum, ReAct vs Plan-and-Execute vs Tree-of-Thoughts, single-vs-multi-agent
+decisions, when to introduce an orchestrator. Authored by Liz Osborn
+(Lizo-RoadTown), grounded in Anthropic's
+[Building Effective Agents](https://www.anthropic.com/research/building-effective-agents)
+and published research on ReAct and Tree-of-Thoughts.
 
-The exact slug doesn't have a single canonical public package; the patterns
-it documents are best learned from Anthropic's authoritative guide on the
-same material:
+Install from inside a Claude Code session:
 
-- **Anthropic — Building Effective Agents:**
-  <https://www.anthropic.com/research/building-effective-agents>
+```text
+/plugin marketplace add Lizo-RoadTown/claude-skills-marketplace
+/plugin install ai-agents-architect@lizo-skills
+```
 
-Closest community skill: `mcpmarket.com/tools/skills/ai-agent-systems-architect`.
+Source: <https://github.com/Lizo-RoadTown/claude-skills-marketplace>
 
-If you don't install a specific skill, the patterns are covered in the docs
-site's `ai-agents-architect.html` page.
+Cross-compatible: follows the open agentskills.io standard, so it also works
+in Cursor, Gemini CLI, OpenCode, Junie, Goose, Amp, and other clients.
 
 ---
 

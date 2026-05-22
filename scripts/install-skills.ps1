@@ -140,6 +140,10 @@ if ($Variant -in @("ui-app", "both")) {
     Write-Host "  /plugin marketplace add anthropics/claude-plugins-official"
     Write-Host "  /plugin install frontend-design"
     Write-Host ""
+    Write-Host "  # Onboarding playbook — by Liz Osborn"
+    Write-Host "  /plugin marketplace add Lizo-RoadTown/claude-skills-marketplace"
+    Write-Host "  /plugin install onboarding-psychologist@lizo-skills"
+    Write-Host ""
 }
 if ($Variant -in @("agent-app", "both")) {
     Write-Host "Agent App:" -ForegroundColor Cyan
@@ -151,6 +155,10 @@ if ($Variant -in @("agent-app", "both")) {
     Write-Host ""
     Write-Host "  /plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering"
     Write-Host "  /plugin install multi-agent-patterns@context-engineering"
+    Write-Host ""
+    Write-Host "  # Agent architecture guide — by Liz Osborn"
+    Write-Host "  /plugin marketplace add Lizo-RoadTown/claude-skills-marketplace"
+    Write-Host "  /plugin install ai-agents-architect@lizo-skills"
     Write-Host ""
 }
 

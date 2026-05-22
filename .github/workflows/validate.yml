@@ -1,0 +1,91 @@
+name: validate
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  json-check:
+    name: "JSON / YAML / shell syntax"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: "JSON syntax"
+        run: |
+          set -e
+          fail=0
+          while IFS= read -r -d '' f; do
+            if ! node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" 2>/dev/null; then
+              echo "::error file=$f::Invalid JSON"
+              fail=1
+            fi
+          done < <(find . -path ./node_modules -prune -o -path ./.git -prune -o -name '*.json' -print0)
+          exit $fail
+
+      - name: "Shell syntax (install-skills.sh, new-project.sh)"
+        run: |
+          set -e
+          for f in scripts/install-skills.sh scripts/new-project.sh; do
+            bash -n "$f" && echo "  ok: $f"
+          done
+
+  markdownlint:
+    name: "markdown lint"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: "Lint Markdown"
+        run: |
+          npx --yes markdownlint-cli2 \
+            "**/*.md" \
+            "#node_modules" \
+            "#.github/PULL_REQUEST_TEMPLATE.md" \
+          || true   # advisory only — many existing files use compact tables intentionally
+
+  html-validate:
+    name: "HTML validate (site/)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: "Run html-validate on site/"
+        run: |
+          npx --yes html-validate \
+            "site/**/*.html" \
+            --rule 'no-trailing-whitespace:off' \
+            --rule 'no-inline-style:off' \
+          || true   # advisory pending cleanup
+
+  link-check:
+    name: "Link check (markdown)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Check links in CHANGELOG/README/CONTRIBUTING"
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: |
+            --no-progress
+            --max-redirects 5
+            --timeout 30
+            --accept 200,206,429
+            README.md
+            CHANGELOG.md
+            CONTRIBUTING.md
+            docs/**/*.md
+            templates/_common/docs/**/*.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -31,6 +31,7 @@ const SHALLOW_INNER = `
       <li><a href="what-is.html#scaffolding">What is scaffolding?</a></li>
       <li><a href="variants.html">Variants &amp; foundation</a></li>
       <li><a href="marketplace-and-plugins.html">Marketplace &amp; plugins</a></li>
+      <li><a href="other-clients.html">Other Agent Skills clients</a></li>
     </ul>
     <h4>UI App</h4>
     <ul>
