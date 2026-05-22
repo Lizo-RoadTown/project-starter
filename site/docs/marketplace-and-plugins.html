@@ -152,20 +152,32 @@
     <h3>3. <code>Lizo-RoadTown/claude-skills-marketplace</code></h3>
     <p>
       Liz Osborn's own marketplace, the home for skills authored for project-starter's
-      variant templates. Currently ships:
+      variant templates. Currently ships three plugins:
     </p>
     <ul>
-      <li><strong><code>onboarding-psychologist</code></strong> — IDENTITY-TO-HABIT arc for first-time-user flows.</li>
-      <li><strong><code>ai-agents-architect</code></strong> — decision framework for autonomous-agent architecture.</li>
+      <li><strong><code>onboarding-psychologist</code></strong> — IDENTITY-TO-HABIT arc for first-time-user flows. Grounded in BJ Fogg + Nir Eyal + James Clear.</li>
+      <li><strong><code>ai-agents-architect</code></strong> — decision framework for autonomous-agent architecture (autonomy spectrum, ReAct vs Plan-and-Execute vs Tree-of-Thoughts, single-vs-multi-agent, when to introduce an orchestrator).</li>
+      <li><strong><code>make-skills-discipline</code></strong> — auto-injecting Claude Code plugin that enforces PROBE-first behavior, <code>file:line</code> citation, dev-vs-runtime distinction, and friction-as-memory writing via hooks. Recommended for every Make_Skills or project-starter-scaffolded repo. Recommended in project-starter v0.4.0; required in v0.4.1 after smoke-test.</li>
     </ul>
 <pre><code>/plugin marketplace add Lizo-RoadTown/claude-skills-marketplace
 /plugin install onboarding-psychologist@lizo-skills
-/plugin install ai-agents-architect@lizo-skills</code></pre>
+/plugin install ai-agents-architect@lizo-skills
+/plugin install make-skills-discipline@lizo-skills</code></pre>
     <p>
       Source: <a href="https://github.com/Lizo-RoadTown/claude-skills-marketplace">github.com/Lizo-RoadTown/claude-skills-marketplace</a>.
-      The skills themselves are <a href="https://agentskills.io/specification">agentskills.io</a>-compliant,
+      The two skill plugins are <a href="https://agentskills.io/specification">agentskills.io</a>-compliant,
       so they also work in Cursor, Gemini CLI, OpenCode, and other compatible clients.
+      The discipline plugin is Claude Code-specific (it relies on Claude Code's hook system).
     </p>
+
+    <div class="callout info">
+      <div class="icon">i</div>
+      <div>
+        <p>
+          <strong>More skills coming in marketplace v0.2.0 + v0.3.0.</strong> Liz is publishing 10 additional skills from her Make_Skills repo (the "upskilling triad" — <code>agentic-upskilling</code>, <code>orchestration-cataloging</code>, <code>lessons-learned</code> — plus a "breadth batch" covering research patterns, evaluation, documentation, and design discipline). See the in-flight publishing plan in <a href="https://github.com/Lizo-RoadTown/project-starter/blob/main/docs/assets/2026-05-21-project-starter-recommendations.md">the agent-collaboration doc</a>.
+        </p>
+      </div>
+    </div>
 
     <h3>4. Other community marketplaces</h3>
     <p>
