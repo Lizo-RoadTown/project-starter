@@ -1,0 +1,36 @@
+// markdownlint config for project-starter.
+// CI uses markdownlint-cli2 with these rules.
+{
+  // MD024 — no duplicate headings. Keep-a-Changelog REQUIRES repeating
+  // ### Fixed / ### Changed / ### Added under each ## version header.
+  // siblings_only allows duplicates as long as they aren't siblings of
+  // each other (i.e. they're under different parent headings).
+  "MD024": { "siblings_only": true },
+
+  // MD013 — line length. Don't enforce — markdown prose wraps naturally
+  // and our content blocks (changelog entries, descriptions, doc bodies)
+  // often need longer lines for readability.
+  "MD013": false,
+
+  // MD033 — inline HTML. We use <p align>, <img>, <span> in READMEs for
+  // centered images and badges that markdown alone can't express.
+  "MD033": false,
+
+  // MD041 — first line in file must be H1. Our README starts with a
+  // centered image (HTML), and some template files start with frontmatter
+  // or comments. Standard OSS pattern.
+  "MD041": false,
+
+  // MD040 — fenced code blocks should have a language. We use untagged
+  // ``` blocks for plain output / file-tree snippets. Acceptable.
+  "MD040": false,
+
+  // MD060 — compact-table style. The repo uses |---|---| throughout;
+  // enforcing pipe spacing would touch every table file. Project style
+  // decision, not enforced.
+  "MD060": false,
+
+  // MD032 — blank lines around lists. Some inline-list patterns
+  // (e.g. lists inside callouts) intentionally omit the blank line.
+  "MD032": false
+}

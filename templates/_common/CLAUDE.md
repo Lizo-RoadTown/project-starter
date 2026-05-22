@@ -83,6 +83,30 @@ The Claude Code marketplace ships skills that augment what's built into the harn
 
 Built-in harness capabilities (always available, no install): `EnterPlanMode` for designing before coding, `TodoWrite` for multi-step tracking, the `Agent` tool with `Explore` / `general-purpose` for delegated research.
 
+## Discipline plugin (recommended)
+
+This project depends on the `make-skills-discipline` Claude Code plugin. Install once per machine:
+
+```text
+/plugin marketplace add Lizo-RoadTown/claude-skills-marketplace
+/plugin install make-skills-discipline@lizo-skills
+```
+
+The plugin auto-injects behavioral rules into every Claude Code session in this repo — PROBE before asserting, cite `file:line`, distinguish dev-tooling from runtime, write friction as memory at the moment of correction, cite skills by name, append to the test-runs log.
+
+Recommended in v0.4.0 of project-starter; required in v0.4.1 after smoke-test proves the hooks fire as designed.
+
+## Memory architecture
+
+This project has **two memory layers**:
+
+1. **File-protocol auto-memory** (always present) — typed `.md` files at `~/.claude/projects/<project-key>/memory/`, indexed by `MEMORY.md`. Scripts/seed-memory.{sh,ps1} sets this up. Loaded automatically into every Claude Code session.
+2. **Durable memory backbone** (`agent-app` variant only) — LanceDB + MCP server at `platform/api/memory/`. Survives process restarts, scales beyond a single project, and (in hosted mode) supports cross-tenant isolation. Auto-discovered by Claude Code via the project's `.mcp.json`.
+
+Write durable memories to the LanceDB layer when the project ships one (agent-app). Otherwise use the file-protocol layer. The file-protocol layer is also the right place for short-lived per-session notes even when LanceDB is present.
+
+For runbook on operating the memory MCP locally, see [`docs/runbooks/memory-mcp-local.md`](docs/runbooks/memory-mcp-local.md) (agent-app variant only).
+
 ## Voice and tone
 
 Describe what *is*, not what it *isn't*. No marketing language ("the unlock," "delightful," "exciting"). No self-congratulation ("we built a beautiful X"). No defensive contrasts ("real X not Y"). No conversation-language in product surfaces.

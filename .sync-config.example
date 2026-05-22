@@ -1,0 +1,10 @@
+# Local config for scripts/sync-agent-comms.{sh,ps1}.
+#
+# Copy this file to .sync-config (which is gitignored) and fill in
+# the AGENT_COMMS_REMOTE path on YOUR machine. The sync script reads
+# from .sync-config so the script itself stays free of personal paths.
+
+# Path to the OTHER checkout's copy of the agent-comms doc.
+# Example (Windows): C:\Users\<you>\<other-repo>\docs\plans\2026-05-21-project-starter-recommendations.md
+# Example (Mac):     /Users/<you>/<other-repo>/docs/plans/2026-05-21-project-starter-recommendations.md
+AGENT_COMMS_REMOTE=
