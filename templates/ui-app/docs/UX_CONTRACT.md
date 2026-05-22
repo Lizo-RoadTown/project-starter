@@ -2,11 +2,11 @@
 
 The design discipline every user-facing surface in {{PROJECT_NAME}} must follow. This is the gate every UI PR passes through. If a change can't be defended against this document, it doesn't ship.
 
-This contract is lifted from Liz Osborn's Make_Skills `docs/UX_CONTRACT.md`. Most of it is universal; a few sections need adaptation to your project's specific surfaces — those are marked with `<adapt-this>` placeholders.
+Most of this contract is universal; a few sections reference surfaces specific to your project and are marked with `<adapt-this>` placeholders — edit those to match the actual screens, components, or routes in your build.
 
 Two source bodies were synthesized into this contract:
 
-- **The Interactive LP Simulator's UX rules** (`lp-ui-design` skill), authored by another agent working on a student-facing learning product. Hard-won from chapters that worked vs. chapters where users bounced.
+- **The Attention → Question → Commitment → Feedback → Reveal master pattern**, hard-won from interactive-product work — chapters that worked vs chapters where users bounced.
 - **`ui-ux-pro-max`** (installed skill), a comprehensive design contract for web and mobile — 99 guidelines, 10 prioritized categories, anti-patterns.
 
 Plus the principles every well-designed product converges on: surfaces are guided journeys not database editors, the user is the protagonist, marketing voice is forbidden.
@@ -228,4 +228,4 @@ The principle is: *one place where the design discipline lives, applied uniforml
 
 ## Attribution
 
-The structure and most of the prose is from Liz Osborn's [Make_Skills `docs/UX_CONTRACT.md`](https://github.com/Lizo-RoadTown/Make_Skills/blob/main/docs/UX_CONTRACT.md), lifted into project-starter's `ui-app` template. Generalized examples; the underlying discipline is the same.
+This template was lifted into project-starter from a working repo where the discipline was hard-won. Generalized for template use; the underlying rules stay the same.

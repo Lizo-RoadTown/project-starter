@@ -181,4 +181,4 @@ If a skill doesn't fit your project, edit this file to remove it and delete the 
 
 ## See also
 
-- [`docs/UX_CONTRACT.md`](docs/UX_CONTRACT.md) — the design discipline every UI PR cites. Liz Osborn's full version (lifted from Make_Skills).
+- [`docs/UX_CONTRACT.md`](docs/UX_CONTRACT.md) — the design discipline every UI PR cites.

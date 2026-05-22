@@ -32,17 +32,17 @@ Liz Osborn's decision framework for agent architecture: autonomy spectrum, ReAct
 /plugin install ai-agents-architect@lizo-skills
 ```
 
-### `lizo-skills/agentic-skill-design`
+### `lizo-skills/agentic-skill-design` — *coming in marketplace v0.3.0*
 
-Liz Osborn's meta-skill on designing agentic-form skills (PROBE → DECIDE → ACT → REPORT) vs passive-form. Companion to `agentic-upskilling`.
+Liz Osborn's meta-skill on designing agentic-form skills (PROBE → DECIDE → ACT → REPORT) vs passive-form. Companion to `agentic-upskilling`. **Not yet published.** Track [the marketplace](https://github.com/Lizo-RoadTown/claude-skills-marketplace/blob/main/CHANGELOG.md) for v0.3.0; install when available:
 
 ```text
 /plugin install agentic-skill-design@lizo-skills
 ```
 
-### `lizo-skills/agentic-upskilling`
+### `lizo-skills/agentic-upskilling` — *coming in marketplace v0.2.0*
 
-Liz Osborn's headline framework — observe user workflow, identify recurring skill invocations, promote skills to tools when promotion criteria are met. The named framework that makes the project's agent sharper at the user's actual work over time.
+Liz Osborn's headline framework — observe user workflow, identify recurring skill invocations, promote skills to tools when promotion criteria are met. The named framework that makes the project's agent sharper at the user's actual work over time. **Not yet published.** Track [the marketplace](https://github.com/Lizo-RoadTown/claude-skills-marketplace/blob/main/CHANGELOG.md) for v0.2.0; install when available:
 
 ```text
 /plugin install agentic-upskilling@lizo-skills
