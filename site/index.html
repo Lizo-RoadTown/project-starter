@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>project-starter — day-1 scaffolding for Claude Code projects</title>
-  <meta name="description" content="A template repo for new Claude Code projects. Two variants — ui-app and agent-app. Pinned MCP servers, skill recommendations, persistent memory hierarchy."/>
-  <meta property="og:title" content="project-starter"/>
-  <meta property="og:description" content="Day-1 scaffolding for Claude Code projects."/>
+  <title>1-Day Foundations — scaffolding for AI-agent projects</title>
+  <meta name="description" content="A template repo for new AI-agent projects. Two variants — ui-app and agent-app. Pinned MCP servers, skill recommendations, persistent memory hierarchy."/>
+  <meta property="og:title" content="1-Day Foundations"/>
+  <meta property="og:description" content="Day-1 scaffolding for AI-agent projects."/>
   <meta property="og:image" content="assets/project-starter-og.jpg"/>
   <meta name="twitter:card" content="summary_large_image"/>
   <meta name="twitter:image" content="assets/project-starter-og.jpg"/>
@@ -93,9 +93,9 @@
     .topbar nav { display: flex; gap: 22px; }
 
     /* ---------- hero (cinematic landing — doorway image full-bleed) ----------
-       The image is the brand mood: a dark room with a doorway on the right,
-       warm amber light spilling through onto a polished floor. The left ~40%
-       is dark walls — text overlays cleanly with no additional darkening
+       The image is the brand mood: a dark room with a doorway center-left,
+       warm amber light spilling through onto a polished floor. The right ~35%
+       is pure dark wall — text overlays cleanly there with no extra darkening
        needed on desktop. */
     .hero-wrap {
       position: relative;
@@ -103,12 +103,13 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       background-image: image-set(
         url('assets/project-starter-doorway-1200.jpg') 1x,
         url('assets/project-starter-doorway.jpg') 2x
       );
       background-size: cover;
-      background-position: center right;
+      background-position: center left;
       background-repeat: no-repeat;
       /* Bottom fade into the page background so the next section blends in */
       box-shadow: inset 0 -180px 120px -100px var(--bg-1);
@@ -116,14 +117,14 @@
     @supports not (background-image: image-set(url('a') 1x)) {
       .hero-wrap { background-image: url('assets/project-starter-doorway-1200.jpg'); }
     }
-    /* Subtle right-side vignette — softens anything that drifts into the lit area */
+    /* Subtle left-side vignette — softens the lit doorway edge against the text column */
     .hero-wrap::before {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
       background: linear-gradient(
-        90deg,
+        270deg,
         rgba(6, 9, 26, 0) 0%,
         rgba(6, 9, 26, 0) 30%,
         rgba(6, 9, 26, 0.15) 70%,
@@ -131,13 +132,15 @@
       );
     }
     .hero {
-      max-width: 640px;
+      max-width: 620px;
       padding: 32px;
-      margin-left: max(32px, calc((100% - 1180px) / 2));
-      margin-right: 0;
+      margin-right: max(32px, calc((100% - 1180px) / 2));
+      margin-left: 0;
       position: relative;
       z-index: 1;
     }
+    /* In the right-rail hero, stack the two path cards so they fit the narrower column */
+    .hero .path-picker { grid-template-columns: 1fr; }
     /* Scroll hint at the bottom of the landing */
     .scroll-hint {
       position: absolute;
@@ -176,7 +179,8 @@
           rgba(6, 9, 26, 0.7) 100%
         );
       }
-      .hero { padding: 48px 24px 64px; max-width: 100%; margin-left: 0; }
+      .hero { padding: 48px 24px 64px; max-width: 100%; margin-left: 0; margin-right: 0; }
+      .hero-wrap { justify-content: center; }
       .scroll-hint { display: none; }
     }
 
@@ -190,6 +194,14 @@
     }
     .hero h1 .dot-cyan { color: var(--cyan); }
     .hero h1 .dot-violet { color: var(--violet); }
+    .hero h1 .h1-sub {
+      display: block;
+      margin-top: 14px;
+      font-size: clamp(18px, 2.1vw, 24px);
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      color: var(--text-muted);
+    }
     .hero p.lede {
       font-size: clamp(17px, 1.4vw, 20px);
       color: var(--text-muted);
@@ -551,7 +563,7 @@
 <body>
 
 <div class="topbar" aria-label="primary">
-  <div class="brand">project-starter</div>
+  <div class="brand">1-Day Foundations</div>
   <nav>
     <a href="docs/">docs</a>
     <a href="#variants">variants</a>
@@ -565,9 +577,8 @@
   <section class="hero">
     <div class="hero-copy">
       <h1>
-        Day-1 scaffolding<br/>
-        for <span class="dot-cyan">Claude</span> <span class="dot-violet">Code</span><br/>
-        projects.
+        <span class="dot-cyan">1&#8209;Day</span> <span class="dot-violet">Foundations</span><br/>
+        <span class="h1-sub">Scaffolding for AI&#8209;agent projects.</span>
       </h1>
       <p class="lede">
         A template repo with two variants, pinned MCP servers, a curated skill list,
