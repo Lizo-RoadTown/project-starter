@@ -7,7 +7,10 @@
   <meta name="description" content="A template repo for new Claude Code projects. Two variants — ui-app and agent-app. Pinned MCP servers, skill recommendations, persistent memory hierarchy."/>
   <meta property="og:title" content="project-starter"/>
   <meta property="og:description" content="Day-1 scaffolding for Claude Code projects."/>
-  <meta property="og:image" content="assets/thumbnail.svg"/>
+  <meta property="og:image" content="assets/project-starter-og.jpg"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:image" content="assets/project-starter-og.jpg"/>
+  <link rel="preload" as="image" href="assets/project-starter-doorway-1200.jpg" imagesrcset="assets/project-starter-doorway-1200.jpg 1200w, assets/project-starter-doorway.jpg 1712w" imagesizes="100vw"/>
   <link rel="icon" href="assets/favicon.svg"/>
   <style>
     :root {
@@ -89,18 +92,92 @@
     .topbar .brand { color: var(--text); font-weight: 600; }
     .topbar nav { display: flex; gap: 22px; }
 
-    /* ---------- hero ---------- */
-    .hero {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 56px 32px 72px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 56px;
+    /* ---------- hero (cinematic landing — doorway image full-bleed) ----------
+       The image is the brand mood: a dark room with a doorway on the right,
+       warm amber light spilling through onto a polished floor. The left ~40%
+       is dark walls — text overlays cleanly with no additional darkening
+       needed on desktop. */
+    .hero-wrap {
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
       align-items: center;
+      background-image: image-set(
+        url('assets/project-starter-doorway-1200.jpg') 1x,
+        url('assets/project-starter-doorway.jpg') 2x
+      );
+      background-size: cover;
+      background-position: center right;
+      background-repeat: no-repeat;
+      /* Bottom fade into the page background so the next section blends in */
+      box-shadow: inset 0 -180px 120px -100px var(--bg-1);
+    }
+    @supports not (background-image: image-set(url('a') 1x)) {
+      .hero-wrap { background-image: url('assets/project-starter-doorway-1200.jpg'); }
+    }
+    /* Subtle right-side vignette — softens anything that drifts into the lit area */
+    .hero-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        rgba(6, 9, 26, 0) 0%,
+        rgba(6, 9, 26, 0) 30%,
+        rgba(6, 9, 26, 0.15) 70%,
+        rgba(6, 9, 26, 0.4) 100%
+      );
+    }
+    .hero {
+      max-width: 640px;
+      padding: 32px;
+      margin-left: max(32px, calc((100% - 1180px) / 2));
+      margin-right: 0;
+      position: relative;
+      z-index: 1;
+    }
+    /* Scroll hint at the bottom of the landing */
+    .scroll-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      z-index: 1;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      opacity: 0.7;
+      animation: scroll-pulse 2.5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: 0.4; transform: translate(-50%, 0); }
+      50%      { opacity: 0.85; transform: translate(-50%, 6px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-hint { animation: none; opacity: 0.6; }
     }
     @media (max-width: 880px) {
-      .hero { grid-template-columns: 1fr; gap: 40px; padding-top: 32px; }
+      .hero-wrap {
+        min-height: auto;
+        background-position: center;
+      }
+      /* On mobile the image's dark area might not cover the full text column;
+         add a moderate top-to-bottom darkening just on small screens */
+      .hero-wrap::before {
+        background: linear-gradient(
+          180deg,
+          rgba(6, 9, 26, 0.55) 0%,
+          rgba(6, 9, 26, 0.35) 40%,
+          rgba(6, 9, 26, 0.7) 100%
+        );
+      }
+      .hero { padding: 48px 24px 64px; max-width: 100%; margin-left: 0; }
+      .scroll-hint { display: none; }
     }
 
     .hero h1 {
@@ -224,24 +301,9 @@
     }
     .new-here a:hover { border-bottom-color: currentColor; }
 
-    /* hero illustration */
-    .hero-art {
-      position: relative;
-      aspect-ratio: 1 / 1;
-      max-width: 520px;
-      width: 100%;
-      margin: 0 auto;
-    }
-    .hero-art svg { width: 100%; height: 100%; display: block; }
+    /* (hero-art removed in v0.4 — image is now the hero background) */
 
-    @keyframes pulse-seed {
-      0%, 100% { opacity: 0.55; transform: scale(1); }
-      50%      { opacity: 0.85; transform: scale(1.06); }
-    }
-    .seed-halo { transform-origin: center; animation: pulse-seed 4s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) {
-      .seed-halo { animation: none; }
-    }
+    /* (Old seed-halo animation removed in v0.4 — was only used by the inline SVG hero, which the doorway image now replaces.) */
 
     /* ---------- section base ---------- */
     section.section {
@@ -499,7 +561,7 @@
   </nav>
 </div>
 
-<header>
+<header class="hero-wrap">
   <section class="hero">
     <div class="hero-copy">
       <h1>
@@ -550,138 +612,8 @@
       </div>
     </div>
 
-    <div class="hero-art" aria-hidden="true">
-      <!-- Inline simplified illustration: seed → trunk → two branches → dashboard + neural cluster.
-           Mirrors docs/assets/thumbnail-illustrative.svg, smaller for hero use. -->
-      <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="hseed" cx=".5" cy=".5" r=".5">
-            <stop offset="0" stop-color="#fde68a"/>
-            <stop offset=".45" stop-color="#f59e0b"/>
-            <stop offset="1" stop-color="#b45309"/>
-          </radialGradient>
-          <radialGradient id="hhalo" cx=".5" cy=".5" r=".5">
-            <stop offset="0" stop-color="#fbbf24" stop-opacity=".55"/>
-            <stop offset=".5" stop-color="#f59e0b" stop-opacity=".15"/>
-            <stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="htrunk" x1="0" y1="1" x2="0" y2="0">
-            <stop offset="0" stop-color="#b45309"/>
-            <stop offset=".4" stop-color="#92591a"/>
-            <stop offset="1" stop-color="#475569"/>
-          </linearGradient>
-          <linearGradient id="hbranchL" x1="0" y1="1" x2="0" y2="0">
-            <stop offset="0" stop-color="#475569"/>
-            <stop offset="1" stop-color="#7dd3fc"/>
-          </linearGradient>
-          <linearGradient id="hbranchR" x1="0" y1="1" x2="0" y2="0">
-            <stop offset="0" stop-color="#475569"/>
-            <stop offset="1" stop-color="#a78bfa"/>
-          </linearGradient>
-          <filter id="hglow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="10" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-
-        <!-- ground curves -->
-        <g stroke="#1e293b" stroke-width="1" opacity=".5" fill="none">
-          <path d="M0 525 Q 300 495 600 525"/>
-          <path d="M0 555 Q 300 525 600 555"/>
-        </g>
-
-        <!-- roots -->
-        <g stroke="#92591a" stroke-width="2" fill="none" opacity=".7" stroke-linecap="round">
-          <path d="M300 495 Q 260 515 220 545 Q 200 565 190 590"/>
-          <path d="M300 495 Q 290 520 280 555 Q 275 580 275 600"/>
-          <path d="M300 495 Q 310 520 320 555 Q 325 580 325 600"/>
-          <path d="M300 495 Q 340 515 380 545 Q 400 565 410 590"/>
-        </g>
-
-        <!-- halo + seed -->
-        <ellipse cx="300" cy="490" rx="90" ry="90" fill="url(#hhalo)" filter="url(#hglow)" class="seed-halo"/>
-        <ellipse cx="300" cy="490" rx="26" ry="34" fill="url(#hseed)"/>
-        <ellipse cx="293" cy="478" rx="7" ry="10" fill="#fef3c7" opacity=".75"/>
-
-        <!-- trunk -->
-        <path d="M300 460
-                 C 297 420, 308 380, 300 340
-                 C 293 300, 306 270, 300 240"
-              stroke="url(#htrunk)" stroke-width="8" fill="none" stroke-linecap="round"/>
-
-        <!-- left branch -->
-        <path d="M300 240
-                 C 285 215, 255 195, 215 175
-                 C 175 155, 135 140, 100 115"
-              stroke="url(#hbranchL)" stroke-width="6" fill="none" stroke-linecap="round"/>
-        <!-- right branch -->
-        <path d="M300 240
-                 C 315 215, 345 195, 385 175
-                 C 425 155, 465 140, 500 115"
-              stroke="url(#hbranchR)" stroke-width="6" fill="none" stroke-linecap="round"/>
-
-        <!-- left fruit: tiny dashboard cluster -->
-        <g transform="translate(20, 50)">
-          <circle cx="80" cy="65" r="75" fill="#7dd3fc" opacity=".07" filter="url(#hglow)"/>
-          <rect x="20" y="30" width="120" height="80" rx="8" fill="#0f1a30" stroke="#7dd3fc" stroke-width="1.2"/>
-          <rect x="20" y="30" width="120" height="14" rx="8" fill="#7dd3fc" opacity=".3"/>
-          <circle cx="28" cy="37" r="2" fill="#0b1220"/>
-          <circle cx="35" cy="37" r="2" fill="#0b1220"/>
-          <circle cx="42" cy="37" r="2" fill="#0b1220"/>
-          <rect x="28" y="54" width="60" height="4" rx="2" fill="#7dd3fc" opacity=".7"/>
-          <rect x="28" y="64" width="85" height="4" rx="2" fill="#475569"/>
-          <rect x="28" y="74" width="70" height="4" rx="2" fill="#475569"/>
-          <rect x="28" y="86" width="28" height="20" rx="3" fill="#1e293b" stroke="#7dd3fc" stroke-width=".8"/>
-          <rect x="60" y="86" width="28" height="20" rx="3" fill="#1e293b" stroke="#7dd3fc" stroke-width=".8"/>
-          <rect x="92" y="86" width="28" height="20" rx="3" fill="#1e293b" stroke="#7dd3fc" stroke-width=".8"/>
-        </g>
-
-        <!-- right fruit: neural constellation -->
-        <g transform="translate(420, 50)">
-          <circle cx="80" cy="65" r="75" fill="#a78bfa" opacity=".07" filter="url(#hglow)"/>
-          <g stroke="#a78bfa" stroke-width="1" fill="none" opacity=".55">
-            <path d="M30 40 Q 70 15 130 35"/>
-            <path d="M30 40 Q 55 75 80 100"/>
-            <path d="M130 35 Q 155 70 145 110"/>
-            <path d="M80 100 Q 115 115 145 110"/>
-            <path d="M30 40 Q 80 65 130 35"/>
-            <path d="M145 110 Q 165 75 130 35"/>
-          </g>
-          <g fill="#a78bfa">
-            <circle cx="30" cy="40" r="6"/>
-            <circle cx="80" cy="20" r="4.5"/>
-            <circle cx="130" cy="35" r="7.5"/>
-            <circle cx="165" cy="75" r="4.5"/>
-            <circle cx="145" cy="110" r="6"/>
-            <circle cx="80" cy="100" r="5"/>
-          </g>
-          <g fill="#ede9fe" opacity=".8">
-            <circle cx="28" cy="38" r="1.8"/>
-            <circle cx="128" cy="33" r="2.2"/>
-            <circle cx="143" cy="108" r="1.8"/>
-          </g>
-        </g>
-
-        <!-- leaves on trunk -->
-        <g opacity=".7">
-          <ellipse cx="278" cy="350" rx="9" ry="4" fill="#7dd3fc" opacity=".4" transform="rotate(-30 278 350)"/>
-          <ellipse cx="325" cy="320" rx="9" ry="4" fill="#a78bfa" opacity=".4" transform="rotate(35 325 320)"/>
-          <ellipse cx="285" cy="285" rx="8" ry="3.5" fill="#7dd3fc" opacity=".35" transform="rotate(-20 285 285)"/>
-          <ellipse cx="318" cy="265" rx="8" ry="3.5" fill="#a78bfa" opacity=".35" transform="rotate(40 318 265)"/>
-        </g>
-
-        <!-- pollen -->
-        <g fill="#fbbf24" opacity=".55">
-          <circle cx="250" cy="430" r="1.2"/>
-          <circle cx="355" cy="440" r="1"/>
-          <circle cx="230" cy="395" r="1"/>
-          <circle cx="370" cy="400" r="1.4"/>
-          <circle cx="260" cy="365" r="1"/>
-          <circle cx="340" cy="335" r="1"/>
-        </g>
-      </svg>
-    </div>
   </section>
+  <div class="scroll-hint" aria-hidden="true">Scroll · enter</div>
 </header>
 
 <main>
