@@ -103,13 +103,13 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: flex-start;
       background-image: image-set(
         url('assets/project-starter-doorway-1200.jpg') 1x,
         url('assets/project-starter-doorway.jpg') 2x
       );
       background-size: cover;
-      background-position: center right;
+      background-position: center left;
       background-repeat: no-repeat;
       /* Bottom fade into the page background so the next section blends in */
       box-shadow: inset 0 -180px 120px -100px var(--bg-1);
@@ -117,14 +117,14 @@
     @supports not (background-image: image-set(url('a') 1x)) {
       .hero-wrap { background-image: url('assets/project-starter-doorway-1200.jpg'); }
     }
-    /* Right-side vignette — deepens the dark wall area so the text column reads clean */
+    /* Left-side vignette — deepens the left wall area so the text column reads clean */
     .hero-wrap::before {
       content: "";
       position: absolute;
       inset: 0;
       pointer-events: none;
       background: linear-gradient(
-        90deg,
+        270deg,
         rgba(6, 9, 26, 0) 0%,
         rgba(6, 9, 26, 0) 30%,
         rgba(6, 9, 26, 0.15) 70%,
@@ -134,12 +134,12 @@
     .hero {
       max-width: 620px;
       padding: 32px;
-      margin-right: max(32px, calc((100% - 1180px) / 2));
-      margin-left: 0;
+      margin-left: max(32px, calc((100% - 1180px) / 2));
+      margin-right: 0;
       position: relative;
       z-index: 1;
     }
-    /* In the right-rail hero, stack the two path cards so they fit the narrower column */
+    /* In the narrow left-rail hero, stack the two path cards in a single column */
     .hero .path-picker { grid-template-columns: 1fr; }
     /* Scroll hint at the bottom of the landing */
     .scroll-hint {
@@ -180,7 +180,6 @@
         );
       }
       .hero { padding: 48px 24px 64px; max-width: 100%; margin-left: 0; margin-right: 0; }
-      .hero-wrap { justify-content: center; }
       .scroll-hint { display: none; }
     }
 
@@ -306,6 +305,14 @@
       color: var(--cyan);
     }
     .path-other .path-cta { color: var(--amber); }
+    .picker-note {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-faint);
+      line-height: 1.55;
+    }
+    .picker-note a { color: var(--text-muted); border-bottom: 1px dotted var(--text-faint); }
+    .picker-note a:hover { color: var(--cyan); border-bottom-color: var(--cyan); }
     .new-here strong { color: var(--text); font-weight: 600; }
     .new-here a {
       color: var(--amber);
@@ -594,33 +601,34 @@
         <a href="docs/getting-started.html">Start with the walkthrough →</a>
       </p>
 
-      <div class="path-picker" aria-label="Pick your client">
-        <a class="path-card path-claude" href="#scaffold">
-          <div class="path-eyebrow">Path A · complete</div>
-          <div class="path-title">Claude Code</div>
+      <div class="path-picker" aria-label="Pick your project type">
+        <a class="path-card path-claude" href="#variants">
+          <div class="path-eyebrow">For interfaces</div>
+          <div class="path-title">UI App</div>
           <div class="path-desc">
-            Every piece works. <code>CLAUDE.md</code>, <code>.mcp.json</code>,
-            <code>/plugin install</code> for Anthropic plugins
-            (<code>frontend-design</code>, <code>claude-api</code>,
-            <code>ralph-loop</code>), the full scaffolder, auto-memory at
-            <code>~/.claude/</code>.
+            Websites, dashboards, marketing pages — anything with a screen.
+            Adds a visual design rulebook, first-use onboarding patterns,
+            and the frontend skills agents reach for.
           </div>
-          <div class="path-cta">Scaffold for Claude Code →</div>
+          <div class="path-cta">Scaffold a UI app →</div>
         </a>
 
-        <a class="path-card path-other" href="docs/other-clients.html">
-          <div class="path-eyebrow">Path B · portable subset</div>
-          <div class="path-title">Other Agent Skills clients</div>
+        <a class="path-card path-other" href="#variants">
+          <div class="path-eyebrow">For agents</div>
+          <div class="path-title">Agent App</div>
           <div class="path-desc">
-            Cursor, Gemini CLI, OpenCode, Junie, Goose, Amp, and
-            <a href="https://agentskills.io/clients" onclick="event.stopPropagation()">others</a>.
-            The skills, scaffolder, memory hierarchy, and design discipline
-            all work — Claude-Code-specific pieces (Anthropic plugins, MCP
-            servers) don't.
+            LLM agents, AI assistants, agentic workflows. Adds architecture
+            decision frameworks, agent memory systems, orchestration patterns,
+            and Claude-API discipline.
           </div>
-          <div class="path-cta">See what works in other clients →</div>
+          <div class="path-cta">Scaffold an agent app →</div>
         </a>
       </div>
+      <p class="picker-note">
+        More project types coming soon. Works with Claude Code end-to-end, and
+        with Cursor / Gemini CLI / OpenCode / Junie / Goose / Amp via the
+        <a href="docs/other-clients.html">portable subset</a>.
+      </p>
     </div>
 
   </section>
