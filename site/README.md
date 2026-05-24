@@ -1,8 +1,7 @@
 # Demo site
 
-Single-page static site for project-starter. Visual language inherits from
-[`docs/assets/thumbnail-illustrative.svg`](../docs/assets/thumbnail-illustrative.svg) —
-deep navy background, amber seed, cyan / violet branch accents, organic forms.
+Single-page static site for 1-Day Foundations. Visual language: deep navy
+background with cinematic doorway hero, cyan / violet brand accents.
 
 ## Preview locally
 
@@ -53,8 +52,10 @@ That's the entire config.
 | [index.html](index.html) | Single-page site. Inline CSS + inline simplified hero illustration. |
 | [docs/](docs/) | Beginner-friendly documentation site (landing, concept explainers, walkthrough, first-conversation guide, glossary). |
 | [docs/docs.css](docs/docs.css) | Shared styles for every docs page (sidebar layout, step badges, callouts). |
-| [assets/thumbnail.svg](assets/thumbnail.svg) | Full illustrative thumbnail (also used as `og:image`). |
-| [assets/favicon.svg](assets/favicon.svg) | 64×64 mark — seed + trunk + two branches. |
+| [assets/project-starter-doorway.jpg](assets/project-starter-doorway.jpg) | Hero image — cinematic doorway, 1712×864 retina. |
+| [assets/project-starter-doorway-1200.jpg](assets/project-starter-doorway-1200.jpg) | Hero image — 1200×606 1x variant. |
+| [assets/project-starter-og.jpg](assets/project-starter-og.jpg) | 1200×630 social card image (og:image / twitter:image). |
+| [assets/favicon.svg](assets/favicon.svg) | 64×64 mark. |
 
 ### Docs site (`site/docs/`)
 
