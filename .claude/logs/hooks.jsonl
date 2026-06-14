@@ -1,0 +1,184 @@
+{"ts": "2026-05-26T19:04:47.422748+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:04:47.430602+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 8}
+{"ts": "2026-05-26T19:04:47.492061+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:04:47.493667+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:04:50.326624+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:04:50.334491+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 8}
+{"ts": "2026-05-26T19:04:51.933873+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:04:51.935339+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:20:59.624534+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:20:59.627976+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 3}
+{"ts": "2026-05-26T19:21:16.200278+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:21:16.201695+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:22:06.756720+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:22:06.762046+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "probe", "exit_code": 0, "elapsed_ms": 6}
+{"ts": "2026-05-26T19:23:02.067831+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:23:02.069221+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:23:29.666814+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:23:29.667806+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:24:35.813301+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:24:35.816862+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "probe", "exit_code": 0, "elapsed_ms": 3}
+{"ts": "2026-05-26T19:25:14.559785+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:25:14.561374+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:28:15.473158+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:28:15.474200+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:29:13.738625+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:29:13.757123+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 19}
+{"ts": "2026-05-26T19:30:07.301213+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:30:07.302635+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:30:50.800025+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:30:50.801328+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:31:48.629784+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:31:48.650033+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 21}
+{"ts": "2026-05-26T19:35:32.126258+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:35:32.127799+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:35:35.870413+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:35:35.871617+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:36:20.667264+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:36:20.674303+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "probe", "exit_code": 0, "elapsed_ms": 7}
+{"ts": "2026-05-26T19:37:04.142890+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:37:04.145146+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 3}
+{"ts": "2026-05-26T19:40:07.510258+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:40:07.512608+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:40:16.755591+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:40:16.756686+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:40:50.944191+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:40:50.950073+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "probe", "exit_code": 0, "elapsed_ms": 6}
+{"ts": "2026-05-26T19:41:11.693141+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:41:11.709728+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "probe", "exit_code": 0, "elapsed_ms": 16}
+{"ts": "2026-05-26T19:41:17.346058+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:41:17.347379+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:42:11.825044+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:42:11.830383+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "probe", "exit_code": 0, "elapsed_ms": 5}
+{"ts": "2026-05-26T19:42:43.458825+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:42:43.461520+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 3}
+{"ts": "2026-05-26T19:44:09.811444+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:44:09.812582+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:44:17.060264+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:44:17.062251+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:46:25.906073+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:46:25.908862+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:46:36.995078+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:46:36.996128+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:47:04.769797+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:47:04.777603+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 8}
+{"ts": "2026-05-26T19:47:15.707358+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:47:15.708641+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:47:23.812507+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:47:23.813647+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:47:44.338975+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:47:44.340437+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:48:03.822036+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:48:03.827473+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "probe", "exit_code": 0, "elapsed_ms": 5}
+{"ts": "2026-05-26T19:48:50.507254+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:48:50.509345+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:52:17.633340+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:52:17.640530+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 7}
+{"ts": "2026-05-26T19:52:23.912312+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:52:23.919144+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 7}
+{"ts": "2026-05-26T19:53:15.345431+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:53:15.351111+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 6}
+{"ts": "2026-05-26T19:53:58.109029+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:53:58.110676+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:54:03.853995+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:54:03.855574+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T19:54:50.229794+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:54:50.234973+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 5}
+{"ts": "2026-05-26T19:55:31.299421+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:55:31.300805+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T19:57:55.760919+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:57:55.765122+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 5}
+{"ts": "2026-05-26T19:58:06.276726+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:58:06.284671+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 8}
+{"ts": "2026-05-26T19:58:46.581958+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T19:58:46.586076+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 5}
+{"ts": "2026-05-26T19:59:21.917096+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T19:59:21.920512+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 3}
+{"ts": "2026-05-26T19:59:38.780879+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T19:59:38.782292+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:00:24.715782+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:00:24.721874+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 6}
+{"ts": "2026-05-26T20:00:35.794139+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:00:35.799635+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 5}
+{"ts": "2026-05-26T20:02:51.061767+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:02:51.063065+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:03:05.877614+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:03:05.878977+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T20:03:15.171471+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:03:15.172942+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T20:03:48.833533+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:03:48.840215+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 7}
+{"ts": "2026-05-26T20:04:26.299664+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:04:26.301294+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:05:42.551305+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:05:42.553423+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:05:44.255695+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:05:44.257052+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:06:04.608684+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:06:04.617552+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 9}
+{"ts": "2026-05-26T20:06:07.991449+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:06:08.004644+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 13}
+{"ts": "2026-05-26T20:06:23.427018+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:06:23.432578+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 5}
+{"ts": "2026-05-26T20:06:30.524585+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:06:30.536440+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 12}
+{"ts": "2026-05-26T20:07:02.981270+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:07:02.982443+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T20:07:08.455288+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:07:08.456789+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 1}
+{"ts": "2026-05-26T20:07:31.504738+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:07:31.514225+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 10}
+{"ts": "2026-05-26T20:07:39.584775+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:07:39.596496+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 12}
+{"ts": "2026-05-26T20:07:54.281500+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:07:54.284006+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:08:03.765419+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:08:03.774765+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 9}
+{"ts": "2026-05-26T20:08:13.340678+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:08:13.342357+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:08:24.113464+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:08:24.115225+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:08:40.598264+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:08:40.607598+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 9}
+{"ts": "2026-05-26T20:08:43.423974+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:08:43.441700+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 18}
+{"ts": "2026-05-26T20:09:00.975656+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:09:00.982489+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 7}
+{"ts": "2026-05-26T20:09:08.710547+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:09:08.727264+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 17}
+{"ts": "2026-05-26T20:09:17.311203+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:09:17.321564+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 10}
+{"ts": "2026-05-26T20:09:21.589111+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:09:21.592221+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 3}
+{"ts": "2026-05-26T20:09:36.363830+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:09:36.399347+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 36}
+{"ts": "2026-05-26T20:09:45.991743+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:09:46.009972+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 18}
+{"ts": "2026-05-26T20:10:04.765654+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:10:04.797452+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 32}
+{"ts": "2026-05-26T20:10:16.271072+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:10:16.332320+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 61}
+{"ts": "2026-05-26T20:10:39.107022+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:10:39.114005+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 6}
+{"ts": "2026-05-26T20:10:47.328345+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:10:47.337395+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 9}
+{"ts": "2026-05-26T20:11:00.692823+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:11:00.696771+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 4}
+{"ts": "2026-05-26T20:11:03.092031+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:11:03.120015+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 28}
+{"ts": "2026-05-26T20:11:17.716270+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:11:17.718472+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:11:20.492280+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:11:20.494090+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:11:21.594578+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:11:21.597336+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 3}
+{"ts": "2026-05-26T20:11:25.348216+00:00", "hook": "SessionStart", "phase": "start"}
+{"ts": "2026-05-26T20:11:25.350130+00:00", "hook": "SessionStart", "phase": "end", "scope_in": true, "action": "noop", "note": "snapshot_script_absent", "exit_code": 0, "elapsed_ms": 2}
+{"ts": "2026-05-26T20:11:32.001098+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:11:32.013273+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 12}
+{"ts": "2026-05-26T20:11:33.783455+00:00", "hook": "UserPromptSubmit", "phase": "start"}
+{"ts": "2026-05-26T20:11:33.788957+00:00", "hook": "UserPromptSubmit", "phase": "end", "scope_in": true, "action": "reminder_injected", "note": "debug", "exit_code": 0, "elapsed_ms": 5}
+{"ts": "2026-05-26T20:11:50.104440+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:11:50.119513+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 15}
+{"ts": "2026-05-26T20:11:54.504362+00:00", "hook": "Stop", "phase": "start"}
+{"ts": "2026-05-26T20:11:54.626916+00:00", "hook": "Stop", "phase": "end", "scope_in": true, "action": "noop", "note": "transcript_unreadable", "exit_code": 0, "elapsed_ms": 122}
