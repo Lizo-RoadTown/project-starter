@@ -65,7 +65,7 @@ This makes the following available **by name in every project**, with one canoni
 Also install the discipline plugin (enforces PROBE-first behavior, file:line citation, dev-tooling-vs-runtime distinction, friction-as-memory writing):
 
 ```text
-/plugin install make-skills-discipline@lizo-skills
+/plugin install loom-discipline@lizo-loom
 ```
 
 ## Third-party skills to lean on
@@ -109,11 +109,11 @@ Built-in harness capabilities (always available, no install): `EnterPlanMode` fo
 
 ## Discipline plugin (recommended)
 
-This project depends on the `make-skills-discipline` Claude Code plugin. Install once per machine:
+This project depends on the `loom-discipline` Claude Code plugin (published via the `lizo-loom` marketplace, sourced from `Lizo-RoadTown/the-loom`). Install once per machine:
 
 ```text
 /plugin marketplace add Lizo-RoadTown/claude-skills-marketplace
-/plugin install make-skills-discipline@lizo-skills
+/plugin install loom-discipline@lizo-loom
 ```
 
 The plugin auto-injects behavioral rules into every Claude Code session in this repo — PROBE before asserting, cite `file:line`, distinguish dev-tooling from runtime, write friction as memory at the moment of correction, cite skills by name, append to the test-runs log.
