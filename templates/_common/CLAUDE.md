@@ -44,9 +44,33 @@ Avoid:
 - Reading full migration / endpoint / config files when you only need a function or block.
 - Quoting long file contents in responses when a path + line range suffices.
 
-## Skills to lean on
+## Canonical patterns (operator's patterns library)
 
-The Claude Code marketplace ships skills that augment what's built into the harness. Lean on these when relevant — they're already installed at the user level.
+The canonical home for reusable agents + skills + tools is the `liz-patterns` plugin in the operator's Claude Code marketplace. Install once per machine:
+
+```text
+/plugin marketplace add Lizo-RoadTown/claude-skills-marketplace
+/plugin install liz-patterns@lizo-skills
+```
+
+This makes the following available **by name in every project**, with one canonical implementation:
+
+- **Agents** (invoke via `Agent({subagent_type: "liz-patterns:<name>", ...})`):
+  `infrastructure-mapping`, `next-actions-planning`, `lessons-learned`, `orchestration-cataloging`, `eval-deep-research`, `web-app-scaffold`, `agentic-upskilling`
+- **Skills** (invoke via Skill tool with `liz-patterns:<name>`):
+  `agentic-skill-design`, `deep-research-pattern`, `design-evaluation`, `documentation`, `document-parsing`, `layered-explanation`, `open-source-documentation`, `proposal-authoring`
+
+**Do not look for these patterns in this repo's local `skills/` directory** — they don't live here. They live in the plugin. Per [tapestry/MANIFESTO.md Pillar 1](https://github.com/Lizo-RoadTown/tapestry/blob/main/MANIFESTO.md): every reusable pattern has ONE name, ONE home, available everywhere via reference, not copy.
+
+Also install the discipline plugin (enforces PROBE-first behavior, file:line citation, dev-tooling-vs-runtime distinction, friction-as-memory writing):
+
+```text
+/plugin install make-skills-discipline@lizo-skills
+```
+
+## Third-party skills to lean on
+
+Beyond the operator's canonical patterns, the Claude Code marketplace ships third-party skills that augment what's built into the harness. Lean on these when relevant — they're already installed at the user level.
 
 ### Planning + Architecture
 
