@@ -12,7 +12,7 @@ The day-1 project scaffolder for projects worked on with Claude Code. Ships vari
 
 ```text
 /plugin marketplace add Lizo-RoadTown/claude-skills-marketplace
-/plugin install make-skills-discipline@lizo-skills
+/plugin install loom-discipline@lizo-loom
 ```
 
 PROBE before asserting (cite file:line). Distinguish dev-tooling from runtime. Save corrections as feedback memory immediately.
