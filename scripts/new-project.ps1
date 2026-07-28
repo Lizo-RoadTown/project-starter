@@ -1,4 +1,4 @@
-# new-project.ps1
+﻿# new-project.ps1
 #
 # Scaffolds a new project from one of the templates in this repo.
 #
